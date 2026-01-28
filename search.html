@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品安装视频搜索</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .search-box:focus {
+            border-color: #00a1d6;
+            outline: none;
+        }
+        .video-list {
+            display: grid;
+            gap: 15px;
+        }
+        .video-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #00a1d6;
+        }
+        .video-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .video-player {
+            width: 100%;
+            height: 200px;
+            border-radius: 5px;
+        }
+        .no-result {
+            text-align: center;
+            color: #999;
+            padding: 40px;
+        }
+        @media (min-width: 768px) {
+            .video-player { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 产品安装视频搜索</h1>
+        <input type="text" class="search-box" placeholder="请输入产品名称搜索..." id="searchInput">
+        
+        <div id="videoList" class="video-list">
+            <!-- 视频列表会在这里显示 -->
+        </div>
+    </div>
+
+    <script>
+        // 这里是你的视频数据
+        const videoData = [
+            // 格式：["产品名称", "B站视频ID"]
+            // 示例：
+            ["智能门锁A1", "BV1GJ4m1Y7XX"],
+            ["智能摄像头C2", "BV1iH4y1v7YY"],
+            ["路由器R3", "BV1aZ421g7ZZ"],
+            // 把你Excel里的50行数据按这个格式复制到这里
+            // ["产品A", "BVxxxxxxx"],
+            // ["产品B", "BVyyyyyyy"],
+            // ...
+        ];
+
+        // 显示所有视频
+        function displayVideos(videos) {
+            const listElement = document.getElementById('videoList');
+            
+            if (videos.length === 0) {
+                listElement.innerHTML = '<div class="no-result">未找到相关视频</div>';
+                return;
+            }
+            
+            let html = '';
+            videos.forEach(item => {
+                const [productName, videoId] = item;
+                html += `
+                <div class="video-item">
+                    <div class="video-title">${productName}</div>
+                    <iframe 
+                        class="video-player"
+                        src="https://player.bilibili.com/player.html?bvid=${videoId}&page=1"
+                        scrolling="no" 
+                        frameborder="no" 
+                        allowfullscreen="true">
+                    </iframe>
+                </div>`;
+            });
+            listElement.innerHTML = html;
+        }
+
+        // 搜索功能
+        function searchVideos() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            
+            if (!searchText) {
+                displayVideos(videoData);
+                return;
+            }
+            
+            const filtered = videoData.filter(item => {
+                const productName = item[0].toLowerCase();
+                return productName.includes(searchText);
+            });
+            
+            displayVideos(filtered);
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            displayVideos(videoData);
+            
+            // 实时搜索
+            document.getElementById('searchInput').addEventListener('input', searchVideos);
+        });
+    </script>
+</body>
+</html>
