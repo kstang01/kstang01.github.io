@@ -46,15 +46,48 @@
             border-radius: 5px;
             border-left: 4px solid #00a1d6;
         }
+        .video-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
         .video-title {
             font-weight: bold;
-            margin-bottom: 10px;
             color: #333;
+            font-size: 16px;
+        }
+        .play-btn {
+            background: #00a1d6;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .play-btn:hover {
+            background: #0088b3;
+        }
+        .play-btn.playing {
+            background: #f56c6c;
+        }
+        .video-container {
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+            transition: height 0.3s ease;
+            border-radius: 5px;
+        }
+        .video-container.active {
+            height: 200px;
+            margin-top: 10px;
         }
         .video-player {
             width: 100%;
             height: 200px;
             border-radius: 5px;
+            border: none;
         }
         .no-result {
             text-align: center;
@@ -62,6 +95,7 @@
             padding: 40px;
         }
         @media (min-width: 768px) {
+            .video-container.active { height: 300px; }
             .video-player { height: 300px; }
         }
     </style>
@@ -90,6 +124,9 @@
             // ...
         ];
 
+        // 存储当前播放的视频
+        let currentPlayingId = null;
+
         // 显示所有视频
         function displayVideos(videos) {
             const listElement = document.getElementById('videoList');
@@ -100,21 +137,86 @@
             }
             
             let html = '';
-            videos.forEach(item => {
+            videos.forEach((item, index) => {
                 const [productName, videoId] = item;
+                const itemId = `video-${index}`;
                 html += `
-                <div class="video-item">
-                    <div class="video-title">${productName}</div>
-                    <iframe 
-                        class="video-player"
-                        src="https://player.bilibili.com/player.html?bvid=${videoId}&page=1"
-                        scrolling="no" 
-                        frameborder="no" 
-                        allowfullscreen="true">
-                    </iframe>
+                <div class="video-item" id="${itemId}">
+                    <div class="video-header">
+                        <div class="video-title">${productName}</div>
+                        <button class="play-btn" data-id="${itemId}" data-video="${videoId}">
+                            播放视频
+                        </button>
+                    </div>
+                    <div class="video-container">
+                        <iframe 
+                            class="video-player"
+                            src=""
+                            scrolling="no" 
+                            frameborder="no" 
+                            allowfullscreen="true"
+                            data-bvid="${videoId}">
+                        </iframe>
+                    </div>
                 </div>`;
             });
             listElement.innerHTML = html;
+            
+            // 添加点击事件
+            document.querySelectorAll('.play-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const itemId = this.getAttribute('data-id');
+                    const videoId = this.getAttribute('data-video');
+                    toggleVideo(itemId, videoId, this);
+                });
+            });
+        }
+
+        // 切换视频播放
+        function toggleVideo(itemId, videoId, button) {
+            const item = document.getElementById(itemId);
+            const container = item.querySelector('.video-container');
+            const iframe = item.querySelector('.video-player');
+            
+            // 如果点击的是当前正在播放的视频，则关闭
+            if (currentPlayingId === itemId) {
+                // 停止播放
+                iframe.src = '';
+                container.classList.remove('active');
+                button.textContent = '播放视频';
+                button.classList.remove('playing');
+                currentPlayingId = null;
+                return;
+            }
+            
+            // 关闭其他正在播放的视频
+            if (currentPlayingId) {
+                const prevItem = document.getElementById(currentPlayingId);
+                if (prevItem) {
+                    const prevContainer = prevItem.querySelector('.video-container');
+                    const prevIframe = prevItem.querySelector('.video-player');
+                    const prevButton = prevItem.querySelector('.play-btn');
+                    
+                    prevIframe.src = '';
+                    prevContainer.classList.remove('active');
+                    prevButton.textContent = '播放视频';
+                    prevButton.classList.remove('playing');
+                }
+            }
+            
+            // 播放当前视频
+            if (iframe.src === '') {
+                // 第一次点击，设置视频源
+                iframe.src = `https://player.bilibili.com/player.html?bvid=${videoId}&page=1&autoplay=true`;
+            }
+            
+            container.classList.add('active');
+            button.textContent = '关闭视频';
+            button.classList.add('playing');
+            currentPlayingId = itemId;
+            
+            // 滚动到视频位置
+            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
         // 搜索功能
@@ -130,6 +232,22 @@
                 const productName = item[0].toLowerCase();
                 return productName.includes(searchText);
             });
+            
+            // 关闭当前播放的视频
+            if (currentPlayingId) {
+                const currentItem = document.getElementById(currentPlayingId);
+                if (currentItem) {
+                    const container = currentItem.querySelector('.video-container');
+                    const iframe = currentItem.querySelector('.video-player');
+                    const button = currentItem.querySelector('.play-btn');
+                    
+                    iframe.src = '';
+                    container.classList.remove('active');
+                    button.textContent = '播放视频';
+                    button.classList.remove('playing');
+                }
+                currentPlayingId = null;
+            }
             
             displayVideos(filtered);
         }
