@@ -78,25 +78,27 @@
             overflow: hidden;
             transition: height 0.3s ease;
             border-radius: 5px;
+            margin-top: 10px;
         }
         .video-container.active {
-            height: 200px;
-            margin-top: 10px;
+            height: 300px;
         }
         .video-player {
             width: 100%;
-            height: 200px;
+            height: 300px;
             border-radius: 5px;
             border: none;
+            display: block;
         }
         .no-result {
             text-align: center;
             color: #999;
             padding: 40px;
         }
-        @media (min-width: 768px) {
-            .video-container.active { height: 300px; }
-            .video-player { height: 300px; }
+        .loading {
+            text-align: center;
+            color: #666;
+            padding: 10px;
         }
     </style>
 </head>
@@ -111,17 +113,16 @@
     </div>
 
     <script>
-        // 这里是你的视频数据
+        // 这里是你的视频数据 - 修改这里的BV号为你真实的视频ID
         const videoData = [
             // 格式：["产品名称", "B站视频ID"]
-            // 示例：
-            ["智能门锁A1", "BV1GJ4m1Y7XX"],
-            ["智能摄像头C2", "BV1iH4y1v7YY"],
-            ["路由器R3", "BV1aZ421g7ZZ"],
+            // 示例：使用真正的B站视频ID测试
+            ["测试视频1 - B站官方", "BV1GJ411x7h6"],  // 这是一个可用的测试视频
+            ["测试视频2 - B站官方", "BV1Kb4y1Y77H"],  // 这是另一个测试视频
+            ["智能门锁A1", "BV1N8zCBFExa"],
+            ["智能摄像头C2", "请输入你的B站视频ID"],
             // 把你Excel里的50行数据按这个格式复制到这里
-            // ["产品A", "BVxxxxxxx"],
-            // ["产品B", "BVyyyyyyy"],
-            // ...
+            // 注意：BV号必须是真实存在的，否则无法播放
         ];
 
         // 存储当前播放的视频
@@ -149,12 +150,15 @@
                         </button>
                     </div>
                     <div class="video-container">
+                        <div class="loading">视频加载中...</div>
                         <iframe 
                             class="video-player"
-                            src=""
+                            src="about:blank"
                             scrolling="no" 
-                            frameborder="no" 
+                            frameborder="0" 
                             allowfullscreen="true"
+                            allow="autoplay; encrypted-media"
+                            sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
                             data-bvid="${videoId}">
                         </iframe>
                     </div>
@@ -177,15 +181,17 @@
             const item = document.getElementById(itemId);
             const container = item.querySelector('.video-container');
             const iframe = item.querySelector('.video-player');
+            const loading = container.querySelector('.loading');
             
             // 如果点击的是当前正在播放的视频，则关闭
             if (currentPlayingId === itemId) {
                 // 停止播放
-                iframe.src = '';
+                iframe.src = 'about:blank';
                 container.classList.remove('active');
                 button.textContent = '播放视频';
                 button.classList.remove('playing');
                 currentPlayingId = null;
+                loading.style.display = 'block';
                 return;
             }
             
@@ -196,19 +202,25 @@
                     const prevContainer = prevItem.querySelector('.video-container');
                     const prevIframe = prevItem.querySelector('.video-player');
                     const prevButton = prevItem.querySelector('.play-btn');
+                    const prevLoading = prevContainer.querySelector('.loading');
                     
-                    prevIframe.src = '';
+                    prevIframe.src = 'about:blank';
                     prevContainer.classList.remove('active');
                     prevButton.textContent = '播放视频';
                     prevButton.classList.remove('playing');
+                    prevLoading.style.display = 'block';
                 }
             }
             
             // 播放当前视频
-            if (iframe.src === '') {
-                // 第一次点击，设置视频源
-                iframe.src = `https://player.bilibili.com/player.html?bvid=${videoId}&page=1&autoplay=true`;
-            }
+            console.log('正在加载视频:', videoId);
+            
+            // 正确的B站嵌入格式
+            const embedUrl = `https://player.bilibili.com/player.html?bvid=${videoId}&page=1&high_quality=1&autoplay=1`;
+            
+            // 设置iframe的src
+            iframe.src = embedUrl;
+            loading.style.display = 'none';
             
             container.classList.add('active');
             button.textContent = '关闭视频';
@@ -216,7 +228,9 @@
             currentPlayingId = itemId;
             
             // 滚动到视频位置
-            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            setTimeout(() => {
+                item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 300);
         }
 
         // 搜索功能
@@ -240,11 +254,13 @@
                     const container = currentItem.querySelector('.video-container');
                     const iframe = currentItem.querySelector('.video-player');
                     const button = currentItem.querySelector('.play-btn');
+                    const loading = container.querySelector('.loading');
                     
-                    iframe.src = '';
+                    iframe.src = 'about:blank';
                     container.classList.remove('active');
                     button.textContent = '播放视频';
                     button.classList.remove('playing');
+                    loading.style.display = 'block';
                 }
                 currentPlayingId = null;
             }
