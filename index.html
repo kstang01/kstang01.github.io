@@ -2,59 +2,51 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>硒鼓安装教程视频库</title>
     <style>
-        /* 全局样式 */
+        /* 全局样式 - 优化手机体验 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
             background-color: #f7f7f7;
             color: #333;
-            line-height: 1.6;
+            line-height: 1.5;
             padding: 0;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
-        /* 容器样式 */
+        /* 容器样式 - 全屏宽度 */
         .container {
-            max-width: 900px;
+            width: 100%;
             margin: 0 auto;
             background-color: white;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-            border-radius: 0;
-            overflow: hidden;
             min-height: 100vh;
         }
         
-        /* 头部样式 - 改为橙色主题 */
+        /* 头部样式 - 手机优化 */
         .header {
             background: linear-gradient(135deg, #FF7A00 0%, #E56A00 100%);
             color: white;
-            padding: 20px 20px;
+            padding: 16px 16px 20px;
             text-align: center;
-            position: relative;
-        }
-        
-        .header:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            right: 0;
-            height: 20px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" fill="%23f7f7f7"><path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path></svg>') no-repeat;
-            background-size: cover;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
         .header h1 {
-            font-size: 22px;
-            font-weight: 500;
+            font-size: 18px;
+            font-weight: 600;
             margin-bottom: 6px;
             display: flex;
             align-items: center;
@@ -62,45 +54,48 @@
         }
         
         .header h1 .icon {
-            margin-right: 10px;
-            font-size: 24px;
+            margin-right: 8px;
+            font-size: 20px;
             filter: brightness(0) invert(1);
         }
         
         .header .subtitle {
-            font-size: 13px;
+            font-size: 12px;
             opacity: 0.9;
             font-weight: 400;
+            margin-bottom: 12px;
         }
         
-        /* 页面切换按钮 */
+        /* 页面切换按钮 - 手机优化 */
         .page-switch {
             display: flex;
             justify-content: center;
-            margin-top: 10px;
-            gap: 15px;
+            gap: 10px;
         }
         
         .page-btn {
             background: rgba(255, 255, 255, 0.2);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 6px 15px;
+            padding: 6px 20px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.3s;
+            flex: 1;
+            max-width: 140px;
         }
         
         .page-btn.active {
             background: white;
             color: #FF7A00;
             font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         
-        /* 主内容区域 */
+        /* 主内容区域 - 手机优化 */
         .main-content {
-            padding: 20px 20px 30px;
+            padding: 16px 16px 20px;
         }
         
         /* 页面样式 */
@@ -112,26 +107,22 @@
             display: block;
         }
         
-        /* 返回按钮样式 */
+        /* 返回按钮样式 - 手机优化 */
         .back-btn {
             display: inline-flex;
             align-items: center;
             background-color: #FF7A00;
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 10px 16px;
             border-radius: 20px;
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.3s;
             margin-bottom: 15px;
             box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
-        }
-        
-        .back-btn:hover {
-            background-color: #E56A00;
-            transform: translateY(-1px);
-            box-shadow: 0 3px 8px rgba(255, 122, 0, 0.3);
+            width: 100%;
+            justify-content: center;
         }
         
         .back-btn .icon {
@@ -139,44 +130,45 @@
             font-size: 14px;
         }
         
-        /* 首页搜索框 */
-        .home-search-section {
-            margin-bottom: 15px;
+        /* 搜索框 - 手机优化 */
+        .home-search-section, .search-section {
+            margin-bottom: 16px;
         }
         
-        .home-search-box {
+        .home-search-box, .search-box {
             position: relative;
             width: 100%;
             display: flex;
             gap: 8px;
         }
         
-        .home-search-box input {
+        .home-search-box input, .search-box input {
             flex: 1;
             padding: 14px 16px;
-            font-size: 15px;
+            font-size: 16px;
             border: 1px solid #e6e6e6;
-            border-radius: 8px;
+            border-radius: 10px;
             background-color: #fafafa;
             transition: all 0.3s;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            -webkit-appearance: none;
         }
         
-        .home-search-box input:focus {
+        .home-search-box input:focus, .search-box input:focus {
             outline: none;
             border-color: #FF7A00;
             background-color: white;
             box-shadow: 0 3px 12px rgba(255, 122, 0, 0.1);
         }
         
-        .home-search-btn {
+        .home-search-btn, .search-btn {
             background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
             color: #333;
             border: 1px solid #e9ecef;
             padding: 0 20px;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 500;
             transition: all 0.3s;
             display: flex;
@@ -186,73 +178,60 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
         }
         
-        .home-search-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-color: #FF7A00;
-        }
-        
-        .home-search-btn:active {
-            transform: translateY(0);
-        }
-        
-        .home-search-btn .btn-icon {
-            font-size: 16px;
+        .home-search-btn .btn-icon, .search-btn .btn-icon {
+            font-size: 18px;
             color: #666;
         }
         
-        /* 首页搜索说明 */
-        .home-search-instructions {
+        /* 使用说明 - 手机优化 */
+        .home-search-instructions, .instructions {
             background-color: #fff8f0;
-            border-radius: 6px;
-            padding: 8px 12px;
-            margin-top: 8px;
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-top: 10px;
             margin-bottom: 5px;
-            border-left: 2px solid #FF7A00;
-            font-size: 11px;
+            border-left: 3px solid #FF7A00;
+            font-size: 12px;
             line-height: 1.4;
         }
         
-        .home-search-instructions .title {
+        .home-search-instructions .title, .instructions h3 {
             color: #FF7A00;
             font-weight: 500;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
+            font-size: 13px;
         }
         
-        .home-search-instructions .title .icon {
-            margin-right: 4px;
-            font-size: 12px;
+        .home-search-instructions .title .icon, .instructions h3 .icon {
+            margin-right: 6px;
+            font-size: 14px;
         }
         
-        .home-search-instructions ol {
-            padding-left: 16px;
+        .home-search-instructions ol, .instructions ol {
+            padding-left: 18px;
             margin: 0;
         }
         
-        .home-search-instructions li {
-            margin-bottom: 3px;
+        .home-search-instructions li, .instructions li {
+            margin-bottom: 6px;
             color: #666;
-            font-size: 11px;
+            font-size: 12px;
         }
         
-        .home-search-instructions li:last-child {
-            margin-bottom: 0;
-        }
-        
-        .home-search-instructions li strong {
+        .home-search-instructions li strong, .instructions li strong {
             color: #333;
             font-weight: 500;
         }
         
-        /* 首页样式 - 分类指南 */
+        /* 分类指南 - 手机优化 */
         .guide-title {
-            font-size: 18px;
-            font-weight: 500;
+            font-size: 17px;
+            font-weight: 600;
             color: #333;
             margin-bottom: 5px;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
             border-bottom: 2px solid #f0f0f0;
             display: flex;
             align-items: center;
@@ -260,22 +239,21 @@
         
         .guide-title .icon {
             margin-right: 8px;
-            font-size: 20px;
+            font-size: 18px;
             color: #FF7A00;
         }
         
-        /* 分类指南下面的小字提示 */
         .guide-subtitle {
             font-size: 13px;
             color: #666;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
             padding-left: 5px;
-            font-style: italic;
         }
         
+        /* 分类网格 - 手机单列布局 */
         .category-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
             gap: 12px;
             margin-bottom: 25px;
         }
@@ -283,8 +261,8 @@
         .category-card {
             background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
             border: 1px solid #e9ecef;
-            border-radius: 10px;
-            padding: 15px;
+            border-radius: 12px;
+            padding: 18px 15px;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
@@ -294,72 +272,73 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
         }
         
-        .category-card:hover {
-            transform: translateY(-3px);
+        .category-card:active {
+            transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             border-color: #FF7A00;
         }
         
         .category-icon {
-            font-size: 28px;
-            margin-bottom: 10px;
+            font-size: 32px;
+            margin-bottom: 12px;
             color: #FF7A00;
         }
         
         .category-name {
-            font-weight: 500;
-            font-size: 15px;
+            font-weight: 600;
+            font-size: 16px;
             color: #333;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         
         .category-desc {
-            font-size: 12px;
+            font-size: 13px;
             color: #666;
         }
         
-        /* 硒鼓通用安装步骤 */
-        .steps-title {
-            font-size: 18px;
-            font-weight: 500;
+        /* 通用安装步骤 - 手机优化 */
+        .steps-title, .faq-title {
+            font-size: 17px;
+            font-weight: 600;
             color: #333;
             margin-bottom: 15px;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
             border-bottom: 2px solid #f0f0f0;
             display: flex;
             align-items: center;
         }
         
-        .steps-title .icon {
+        .steps-title .icon, .faq-title .icon {
             margin-right: 8px;
-            font-size: 20px;
+            font-size: 18px;
             color: #FF7A00;
         }
         
         .steps-list {
             list-style: none;
+            margin-bottom: 25px;
         }
         
         .step-item {
             display: flex;
             align-items: flex-start;
             margin-bottom: 12px;
-            padding: 12px 15px;
+            padding: 14px;
             background-color: #f8f9fa;
-            border-radius: 8px;
-            border-left: 3px solid #FF7A00;
+            border-radius: 10px;
+            border-left: 4px solid #FF7A00;
         }
         
         .step-number {
             background-color: #FF7A00;
             color: white;
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: bold;
             margin-right: 12px;
             flex-shrink: 0;
@@ -371,37 +350,24 @@
             line-height: 1.5;
         }
         
-        /* 安装常见问题 */
+        /* 常见问题 - 手机优化 */
         .faq-title {
-            font-size: 18px;
-            font-weight: 500;
-            color: #333;
             margin: 25px 0 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
-            display: flex;
-            align-items: center;
-        }
-        
-        .faq-title .icon {
-            margin-right: 8px;
-            font-size: 20px;
-            color: #FF7A00;
         }
         
         .faq-item {
             margin-bottom: 12px;
-            padding: 12px 15px;
+            padding: 14px;
             background-color: #f8f9fa;
-            border-radius: 8px;
-            border-left: 3px solid #ff6b6b;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
         }
         
         .faq-question {
-            font-weight: 500;
+            font-weight: 600;
             color: #333;
             font-size: 14px;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
         }
@@ -418,7 +384,7 @@
             line-height: 1.5;
         }
         
-        /* 热门硒鼓安装视频推荐 */
+        /* 热门视频推荐 - 手机优化 */
         .home-video-section {
             margin-top: 25px;
         }
@@ -431,8 +397,8 @@
         }
         
         .home-video-title h2 {
-            font-size: 18px;
-            font-weight: 500;
+            font-size: 17px;
+            font-weight: 600;
             color: #333;
             display: flex;
             align-items: center;
@@ -447,370 +413,128 @@
             background-color: #FF7A00;
             color: white;
             border: none;
-            padding: 6px 15px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.3s;
             font-weight: 500;
             box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
-        }
-        
-        .view-all-btn:hover {
-            background-color: #E56A00;
-            transform: translateY(-1px);
-            box-shadow: 0 3px 8px rgba(255, 122, 0, 0.3);
         }
         
         .home-video-list {
             display: grid;
-            gap: 12px;
+            gap: 14px;
         }
         
-        .home-video-item {
+        .home-video-item, .video-item {
             background-color: white;
-            border-radius: 8px;
-            padding: 15px;
+            border-radius: 12px;
+            padding: 16px;
             border: 1px solid #f0f0f0;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             transition: all 0.3s;
         }
         
-        .home-video-item:hover {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-            transform: translateY(-1px);
-        }
-        
-        .home-video-header {
+        .home-video-header, .video-header {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: flex-start;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
-        .home-video-title-text {
-            font-weight: 500;
+        .home-video-title-text, .video-title {
+            font-weight: 600;
             color: #333;
-            font-size: 14px;
+            font-size: 15px;
             flex: 1;
             line-height: 1.4;
+            margin-bottom: 12px;
         }
         
-        .home-play-btn {
+        .home-play-btn, .play-btn {
             background-color: #FF7A00;
             color: white;
             border: none;
-            padding: 6px 12px;
-            border-radius: 5px;
+            padding: 10px 20px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 500;
             transition: all 0.3s;
-            white-space: nowrap;
-            margin-left: 10px;
+            width: 100%;
             box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
             display: flex;
             align-items: center;
+            justify-content: center;
         }
         
-        .home-play-btn:hover {
-            background-color: #E56A00;
-            transform: translateY(-1px);
-            box-shadow: 0 3px 8px rgba(255, 122, 0, 0.3);
+        .home-play-btn .btn-icon, .play-btn .btn-icon {
+            margin-right: 6px;
+            font-size: 14px;
         }
         
-        .home-play-btn.playing {
+        .home-play-btn.playing, .play-btn.playing {
             background-color: #f85e5e;
-            box-shadow: 0 2px 5px rgba(248, 94, 94, 0.2);
         }
         
-        .home-play-btn.playing:hover {
-            background-color: #e75353;
-            box-shadow: 0 3px 8px rgba(248, 94, 94, 0.3);
-        }
-        
-        .home-play-btn .btn-icon {
-            margin-right: 4px;
-            font-size: 12px;
-        }
-        
-        .home-video-container {
+        .home-video-container, .video-container {
             width: 100%;
             height: 0;
             overflow: hidden;
             transition: height 0.3s ease;
-            border-radius: 6px;
+            border-radius: 8px;
             margin-top: 12px;
             background-color: #000;
         }
         
-        .home-video-container.active {
+        .home-video-container.active, .video-container.active {
             height: 200px;
         }
         
-        .home-video-player {
+        .home-video-player, .video-player {
             width: 100%;
             height: 200px;
-            border-radius: 6px;
+            border-radius: 8px;
             border: none;
             display: block;
         }
         
-        /* 视频页面样式 */
-        .search-section {
-            margin-bottom: 15px;
-        }
-        
-        .search-box {
-            position: relative;
-            width: 100%;
-            display: flex;
-            gap: 8px;
-        }
-        
-        .search-box input {
-            flex: 1;
-            padding: 14px 16px;
-            font-size: 15px;
-            border: 1px solid #e6e6e6;
-            border-radius: 8px;
-            background-color: #fafafa;
-            transition: all 0.3s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-        }
-        
-        .search-box input:focus {
-            outline: none;
-            border-color: #FF7A00;
-            background-color: white;
-            box-shadow: 0 3px 12px rgba(255, 122, 0, 0.1);
-        }
-        
-        .search-btn {
-            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
-            color: #333;
-            border: 1px solid #e9ecef;
-            padding: 0 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 60px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-        }
-        
-        .search-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-color: #FF7A00;
-        }
-        
-        .search-btn:active {
-            transform: translateY(0);
-        }
-        
-        .search-btn .btn-icon {
-            font-size: 16px;
-            color: #666;
-        }
-        
-        /* 使用说明 - 优化后更紧凑 */
-        .instructions {
-            background-color: #fff8f0;
-            border-radius: 8px;
-            padding: 12px 15px;
-            margin-bottom: 15px;
-            border-left: 3px solid #FF7A00;
-            box-shadow: 0 2px 6px rgba(255, 122, 0, 0.05);
-            font-size: 13px;
-        }
-        
-        .instructions h3 {
-            color: #FF7A00;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .instructions h3 .icon {
-            margin-right: 6px;
-            font-size: 16px;
-        }
-        
-        .instructions ol {
-            padding-left: 18px;
-            margin: 0;
-        }
-        
-        .instructions li {
-            margin-bottom: 5px;
-            color: #555;
-            font-size: 13px;
-            line-height: 1.4;
-        }
-        
-        .instructions li:last-child {
-            margin-bottom: 0;
-        }
-        
-        .instructions li strong {
-            color: #333;
-            font-weight: 500;
-        }
-        
-        /* 视频列表标题 */
+        /* 视频页面样式 - 手机优化 */
         .video-list-title {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
         
         .video-list-title h2 {
-            font-size: 16px;
-            font-weight: 500;
+            font-size: 17px;
+            font-weight: 600;
             color: #333;
         }
         
         .video-count {
             background-color: #FF7A00;
             color: white;
-            padding: 3px 10px;
+            padding: 4px 12px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 500;
         }
         
-        /* 视频列表 */
         .video-list {
             display: grid;
-            gap: 12px;
-        }
-        
-        .video-item {
-            background-color: white;
-            border-radius: 8px;
-            padding: 15px;
-            border: 1px solid #f0f0f0;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-            transition: all 0.3s;
-        }
-        
-        .video-item:hover {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-            transform: translateY(-1px);
-        }
-        
-        .video-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-        
-        .video-title {
-            font-weight: 500;
-            color: #333;
-            font-size: 15px;
-            flex: 1;
-            line-height: 1.4;
-        }
-        
-        .play-btn {
-            background-color: #FF7A00;
-            color: white;
-            border: none;
-            padding: 7px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
-            transition: all 0.3s;
-            white-space: nowrap;
-            margin-left: 12px;
-            box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
-            display: flex;
-            align-items: center;
-        }
-        
-        .play-btn:hover {
-            background-color: #E56A00;
-            transform: translateY(-1px);
-            box-shadow: 0 3px 8px rgba(255, 122, 0, 0.3);
-        }
-        
-        .play-btn.playing {
-            background-color: #f85e5e;
-            box-shadow: 0 2px 5px rgba(248, 94, 94, 0.2);
-        }
-        
-        .play-btn.playing:hover {
-            background-color: #e75353;
-            box-shadow: 0 3px 8px rgba(248, 94, 94, 0.3);
-        }
-        
-        .play-btn .btn-icon {
-            margin-right: 4px;
-            font-size: 14px;
-        }
-        
-        .video-container {
-            width: 100%;
-            height: 0;
-            overflow: hidden;
-            transition: height 0.3s ease;
-            border-radius: 6px;
-            margin-top: 12px;
-            background-color: #000;
-        }
-        
-        .video-container.active {
-            height: 280px;
-        }
-        
-        .video-player {
-            width: 100%;
-            height: 280px;
-            border-radius: 6px;
-            border: none;
-            display: block;
-        }
-        
-        .no-result {
-            text-align: center;
-            padding: 40px 15px;
-            color: #999;
-        }
-        
-        .no-result-icon {
-            font-size: 40px;
-            margin-bottom: 12px;
-            opacity: 0.5;
-        }
-        
-        .no-result p {
-            font-size: 15px;
-        }
-        
-        .no-result .hint {
-            font-size: 13px;
-            margin-top: 8px;
-            color: #666;
+            gap: 14px;
         }
         
         /* 分类搜索提示 */
         .category-hint {
             background-color: #fff8f0;
-            border-radius: 8px;
-            padding: 10px 15px;
-            margin-bottom: 15px;
-            border-left: 3px solid #FF7A00;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 16px;
+            border-left: 4px solid #FF7A00;
             font-size: 13px;
             display: flex;
             align-items: center;
@@ -833,11 +557,11 @@
             background: none;
             border: none;
             color: #999;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
             padding: 0;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -845,12 +569,44 @@
             transition: all 0.2s;
         }
         
-        .close-btn:hover {
-            background-color: rgba(0, 0, 0, 0.05);
+        /* 无结果样式 */
+        .no-result {
+            text-align: center;
+            padding: 50px 15px;
+            color: #999;
+        }
+        
+        .no-result-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+        
+        .no-result p {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .no-result .hint {
+            font-size: 13px;
+            margin-top: 8px;
             color: #666;
         }
         
-        /* 页脚 */
+        /* 搜索结果提示 */
+        .search-result-info {
+            color: #FF7A00;
+            font-size: 13px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-result-info .icon {
+            margin-right: 6px;
+        }
+        
+        /* 页脚 - 手机优化 */
         .footer {
             text-align: center;
             padding: 20px 15px;
@@ -858,6 +614,7 @@
             font-size: 12px;
             border-top: 1px solid #f0f0f0;
             background-color: #fafafa;
+            margin-top: 20px;
         }
         
         .footer .wechat-icon {
@@ -867,132 +624,24 @@
             vertical-align: middle;
         }
         
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .container {
-                border-radius: 0;
-                box-shadow: none;
-            }
-            
-            .header {
-                padding: 18px 15px;
-            }
-            
-            .header h1 {
-                font-size: 20px;
-            }
-            
-            .main-content {
-                padding: 15px 15px 25px;
-            }
-            
-            .category-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            
-            .category-card {
-                padding: 12px;
-            }
-            
-            .category-icon {
-                font-size: 24px;
-            }
-            
-            .home-search-instructions {
-                padding: 6px 10px;
-                font-size: 10px;
-            }
-            
-            .home-search-instructions li {
-                font-size: 10px;
-            }
-            
-            .guide-subtitle {
-                font-size: 12px;
-                margin-bottom: 12px;
-            }
-            
-            .home-video-header, .video-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .home-video-title-text, .video-title {
-                margin-bottom: 10px;
-                font-size: 13px;
-            }
-            
-            .home-play-btn, .play-btn {
-                margin-left: 0;
-                align-self: flex-start;
-                padding: 6px 12px;
-                font-size: 12px;
-            }
-            
-            .home-video-container.active {
-                height: 180px;
-            }
-            
-            .home-video-player {
-                height: 180px;
-            }
-            
-            .video-container.active {
-                height: 200px;
-            }
-            
-            .video-player {
-                height: 200px;
-            }
-            
-            .search-box input, .home-search-box input {
-                padding: 12px 14px;
-                font-size: 14px;
-            }
-            
-            .search-btn, .home-search-btn {
-                padding: 0 15px;
-                min-width: 50px;
-                font-size: 13px;
-            }
-            
-            .instructions {
-                padding: 10px 12px;
-                margin-bottom: 12px;
-            }
-            
-            .instructions li {
-                font-size: 12px;
-            }
-            
-            .step-item {
-                padding: 10px 12px;
-            }
-            
-            .faq-item {
-                padding: 10px 12px;
-            }
-        }
-        
         /* 加载动画 */
         .loading {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 15px;
+            padding: 20px;
             color: #FF7A00;
-            font-size: 13px;
+            font-size: 14px;
         }
         
         .loading:before {
             content: '';
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             border: 2px solid rgba(255, 122, 0, 0.2);
             border-top-color: #FF7A00;
             border-radius: 50%;
-            margin-right: 8px;
+            margin-right: 10px;
             animation: spin 1s linear infinite;
         }
         
@@ -1002,17 +651,72 @@
             }
         }
         
-        /* 搜索结果提示 */
-        .search-result-info {
-            color: #FF7A00;
-            font-size: 13px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
+        /* 针对大屏手机的优化 */
+        @media (min-width: 400px) {
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .home-video-header, .video-header {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .home-video-title-text, .video-title {
+                margin-bottom: 0;
+            }
+            
+            .home-play-btn, .play-btn {
+                width: auto;
+                min-width: 100px;
+            }
         }
         
-        .search-result-info .icon {
-            margin-right: 4px;
+        /* 平板优化 */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+                border-radius: 0;
+                overflow: hidden;
+            }
+            
+            .header {
+                padding: 20px 20px 25px;
+            }
+            
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .header .subtitle {
+                font-size: 13px;
+            }
+            
+            .main-content {
+                padding: 20px 20px 30px;
+            }
+            
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .home-play-btn, .play-btn {
+                padding: 8px 16px;
+            }
+        }
+        
+        /* 防止长按出现复制菜单 */
+        .category-card, .home-video-item, .video-item, .home-play-btn, .play-btn, .page-btn {
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        /* 优化按钮点击效果 */
+        button {
+            touch-action: manipulation;
         }
     </style>
 </head>
@@ -1032,7 +736,7 @@
             <div id="homePage" class="page active">
                 <div class="home-search-section">
                     <div class="home-search-box">
-                        <input type="text" id="homeSearchInput" placeholder="请输入需要搜索的硒鼓或者产品型号，例如：388、1136...">
+                        <input type="text" id="homeSearchInput" placeholder="请输入硒鼓或产品型号，如：388、1136...">
                         <button class="home-search-btn" id="homeSearchBtn">
                             <span class="btn-icon">🔍</span>
                         </button>
@@ -1044,9 +748,9 @@
                             <span class="icon">📚</span>使用说明：
                         </div>
                         <ol>
-                            <li><strong>在搜索框输入硒鼓或者产品型号</strong> - 支持模糊搜索；</li>
-                            <li><strong>从列表中选择对应的产品安装教程</strong></li>
-                            <li><strong>点击播放视频按钮</strong> - 观看详细安装视频教程。</li>
+                            <li><strong>输入硒鼓或产品型号</strong> - 支持模糊搜索</li>
+                            <li><strong>选择对应的产品安装教程</strong></li>
+                            <li><strong>点击播放视频按钮</strong> - 观看详细安装教程</li>
                         </ol>
                     </div>
                 </div>
@@ -1135,7 +839,7 @@
                 
                 <div class="search-section">
                     <div class="search-box">
-                        <input type="text" id="searchInput" placeholder="请输入需要搜索的硒鼓或者产品型号，例如：388、1136...">
+                        <input type="text" id="searchInput" placeholder="请输入硒鼓或产品型号，如：388、1136...">
                         <button class="search-btn" id="searchBtn">
                             <span class="btn-icon">🔍</span>
                         </button>
@@ -1153,9 +857,9 @@
                 <div class="instructions">
                     <h3><span class="icon">📚</span>使用说明：</h3>
                     <ol>
-                        <li><strong>在搜索框输入硒鼓或者产品型号</strong> - 支持模糊搜索；</li>
-                        <li><strong>从列表中选择对应的产品安装教程</strong></li>
-                        <li><strong>点击播放视频按钮</strong> - 观看详细安装视频教程。</li>
+                        <li><strong>输入硒鼓或产品型号</strong> - 支持模糊搜索</li>
+                        <li><strong>选择对应的产品安装教程</strong></li>
+                        <li><strong>点击播放视频按钮</strong> - 观看详细安装教程</li>
                     </ol>
                 </div>
                 
@@ -1205,48 +909,48 @@
             ["兄弟2240 450套装 粉盒硒鼓安装教程", "BV1y5zZBiE9Q"],
         ];
 
-        // 硒鼓分类数据 - 更新图标为更简单统一的样式
+        // 硒鼓分类数据
         const categories = [
             { 
                 id: 'integrated', 
                 name: '一体式硒鼓', 
                 desc: '整体安装',
-                icon: '📦', // 简单的快递包装图标
+                icon: '📦',
                 keywords: ['一体式', '一体式硒鼓', '整体安装', '整体硒鼓']
             },
             { 
                 id: 'separated', 
                 name: '分离式硒鼓', 
                 desc: '鼓粉分离',
-                icon: '🔧', // 工具图标，表示需要组装
+                icon: '🔧',
                 keywords: ['分离式', '分离式硒鼓', '鼓粉分离', '分离']
             },
             { 
                 id: 'toner', 
                 name: '粉盒鼓架', 
                 desc: '分体安装',
-                icon: '⚙️', // 齿轮图标，表示机械部件
+                icon: '⚙️',
                 keywords: ['粉盒', '鼓架', '分体安装', '粉盒鼓架']
             },
             { 
                 id: 'color', 
                 name: '彩色硒鼓', 
                 desc: '彩色安装',
-                icon: '🎨', // 调色板图标，表示彩色
+                icon: '🎨',
                 keywords: ['彩色', '彩鼓', '颜色硒鼓', '彩色硒鼓']
             },
             { 
                 id: 'chip', 
                 name: '芯片更换', 
                 desc: '重置教程',
-                icon: '💿', // 光盘图标，表示芯片/电子部件
+                icon: '💿',
                 keywords: ['芯片', '芯片更换', 'IC芯片', '芯片重置']
             },
             { 
                 id: 'refill', 
                 name: '加粉教程', 
                 desc: '补充碳粉',
-                icon: '🔄', // 循环图标，表示重复使用/加粉
+                icon: '🔄',
                 keywords: ['加粉', '填充', '补充碳粉', '加粉教程']
             }
         ];
@@ -1272,11 +976,15 @@
                 videoPage.classList.remove('active');
                 homeBtn.classList.add('active');
                 videoBtn.classList.remove('active');
+                // 滚动到顶部
+                window.scrollTo(0, 0);
             } else {
                 homePage.classList.remove('active');
                 videoPage.classList.add('active');
                 homeBtn.classList.remove('active');
                 videoBtn.classList.add('active');
+                // 滚动到顶部
+                window.scrollTo(0, 0);
             }
         }
         
@@ -1390,7 +1098,7 @@
                     <div class="home-video-header">
                         <div class="home-video-title-text">${productName}</div>
                         <button class="home-play-btn" data-id="${itemId}" data-video="${videoId}">
-                            <span class="btn-icon">▶</span>播放
+                            <span class="btn-icon">▶</span>播放视频
                         </button>
                     </div>
                     <div class="home-video-container">
@@ -1496,7 +1204,7 @@
                 // 停止播放
                 iframe.src = 'about:blank';
                 container.classList.remove('active');
-                button.innerHTML = '<span class="btn-icon">▶</span>播放';
+                button.innerHTML = '<span class="btn-icon">▶</span>播放视频';
                 button.classList.remove('playing');
                 homeCurrentPlayingId = null;
                 loading.style.display = 'flex';
@@ -1514,7 +1222,7 @@
                     
                     prevIframe.src = 'about:blank';
                     prevContainer.classList.remove('active');
-                    prevButton.innerHTML = '<span class="btn-icon">▶</span>播放';
+                    prevButton.innerHTML = '<span class="btn-icon">▶</span>播放视频';
                     prevButton.classList.remove('playing');
                     prevLoading.style.display = 'flex';
                 }
@@ -1531,7 +1239,7 @@
             loading.style.display = 'none';
             
             container.classList.add('active');
-            button.innerHTML = '<span class="btn-icon">⏸</span>关闭';
+            button.innerHTML = '<span class="btn-icon">⏸</span>关闭视频';
             button.classList.add('playing');
             homeCurrentPlayingId = itemId;
             
@@ -1683,6 +1391,23 @@
                 switchPage('home');
                 // 清空首页搜索框
                 document.getElementById('homeSearchInput').value = '';
+                // 停止所有视频播放
+                if (homeCurrentPlayingId) {
+                    const currentItem = document.getElementById(homeCurrentPlayingId);
+                    if (currentItem) {
+                        const container = currentItem.querySelector('.home-video-container');
+                        const iframe = currentItem.querySelector('.home-video-player');
+                        const button = currentItem.querySelector('.home-play-btn');
+                        const loading = container.querySelector('.loading');
+                        
+                        iframe.src = 'about:blank';
+                        container.classList.remove('active');
+                        button.innerHTML = '<span class="btn-icon">▶</span>播放视频';
+                        button.classList.remove('playing');
+                        loading.style.display = 'flex';
+                    }
+                    homeCurrentPlayingId = null;
+                }
             });
             
             document.getElementById('videoBtn').addEventListener('click', () => switchPage('video'));
@@ -1695,6 +1420,23 @@
                 switchPage('home');
                 // 清空首页搜索框
                 document.getElementById('homeSearchInput').value = '';
+                // 停止视频播放
+                if (currentPlayingId) {
+                    const currentItem = document.getElementById(currentPlayingId);
+                    if (currentItem) {
+                        const container = currentItem.querySelector('.video-container');
+                        const iframe = currentItem.querySelector('.video-player');
+                        const button = currentItem.querySelector('.play-btn');
+                        const loading = container.querySelector('.loading');
+                        
+                        iframe.src = 'about:blank';
+                        container.classList.remove('active');
+                        button.innerHTML = '<span class="btn-icon">▶</span>播放视频';
+                        button.classList.remove('playing');
+                        loading.style.display = 'flex';
+                    }
+                    currentPlayingId = null;
+                }
             });
             
             // 查看全部视频按钮
@@ -1767,6 +1509,17 @@
                     this.value = '';
                     searchVideos();
                 }
+            });
+            
+            // 优化移动端触摸体验
+            document.querySelectorAll('button').forEach(button => {
+                button.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                
+                button.addEventListener('touchend', function() {
+                    this.style.transform = 'scale(1)';
+                });
             });
         });
     </script>
