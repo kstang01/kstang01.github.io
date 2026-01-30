@@ -32,9 +32,9 @@
             min-height: 100vh;
         }
         
-        /* 头部样式 */
+        /* 头部样式 - 改为橙色主题 */
         .header {
-            background: linear-gradient(135deg, #07C160 0%, #06AD56 100%);
+            background: linear-gradient(135deg, #FF7A00 0%, #E56A00 100%);
             color: white;
             padding: 20px 20px;
             text-align: center;
@@ -64,7 +64,7 @@
         .header h1 .icon {
             margin-right: 10px;
             font-size: 24px;
-            filter: brightness(0) invert(1); /* 使图标变为白色 */
+            filter: brightness(0) invert(1);
         }
         
         .header .subtitle {
@@ -73,12 +73,456 @@
             font-weight: 400;
         }
         
+        /* 页面切换按钮 */
+        .page-switch {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            gap: 15px;
+        }
+        
+        .page-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .page-btn.active {
+            background: white;
+            color: #FF7A00;
+            font-weight: 500;
+        }
+        
         /* 主内容区域 */
         .main-content {
             padding: 20px 20px 30px;
         }
         
-        /* 搜索区域 */
+        /* 页面样式 */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* 返回按钮样式 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #FF7A00;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
+        }
+        
+        .back-btn:hover {
+            background-color: #E56A00;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(255, 122, 0, 0.3);
+        }
+        
+        .back-btn .icon {
+            margin-right: 6px;
+            font-size: 14px;
+        }
+        
+        /* 首页搜索框 */
+        .home-search-section {
+            margin-bottom: 15px;
+        }
+        
+        .home-search-box {
+            position: relative;
+            width: 100%;
+        }
+        
+        .home-search-box input {
+            width: 100%;
+            padding: 14px 45px 14px 16px;
+            font-size: 15px;
+            border: 1px solid #e6e6e6;
+            border-radius: 8px;
+            background-color: #fafafa;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+        
+        .home-search-box input:focus {
+            outline: none;
+            border-color: #FF7A00;
+            background-color: white;
+            box-shadow: 0 3px 12px rgba(255, 122, 0, 0.1);
+        }
+        
+        .home-search-box .search-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #FF7A00;
+            font-size: 18px;
+        }
+        
+        /* 首页搜索说明 */
+        .home-search-instructions {
+            background-color: #fff8f0;
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin-top: 8px;
+            margin-bottom: 5px;
+            border-left: 2px solid #FF7A00;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+        
+        .home-search-instructions .title {
+            color: #FF7A00;
+            font-weight: 500;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .home-search-instructions .title .icon {
+            margin-right: 4px;
+            font-size: 12px;
+        }
+        
+        .home-search-instructions ol {
+            padding-left: 16px;
+            margin: 0;
+        }
+        
+        .home-search-instructions li {
+            margin-bottom: 3px;
+            color: #666;
+            font-size: 11px;
+        }
+        
+        .home-search-instructions li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .home-search-instructions li strong {
+            color: #333;
+            font-weight: 500;
+        }
+        
+        /* 首页样式 - 分类指南 */
+        .guide-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .guide-title .icon {
+            margin-right: 8px;
+            font-size: 20px;
+            color: #FF7A00;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .category-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: #FF7A00;
+        }
+        
+        .category-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #FF7A00;
+        }
+        
+        .category-name {
+            font-weight: 500;
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .category-desc {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        /* 安装步骤 */
+        .steps-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .steps-title .icon {
+            margin-right: 8px;
+            font-size: 20px;
+            color: #FF7A00;
+        }
+        
+        .steps-list {
+            list-style: none;
+        }
+        
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            padding: 12px 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid #FF7A00;
+        }
+        
+        .step-number {
+            background-color: #FF7A00;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .step-text {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* 常见问题 */
+        .faq-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .faq-title .icon {
+            margin-right: 8px;
+            font-size: 20px;
+            color: #FF7A00;
+        }
+        
+        .faq-item {
+            margin-bottom: 12px;
+            padding: 12px 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid #ff6b6b;
+        }
+        
+        .faq-question {
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .faq-question .icon {
+            margin-right: 6px;
+            font-size: 16px;
+            color: #ff6b6b;
+        }
+        
+        .faq-answer {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        /* 首页视频列表 */
+        .home-video-section {
+            margin-top: 25px;
+        }
+        
+        .home-video-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .home-video-title h2 {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        
+        .home-video-title h2 .icon {
+            margin-right: 8px;
+            color: #FF7A00;
+        }
+        
+        .view-all-btn {
+            background-color: #FF7A00;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
+        }
+        
+        .view-all-btn:hover {
+            background-color: #E56A00;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(255, 122, 0, 0.3);
+        }
+        
+        .home-video-list {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .home-video-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s;
+        }
+        
+        .home-video-item:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
+        }
+        
+        .home-video-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .home-video-title-text {
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+            flex: 1;
+            line-height: 1.4;
+        }
+        
+        .home-play-btn {
+            background-color: #FF7A00;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s;
+            white-space: nowrap;
+            margin-left: 10px;
+            box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
+            display: flex;
+            align-items: center;
+        }
+        
+        .home-play-btn:hover {
+            background-color: #E56A00;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(255, 122, 0, 0.3);
+        }
+        
+        .home-play-btn.playing {
+            background-color: #f85e5e;
+            box-shadow: 0 2px 5px rgba(248, 94, 94, 0.2);
+        }
+        
+        .home-play-btn.playing:hover {
+            background-color: #e75353;
+            box-shadow: 0 3px 8px rgba(248, 94, 94, 0.3);
+        }
+        
+        .home-play-btn .btn-icon {
+            margin-right: 4px;
+            font-size: 12px;
+        }
+        
+        .home-video-container {
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+            transition: height 0.3s ease;
+            border-radius: 6px;
+            margin-top: 12px;
+            background-color: #000;
+        }
+        
+        .home-video-container.active {
+            height: 200px;
+        }
+        
+        .home-video-player {
+            width: 100%;
+            height: 200px;
+            border-radius: 6px;
+            border: none;
+            display: block;
+        }
+        
+        /* 视频页面样式 */
         .search-section {
             margin-bottom: 15px;
         }
@@ -101,9 +545,9 @@
         
         .search-box input:focus {
             outline: none;
-            border-color: #07C160;
+            border-color: #FF7A00;
             background-color: white;
-            box-shadow: 0 3px 12px rgba(7, 193, 96, 0.1);
+            box-shadow: 0 3px 12px rgba(255, 122, 0, 0.1);
         }
         
         .search-box .search-icon {
@@ -111,23 +555,23 @@
             right: 16px;
             top: 50%;
             transform: translateY(-50%);
-            color: #07C160;
+            color: #FF7A00;
             font-size: 18px;
         }
         
         /* 使用说明 - 优化后更紧凑 */
         .instructions {
-            background-color: #f0f9f4;
+            background-color: #fff8f0;
             border-radius: 8px;
             padding: 12px 15px;
             margin-bottom: 15px;
-            border-left: 3px solid #07C160;
-            box-shadow: 0 2px 6px rgba(7, 193, 96, 0.05);
+            border-left: 3px solid #FF7A00;
+            box-shadow: 0 2px 6px rgba(255, 122, 0, 0.05);
             font-size: 13px;
         }
         
         .instructions h3 {
-            color: #07C160;
+            color: #FF7A00;
             font-size: 14px;
             font-weight: 500;
             margin-bottom: 8px;
@@ -176,7 +620,7 @@
         }
         
         .video-count {
-            background-color: #07C160;
+            background-color: #FF7A00;
             color: white;
             padding: 3px 10px;
             border-radius: 20px;
@@ -220,7 +664,7 @@
         }
         
         .play-btn {
-            background-color: #07C160;
+            background-color: #FF7A00;
             color: white;
             border: none;
             padding: 7px 15px;
@@ -231,15 +675,15 @@
             transition: all 0.3s;
             white-space: nowrap;
             margin-left: 12px;
-            box-shadow: 0 2px 5px rgba(7, 193, 96, 0.2);
+            box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
             display: flex;
             align-items: center;
         }
         
         .play-btn:hover {
-            background-color: #06AD56;
+            background-color: #E56A00;
             transform: translateY(-1px);
-            box-shadow: 0 3px 8px rgba(7, 193, 96, 0.3);
+            box-shadow: 0 3px 8px rgba(255, 122, 0, 0.3);
         }
         
         .play-btn.playing {
@@ -301,6 +745,52 @@
             color: #666;
         }
         
+        /* 分类搜索提示 */
+        .category-hint {
+            background-color: #fff8f0;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-left: 3px solid #FF7A00;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        
+        .category-hint .hint-text {
+            display: flex;
+            align-items: center;
+        }
+        
+        .category-hint .icon {
+            color: #FF7A00;
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        
+        .close-btn:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: #666;
+        }
+        
         /* 页脚 */
         .footer {
             text-align: center;
@@ -312,7 +802,7 @@
         }
         
         .footer .wechat-icon {
-            color: #07C160;
+            color: #FF7A00;
             font-size: 16px;
             margin-right: 4px;
             vertical-align: middle;
@@ -337,21 +827,51 @@
                 padding: 15px 15px 25px;
             }
             
-            .video-header {
+            .category-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .category-card {
+                padding: 12px;
+            }
+            
+            .category-icon {
+                font-size: 24px;
+            }
+            
+            .home-search-instructions {
+                padding: 6px 10px;
+                font-size: 10px;
+            }
+            
+            .home-search-instructions li {
+                font-size: 10px;
+            }
+            
+            .home-video-header, .video-header {
                 flex-direction: column;
                 align-items: flex-start;
             }
             
-            .video-title {
+            .home-video-title-text, .video-title {
                 margin-bottom: 10px;
-                font-size: 14px;
+                font-size: 13px;
             }
             
-            .play-btn {
+            .home-play-btn, .play-btn {
                 margin-left: 0;
                 align-self: flex-start;
                 padding: 6px 12px;
                 font-size: 12px;
+            }
+            
+            .home-video-container.active {
+                height: 180px;
+            }
+            
+            .home-video-player {
+                height: 180px;
             }
             
             .video-container.active {
@@ -362,7 +882,7 @@
                 height: 200px;
             }
             
-            .search-box input {
+            .search-box input, .home-search-box input {
                 padding: 12px 40px 12px 14px;
                 font-size: 14px;
             }
@@ -375,6 +895,14 @@
             .instructions li {
                 font-size: 12px;
             }
+            
+            .step-item {
+                padding: 10px 12px;
+            }
+            
+            .faq-item {
+                padding: 10px 12px;
+            }
         }
         
         /* 加载动画 */
@@ -383,7 +911,7 @@
             align-items: center;
             justify-content: center;
             padding: 15px;
-            color: #07C160;
+            color: #FF7A00;
             font-size: 13px;
         }
         
@@ -391,8 +919,8 @@
             content: '';
             width: 16px;
             height: 16px;
-            border: 2px solid rgba(7, 193, 96, 0.2);
-            border-top-color: #07C160;
+            border: 2px solid rgba(255, 122, 0, 0.2);
+            border-top-color: #FF7A00;
             border-radius: 50%;
             margin-right: 8px;
             animation: spin 1s linear infinite;
@@ -406,7 +934,7 @@
         
         /* 搜索结果提示 */
         .search-result-info {
-            color: #07C160;
+            color: #FF7A00;
             font-size: 13px;
             margin-bottom: 10px;
             display: flex;
@@ -421,38 +949,153 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1><span class="icon">🖥️</span>硒鼓安装教程视频库</h1>
+            <h1><span class="icon">🖨️</span>硒鼓安装教程视频库</h1>
             <div class="subtitle">专业硒鼓安装教学，快速掌握更换技巧</div>
+            <div class="page-switch">
+                <button class="page-btn active" id="homeBtn">安装指南</button>
+                <button class="page-btn" id="videoBtn">教程视频</button>
+            </div>
         </div>
         
         <div class="main-content">
-            <div class="search-section">
-                <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="请输入硒鼓型号或产品名称进行搜索...">
-                    <div class="search-icon">🔍</div>
+            <!-- 首页：硒鼓安装指南 -->
+            <div id="homePage" class="page active">
+                <div class="home-search-section">
+                    <div class="home-search-box">
+                        <input type="text" id="homeSearchInput" placeholder="请输入需要搜索的硒鼓或者产品型号，例如：388、1136...">
+                        <div class="search-icon">🔍</div>
+                    </div>
+                    
+                    <!-- 首页搜索说明 -->
+                    <div class="home-search-instructions">
+                        <div class="title">
+                            <span class="icon">📚</span>使用说明：
+                        </div>
+                        <ol>
+                            <li><strong>在搜索框输入硒鼓或者产品型号</strong> - 支持模糊搜索；</li>
+                            <li><strong>从列表中选择对应的产品安装教程</strong></li>
+                            <li><strong>点击播放视频按钮</strong> - 观看详细安装视频教程。</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="guide-title">
+                    <span class="icon">📋</span>硒鼓安装指南
+                </div>
+                <div class="category-grid" id="categoryGrid">
+                    <!-- 分类将通过JavaScript动态生成 -->
+                </div>
+                
+                <div class="steps-title">
+                    <span class="icon">📝</span>通用安装步骤
+                </div>
+                <ul class="steps-list">
+                    <li class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-text">水平摇晃硒鼓5-6次，唤醒碳粉，使碳粉均匀分布</div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-text">取下硒鼓保护盖和两侧的卡扣，确保安装过程中无异物阻挡</div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-text">平直拉出封条，切勿剪断或使用蛮力，避免损坏内部结构</div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-text">检查芯片方向，确保芯片朝正确方向安装，避免打印机报错</div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-number">5</div>
+                        <div class="step-text">将硒鼓装入打印机，听到"咔哒"声表示安装到位，即可使用</div>
+                    </li>
+                </ul>
+                
+                <div class="faq-title">
+                    <span class="icon">❓</span>常见问题
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="icon">⚠️</span>安装后打印机显示"缺粉"
+                    </div>
+                    <div class="faq-answer">
+                        请尝试重新安装硒鼓，确保完全推入到位。如仍报错，可能需要重置芯片计数器。
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="icon">⚠️</span>打印有底灰或条纹
+                    </div>
+                    <div class="faq-answer">
+                        可能是碳粉未均匀分布。建议取出硒鼓，水平摇晃5-6次后重新安装。
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span class="icon">⚠️</span>芯片不兼容错误
+                    </div>
+                    <div class="faq-answer">
+                        请确认芯片方向与打印机触点完全匹配，如有污渍可用橡皮擦轻轻擦拭。
+                    </div>
+                </div>
+                
+                <!-- 首页视频列表 -->
+                <div class="home-video-section">
+                    <div class="home-video-title">
+                        <h2><span class="icon">🎬</span>安装视频推荐</h2>
+                        <button class="view-all-btn" id="viewAllBtn">查看全部视频</button>
+                    </div>
+                    
+                    <div id="homeVideoList" class="home-video-list">
+                        <!-- 首页视频列表会在这里动态生成 -->
+                    </div>
                 </div>
             </div>
             
-            <div class="instructions">
-                <h3><span class="icon">📚</span>使用说明：</h3>
-                <ol>
-                    <li><strong>在搜索框内输入产品名称</strong> - 支持模糊搜索</li>
-                    <li><strong>从列表中选择对应的产品安装教程</strong></li>
-                    <li><strong>点击播放视频按钮</strong> - 观看详细安装视频教程</li>
-                </ol>
-            </div>
-            
-            <div class="video-list-title">
-                <h2>安装教程列表</h2>
-                <div class="video-count" id="videoCount">50 个教程</div>
-            </div>
-            
-            <div id="searchResultInfo" class="search-result-info" style="display: none;">
-                <span class="icon">🔍</span> <span id="resultText"></span>
-            </div>
-            
-            <div id="videoList" class="video-list">
-                <!-- 视频列表会在这里动态生成 -->
+            <!-- 视频页面：教程视频列表 -->
+            <div id="videoPage" class="page">
+                <!-- 返回按钮 -->
+                <button class="back-btn" id="backToHomeBtn">
+                    <span class="icon">←</span>返回指南首页
+                </button>
+                
+                <div class="search-section">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="请输入需要搜索的硒鼓或者产品型号，例如：388、1136...">
+                        <div class="search-icon">🔍</div>
+                    </div>
+                </div>
+                
+                <div id="categoryHint" class="category-hint" style="display: none;">
+                    <div class="hint-text">
+                        <span class="icon">🔍</span> 
+                        <span id="categoryHintText"></span>
+                    </div>
+                    <button class="close-btn" id="closeCategoryHint">×</button>
+                </div>
+                
+                <div class="instructions">
+                    <h3><span class="icon">📚</span>使用说明：</h3>
+                    <ol>
+                        <li><strong>在搜索框输入硒鼓或者产品型号</strong> - 支持模糊搜索；</li>
+                        <li><strong>从列表中选择对应的产品安装教程</strong></li>
+                        <li><strong>点击播放视频按钮</strong> - 观看详细安装视频教程。</li>
+                    </ol>
+                </div>
+                
+                <div class="video-list-title">
+                    <h2>安装教程列表</h2>
+                    <div class="video-count" id="videoCount">0 个教程</div>
+                </div>
+                
+                <div id="searchResultInfo" class="search-result-info" style="display: none;">
+                    <span class="icon">🔍</span> <span id="resultText"></span>
+                </div>
+                
+                <div id="videoList" class="video-list">
+                    <!-- 视频列表会在这里动态生成 -->
+                </div>
             </div>
         </div>
         
@@ -487,8 +1130,151 @@
             ["兄弟2240 450套装 粉盒硒鼓安装教程", "BV1y5zZBiE9Q"],
         ];
 
+        // 硒鼓分类数据 - 更新图标为更简单统一的样式
+        const categories = [
+            { 
+                id: 'integrated', 
+                name: '一体式硒鼓', 
+                desc: '整体安装',
+                icon: '📦', // 简单的快递包装图标
+                keywords: ['一体式', '一体式硒鼓', '整体安装', '整体硒鼓']
+            },
+            { 
+                id: 'separated', 
+                name: '分离式硒鼓', 
+                desc: '鼓粉分离',
+                icon: '🔧', // 工具图标，表示需要组装
+                keywords: ['分离式', '分离式硒鼓', '鼓粉分离', '分离']
+            },
+            { 
+                id: 'toner', 
+                name: '粉盒鼓架', 
+                desc: '分体安装',
+                icon: '⚙️', // 齿轮图标，表示机械部件
+                keywords: ['粉盒', '鼓架', '分体安装', '粉盒鼓架']
+            },
+            { 
+                id: 'color', 
+                name: '彩色硒鼓', 
+                desc: '彩色安装',
+                icon: '🎨', // 调色板图标，表示彩色
+                keywords: ['彩色', '彩鼓', '颜色硒鼓', '彩色硒鼓']
+            },
+            { 
+                id: 'chip', 
+                name: '芯片更换', 
+                desc: '重置教程',
+                icon: '💿', // 光盘图标，表示芯片/电子部件
+                keywords: ['芯片', '芯片更换', 'IC芯片', '芯片重置']
+            },
+            { 
+                id: 'refill', 
+                name: '加粉教程', 
+                desc: '补充碳粉',
+                icon: '🔄', // 循环图标，表示重复使用/加粉
+                keywords: ['加粉', '填充', '补充碳粉', '加粉教程']
+            }
+        ];
+
         // 存储当前播放的视频
         let currentPlayingId = null;
+        // 存储首页当前播放的视频
+        let homeCurrentPlayingId = null;
+        // 当前搜索的分类
+        let currentCategory = null;
+        // 当前分类下的原始视频列表（用于二次筛选）
+        let currentCategoryVideos = [];
+        
+        // 切换页面
+        function switchPage(page) {
+            const homePage = document.getElementById('homePage');
+            const videoPage = document.getElementById('videoPage');
+            const homeBtn = document.getElementById('homeBtn');
+            const videoBtn = document.getElementById('videoBtn');
+            
+            if (page === 'home') {
+                homePage.classList.add('active');
+                videoPage.classList.remove('active');
+                homeBtn.classList.add('active');
+                videoBtn.classList.remove('active');
+            } else {
+                homePage.classList.remove('active');
+                videoPage.classList.add('active');
+                homeBtn.classList.remove('active');
+                videoBtn.classList.add('active');
+            }
+        }
+        
+        // 显示分类
+        function displayCategories() {
+            const categoryGrid = document.getElementById('categoryGrid');
+            let html = '';
+            
+            categories.forEach(category => {
+                html += `
+                <div class="category-card" data-id="${category.id}">
+                    <div class="category-icon">${category.icon}</div>
+                    <div class="category-name">${category.name}</div>
+                    <div class="category-desc">${category.desc}</div>
+                </div>`;
+            });
+            
+            categoryGrid.innerHTML = html;
+            
+            // 添加分类点击事件
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const categoryId = this.getAttribute('data-id');
+                    const category = categories.find(c => c.id === categoryId);
+                    
+                    if (category) {
+                        // 切换到视频页面
+                        switchPage('video');
+                        // 设置当前分类
+                        currentCategory = category;
+                        // 清空搜索框
+                        document.getElementById('searchInput').value = '';
+                        // 显示分类提示
+                        showCategoryHint(category);
+                        // 搜索该分类下的视频
+                        searchByCategory(category);
+                    }
+                });
+            });
+        }
+        
+        // 显示分类提示
+        function showCategoryHint(category) {
+            const hintElement = document.getElementById('categoryHint');
+            const hintText = document.getElementById('categoryHintText');
+            
+            hintText.textContent = `当前分类：${category.name}安装教程`;
+            hintElement.style.display = 'flex';
+        }
+        
+        // 清除分类筛选
+        function clearCategoryFilter() {
+            currentCategory = null;
+            currentCategoryVideos = [];
+            document.getElementById('categoryHint').style.display = 'none';
+            document.getElementById('searchInput').value = '';
+            displayVideos(videoData);
+        }
+        
+        // 根据分类搜索视频
+        function searchByCategory(category) {
+            // 根据分类关键词筛选视频
+            currentCategoryVideos = videoData.filter(item => {
+                const productName = item[0].toLowerCase();
+                // 检查视频标题是否包含该分类的任何关键词
+                return category.keywords.some(keyword => 
+                    productName.includes(keyword.toLowerCase())
+                );
+            });
+            
+            // 显示筛选后的视频
+            displayVideos(currentCategoryVideos);
+        }
         
         // 更新视频数量显示
         function updateVideoCount(count) {
@@ -497,20 +1283,70 @@
         }
         
         // 显示搜索结果信息
-        function showSearchResultInfo(filteredCount, totalCount) {
+        function showSearchResultInfo(filteredCount, totalCount, isCategoryFilter = false) {
             const resultInfo = document.getElementById('searchResultInfo');
             const resultText = document.getElementById('resultText');
             
-            if (filteredCount === totalCount) {
+            if (filteredCount === totalCount && !isCategoryFilter) {
                 resultInfo.style.display = 'none';
             } else {
                 resultInfo.style.display = 'flex';
-                resultText.textContent = `找到 ${filteredCount} 个相关结果（共 ${totalCount} 个教程）`;
+                if (isCategoryFilter) {
+                    resultText.textContent = `在当前分类下找到 ${filteredCount} 个相关结果`;
+                } else {
+                    resultText.textContent = `找到 ${filteredCount} 个相关结果（共 ${totalCount} 个教程）`;
+                }
             }
+        }
+        
+        // 显示首页视频列表（前4个）
+        function displayHomeVideos() {
+            const listElement = document.getElementById('homeVideoList');
+            
+            // 只取前4个视频显示在首页
+            const homeVideos = videoData.slice(0, 4);
+            
+            let html = '';
+            homeVideos.forEach((item, index) => {
+                const [productName, videoId] = item;
+                const itemId = `home-video-${index}`;
+                html += `
+                <div class="home-video-item" id="${itemId}">
+                    <div class="home-video-header">
+                        <div class="home-video-title-text">${productName}</div>
+                        <button class="home-play-btn" data-id="${itemId}" data-video="${videoId}">
+                            <span class="btn-icon">▶</span>播放
+                        </button>
+                    </div>
+                    <div class="home-video-container">
+                        <div class="loading">视频加载中...</div>
+                        <iframe 
+                            class="home-video-player"
+                            src="about:blank"
+                            scrolling="no" 
+                            frameborder="0" 
+                            allowfullscreen="true"
+                            allow="autoplay; encrypted-media"
+                            sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                            data-bvid="${videoId}">
+                        </iframe>
+                    </div>
+                </div>`;
+            });
+            listElement.innerHTML = html;
+            
+            // 添加首页视频播放事件
+            document.querySelectorAll('.home-play-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const itemId = this.getAttribute('data-id');
+                    const videoId = this.getAttribute('data-video');
+                    toggleHomeVideo(itemId, videoId, this);
+                });
+            });
         }
 
         // 显示所有视频
-        function displayVideos(videos) {
+        function displayVideos(videos, isCategoryFilter = false) {
             const listElement = document.getElementById('videoList');
             
             if (videos.length === 0) {
@@ -555,7 +1391,13 @@
             
             // 更新视频数量
             updateVideoCount(videos.length);
-            showSearchResultInfo(videos.length, videoData.length);
+            
+            // 显示搜索结果信息
+            if (currentCategory) {
+                showSearchResultInfo(videos.length, currentCategoryVideos.length, true);
+            } else {
+                showSearchResultInfo(videos.length, videoData.length, false);
+            }
             
             // 添加点击事件
             document.querySelectorAll('.play-btn').forEach(btn => {
@@ -565,6 +1407,63 @@
                     toggleVideo(itemId, videoId, this);
                 });
             });
+        }
+
+        // 切换首页视频播放
+        function toggleHomeVideo(itemId, videoId, button) {
+            const item = document.getElementById(itemId);
+            const container = item.querySelector('.home-video-container');
+            const iframe = item.querySelector('.home-video-player');
+            const loading = container.querySelector('.loading');
+            
+            // 如果点击的是当前正在播放的视频，则关闭
+            if (homeCurrentPlayingId === itemId) {
+                // 停止播放
+                iframe.src = 'about:blank';
+                container.classList.remove('active');
+                button.innerHTML = '<span class="btn-icon">▶</span>播放';
+                button.classList.remove('playing');
+                homeCurrentPlayingId = null;
+                loading.style.display = 'flex';
+                return;
+            }
+            
+            // 关闭其他正在播放的视频
+            if (homeCurrentPlayingId) {
+                const prevItem = document.getElementById(homeCurrentPlayingId);
+                if (prevItem) {
+                    const prevContainer = prevItem.querySelector('.home-video-container');
+                    const prevIframe = prevItem.querySelector('.home-video-player');
+                    const prevButton = prevItem.querySelector('.home-play-btn');
+                    const prevLoading = prevContainer.querySelector('.loading');
+                    
+                    prevIframe.src = 'about:blank';
+                    prevContainer.classList.remove('active');
+                    prevButton.innerHTML = '<span class="btn-icon">▶</span>播放';
+                    prevButton.classList.remove('playing');
+                    prevLoading.style.display = 'flex';
+                }
+            }
+            
+            // 播放当前视频
+            console.log('正在加载首页视频:', videoId);
+            
+            // 正确的B站嵌入格式
+            const embedUrl = `https://player.bilibili.com/player.html?bvid=${videoId}&page=1&high_quality=1&autoplay=1`;
+            
+            // 设置iframe的src
+            iframe.src = embedUrl;
+            loading.style.display = 'none';
+            
+            container.classList.add('active');
+            button.innerHTML = '<span class="btn-icon">⏸</span>关闭';
+            button.classList.add('playing');
+            homeCurrentPlayingId = itemId;
+            
+            // 滚动到视频位置
+            setTimeout(() => {
+                item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 300);
         }
 
         // 切换视频播放
@@ -624,19 +1523,52 @@
             }, 300);
         }
 
-        // 搜索功能
+        // 首页搜索功能
+        function searchHomeVideos() {
+            const searchText = document.getElementById('homeSearchInput').value.toLowerCase().trim();
+            
+            if (searchText) {
+                // 如果有搜索词，切换到视频页面并执行搜索
+                switchPage('video');
+                document.getElementById('searchInput').value = searchText;
+                searchVideos();
+            } else {
+                // 如果没有搜索词，只显示提示
+                console.log('请输入搜索内容');
+            }
+        }
+
+        // 视频页面搜索功能
         function searchVideos() {
             const searchText = document.getElementById('searchInput').value.toLowerCase().trim();
             
-            if (!searchText) {
-                displayVideos(videoData);
-                return;
-            }
+            let filtered;
             
-            const filtered = videoData.filter(item => {
-                const productName = item[0].toLowerCase();
-                return productName.includes(searchText);
-            });
+            if (currentCategory) {
+                // 在当前分类的视频中进行搜索
+                const sourceVideos = currentCategoryVideos.length > 0 ? currentCategoryVideos : videoData;
+                
+                if (!searchText) {
+                    // 如果没有搜索词，显示当前分类的所有视频
+                    filtered = sourceVideos;
+                } else {
+                    // 有搜索词，在当前分类视频中筛选
+                    filtered = sourceVideos.filter(item => {
+                        const productName = item[0].toLowerCase();
+                        return productName.includes(searchText);
+                    });
+                }
+            } else {
+                // 没有当前分类，在所有视频中搜索
+                if (!searchText) {
+                    filtered = videoData;
+                } else {
+                    filtered = videoData.filter(item => {
+                        const productName = item[0].toLowerCase();
+                        return productName.includes(searchText);
+                    });
+                }
+            }
             
             // 关闭当前播放的视频
             if (currentPlayingId) {
@@ -656,15 +1588,71 @@
                 currentPlayingId = null;
             }
             
-            displayVideos(filtered);
+            displayVideos(filtered, currentCategory !== null);
         }
 
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
+            // 显示分类
+            displayCategories();
+            
+            // 显示首页视频列表
+            displayHomeVideos();
+            
             // 显示所有视频
             displayVideos(videoData);
             
-            // 搜索框实时搜索
+            // 页面切换按钮
+            document.getElementById('homeBtn').addEventListener('click', () => switchPage('home'));
+            document.getElementById('videoBtn').addEventListener('click', () => switchPage('video'));
+            
+            // 返回首页按钮
+            document.getElementById('backToHomeBtn').addEventListener('click', function() {
+                // 清除筛选状态
+                clearCategoryFilter();
+                // 切换到首页
+                switchPage('home');
+            });
+            
+            // 查看全部视频按钮
+            document.getElementById('viewAllBtn').addEventListener('click', function() {
+                switchPage('video');
+                // 清空搜索框
+                document.getElementById('searchInput').value = '';
+                // 清除分类筛选
+                clearCategoryFilter();
+            });
+            
+            // 关闭分类提示按钮
+            document.getElementById('closeCategoryHint').addEventListener('click', function(e) {
+                e.stopPropagation(); // 防止事件冒泡
+                clearCategoryFilter();
+            });
+            
+            // 点击分类提示也可以清除筛选
+            document.getElementById('categoryHint').addEventListener('click', function(e) {
+                if (e.target === this || e.target.classList.contains('hint-text')) {
+                    clearCategoryFilter();
+                }
+            });
+            
+            // 首页搜索框实时搜索
+            const homeSearchInput = document.getElementById('homeSearchInput');
+            let homeSearchTimer;
+            
+            homeSearchInput.addEventListener('input', function() {
+                clearTimeout(homeSearchTimer);
+                homeSearchTimer = setTimeout(searchHomeVideos, 500);
+            });
+            
+            // 首页按回车键搜索
+            homeSearchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchHomeVideos();
+                }
+            });
+            
+            // 视频页面搜索框实时搜索
             const searchInput = document.getElementById('searchInput');
             let searchTimer;
             
@@ -673,14 +1661,14 @@
                 searchTimer = setTimeout(searchVideos, 300);
             });
             
-            // 按回车键搜索
+            // 视频页面按回车键搜索
             searchInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     searchVideos();
                 }
             });
             
-            // 按ESC键清空搜索框
+            // 视频页面按ESC键清空搜索框
             searchInput.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
                     this.value = '';
