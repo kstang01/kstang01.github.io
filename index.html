@@ -147,11 +147,13 @@
         .home-search-box {
             position: relative;
             width: 100%;
+            display: flex;
+            gap: 8px;
         }
         
         .home-search-box input {
-            width: 100%;
-            padding: 14px 45px 14px 16px;
+            flex: 1;
+            padding: 14px 16px;
             font-size: 15px;
             border: 1px solid #e6e6e6;
             border-radius: 8px;
@@ -167,13 +169,36 @@
             box-shadow: 0 3px 12px rgba(255, 122, 0, 0.1);
         }
         
-        .home-search-box .search-icon {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #FF7A00;
-            font-size: 18px;
+        .home-search-btn {
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+            color: #333;
+            border: 1px solid #e9ecef;
+            padding: 0 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .home-search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: #FF7A00;
+        }
+        
+        .home-search-btn:active {
+            transform: translateY(0);
+        }
+        
+        .home-search-btn .btn-icon {
+            font-size: 16px;
+            color: #666;
         }
         
         /* 首页搜索说明 */
@@ -226,7 +251,7 @@
             font-size: 18px;
             font-weight: 500;
             color: #333;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             padding-bottom: 10px;
             border-bottom: 2px solid #f0f0f0;
             display: flex;
@@ -237,6 +262,15 @@
             margin-right: 8px;
             font-size: 20px;
             color: #FF7A00;
+        }
+        
+        /* 分类指南下面的小字提示 */
+        .guide-subtitle {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 15px;
+            padding-left: 5px;
+            font-style: italic;
         }
         
         .category-grid {
@@ -284,7 +318,7 @@
             color: #666;
         }
         
-        /* 安装步骤 */
+        /* 硒鼓通用安装步骤 */
         .steps-title {
             font-size: 18px;
             font-weight: 500;
@@ -337,7 +371,7 @@
             line-height: 1.5;
         }
         
-        /* 常见问题 */
+        /* 安装常见问题 */
         .faq-title {
             font-size: 18px;
             font-weight: 500;
@@ -384,7 +418,7 @@
             line-height: 1.5;
         }
         
-        /* 首页视频列表 */
+        /* 热门硒鼓安装视频推荐 */
         .home-video-section {
             margin-top: 25px;
         }
@@ -530,11 +564,13 @@
         .search-box {
             position: relative;
             width: 100%;
+            display: flex;
+            gap: 8px;
         }
         
         .search-box input {
-            width: 100%;
-            padding: 14px 45px 14px 16px;
+            flex: 1;
+            padding: 14px 16px;
             font-size: 15px;
             border: 1px solid #e6e6e6;
             border-radius: 8px;
@@ -550,13 +586,36 @@
             box-shadow: 0 3px 12px rgba(255, 122, 0, 0.1);
         }
         
-        .search-box .search-icon {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #FF7A00;
-            font-size: 18px;
+        .search-btn {
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+            color: #333;
+            border: 1px solid #e9ecef;
+            padding: 0 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: #FF7A00;
+        }
+        
+        .search-btn:active {
+            transform: translateY(0);
+        }
+        
+        .search-btn .btn-icon {
+            font-size: 16px;
+            color: #666;
         }
         
         /* 使用说明 - 优化后更紧凑 */
@@ -849,6 +908,11 @@
                 font-size: 10px;
             }
             
+            .guide-subtitle {
+                font-size: 12px;
+                margin-bottom: 12px;
+            }
+            
             .home-video-header, .video-header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -883,8 +947,14 @@
             }
             
             .search-box input, .home-search-box input {
-                padding: 12px 40px 12px 14px;
+                padding: 12px 14px;
                 font-size: 14px;
+            }
+            
+            .search-btn, .home-search-btn {
+                padding: 0 15px;
+                min-width: 50px;
+                font-size: 13px;
             }
             
             .instructions {
@@ -963,7 +1033,9 @@
                 <div class="home-search-section">
                     <div class="home-search-box">
                         <input type="text" id="homeSearchInput" placeholder="请输入需要搜索的硒鼓或者产品型号，例如：388、1136...">
-                        <div class="search-icon">🔍</div>
+                        <button class="home-search-btn" id="homeSearchBtn">
+                            <span class="btn-icon">🔍</span>
+                        </button>
                     </div>
                     
                     <!-- 首页搜索说明 -->
@@ -982,12 +1054,13 @@
                 <div class="guide-title">
                     <span class="icon">📋</span>硒鼓安装指南
                 </div>
+                <div class="guide-subtitle">选择对应的硒鼓安装类型查看详细视频教程</div>
                 <div class="category-grid" id="categoryGrid">
                     <!-- 分类将通过JavaScript动态生成 -->
                 </div>
                 
                 <div class="steps-title">
-                    <span class="icon">📝</span>通用安装步骤
+                    <span class="icon">📝</span>硒鼓通用安装步骤
                 </div>
                 <ul class="steps-list">
                     <li class="step-item">
@@ -1013,7 +1086,7 @@
                 </ul>
                 
                 <div class="faq-title">
-                    <span class="icon">❓</span>常见问题
+                    <span class="icon">❓</span>安装常见问题
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">
@@ -1040,10 +1113,10 @@
                     </div>
                 </div>
                 
-                <!-- 首页视频列表 -->
+                <!-- 热门硒鼓安装视频推荐 -->
                 <div class="home-video-section">
                     <div class="home-video-title">
-                        <h2><span class="icon">🎬</span>安装视频推荐</h2>
+                        <h2><span class="icon">🎬</span>热门硒鼓安装视频推荐</h2>
                         <button class="view-all-btn" id="viewAllBtn">查看全部视频</button>
                     </div>
                     
@@ -1063,7 +1136,9 @@
                 <div class="search-section">
                     <div class="search-box">
                         <input type="text" id="searchInput" placeholder="请输入需要搜索的硒鼓或者产品型号，例如：388、1136...">
-                        <div class="search-icon">🔍</div>
+                        <button class="search-btn" id="searchBtn">
+                            <span class="btn-icon">🔍</span>
+                        </button>
                     </div>
                 </div>
                 
@@ -1603,7 +1678,13 @@
             displayVideos(videoData);
             
             // 页面切换按钮
-            document.getElementById('homeBtn').addEventListener('click', () => switchPage('home'));
+            document.getElementById('homeBtn').addEventListener('click', function() {
+                // 切换到首页
+                switchPage('home');
+                // 清空首页搜索框
+                document.getElementById('homeSearchInput').value = '';
+            });
+            
             document.getElementById('videoBtn').addEventListener('click', () => switchPage('video'));
             
             // 返回首页按钮
@@ -1612,6 +1693,8 @@
                 clearCategoryFilter();
                 // 切换到首页
                 switchPage('home');
+                // 清空首页搜索框
+                document.getElementById('homeSearchInput').value = '';
             });
             
             // 查看全部视频按钮
@@ -1621,6 +1704,16 @@
                 document.getElementById('searchInput').value = '';
                 // 清除分类筛选
                 clearCategoryFilter();
+            });
+            
+            // 首页搜索按钮
+            document.getElementById('homeSearchBtn').addEventListener('click', function() {
+                searchHomeVideos();
+            });
+            
+            // 视频页搜索按钮
+            document.getElementById('searchBtn').addEventListener('click', function() {
+                searchVideos();
             });
             
             // 关闭分类提示按钮
