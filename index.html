@@ -1,3 +1,5 @@
+[file name]: index.html
+[file content begin]
 <!DOCTYPE html>
 <html>
 <head>
@@ -708,6 +710,476 @@
             }
         }
         
+        /* 数据统计面板 - 修改：放在网页最下面 */
+        .stats-panel {
+            background-color: #fff8f0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 25px 0 10px;
+            border: 1px solid #ffe4cc;
+            display: none;
+        }
+        
+        .stats-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #FF7A00;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .stats-title .icon {
+            margin-right: 8px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #f0f0f0;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #FF7A00;
+            margin-bottom: 3px;
+        }
+        
+        .stat-label {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        .stats-lists {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        @media (min-width: 400px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .stats-lists {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .stats-list {
+            background-color: white;
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .stats-list-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .stats-list-title .icon {
+            margin-right: 6px;
+        }
+        
+        .stats-list-content {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .stats-list-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 12px;
+            border-bottom: 1px dashed #f0f0f0;
+        }
+        
+        .stats-list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .stats-list-key {
+            color: #333;
+        }
+        
+        .stats-list-value {
+            color: #FF7A00;
+            font-weight: 500;
+        }
+        
+        .empty-stats {
+            color: #999;
+            font-size: 12px;
+            text-align: center;
+            padding: 10px 0;
+        }
+        
+        .stats-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            gap: 8px;
+        }
+        
+        /* 数据统计按钮样式 - 修改：变成搜索按钮一样的灰色，添加动画效果 */
+        .stats-btn {
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+            color: #333;
+            border: 1px solid #e9ecef;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 数据统计按钮悬停效果 */
+        .stats-btn:hover {
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* 数据统计按钮点击效果 */
+        .stats-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 数据统计按钮脉冲动画 */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 122, 0, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 6px rgba(255, 122, 0, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 122, 0, 0);
+            }
+        }
+        
+        /* 刷新按钮动画 */
+        .refresh-animation {
+            animation: spin 0.6s ease-in-out;
+        }
+        
+        /* 导出按钮脉冲动画 */
+        .export-pulse {
+            animation: pulse 1.5s infinite;
+        }
+        
+        /* 按钮加载动画 */
+        .stats-btn.loading {
+            position: relative;
+            color: transparent;
+        }
+        
+        .stats-btn.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            margin: -8px 0 0 -8px;
+            border: 2px solid rgba(255, 122, 0, 0.2);
+            border-top-color: #FF7A00;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        /* 成功动画 */
+        @keyframes success {
+            0% {
+                background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+            }
+            50% {
+                background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+                color: #155724;
+            }
+            100% {
+                background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+            }
+        }
+        
+        .success-animation {
+            animation: success 1s ease;
+        }
+        
+        /* 管理按钮 - 修改：变成搜索按钮一样的灰色 */
+        .admin-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+            color: #666;
+            border: 1px solid #e9ecef;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .admin-btn.active {
+            background: linear-gradient(135deg, #f1f3f5 0%, #e9ecef 100%);
+            border-color: #dee2e6;
+            transform: rotate(45deg);
+        }
+        
+        .admin-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 密码输入框样式 */
+        .password-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .password-modal.active {
+            display: flex;
+        }
+        
+        .password-box {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            width: 90%;
+            max-width: 320px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            animation: modalAppear 0.3s ease-out;
+        }
+        
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .password-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 1px solid #e6e6e6;
+            border-radius: 8px;
+            background-color: #fafafa;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        
+        .password-input:focus {
+            outline: none;
+            border-color: #FF7A00;
+            background-color: white;
+            box-shadow: 0 3px 12px rgba(255, 122, 0, 0.1);
+        }
+        
+        .password-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .password-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .password-confirm {
+            background-color: #FF7A00;
+            color: white;
+            box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
+        }
+        
+        .password-cancel {
+            background-color: #f0f0f0;
+            color: #666;
+        }
+        
+        /* 导出选项弹窗 */
+        .export-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .export-modal.active {
+            display: flex;
+        }
+        
+        .export-box {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            width: 90%;
+            max-width: 350px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            animation: modalAppear 0.3s ease-out;
+        }
+        
+        .export-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .export-options {
+            margin-bottom: 20px;
+        }
+        
+        .export-option {
+            margin-bottom: 12px;
+        }
+        
+        .export-option label {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .export-option input[type="checkbox"] {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        
+        .export-option input[type="radio"] {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        
+        .export-month-select {
+            margin-top: 10px;
+            margin-left: 24px;
+        }
+        
+        .export-month-select select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #e6e6e6;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: #fafafa;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .export-month-select select:focus {
+            outline: none;
+            border-color: #FF7A00;
+            box-shadow: 0 3px 12px rgba(255, 122, 0, 0.1);
+        }
+        
+        .export-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .export-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .export-confirm {
+            background-color: #FF7A00;
+            color: white;
+            box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
+        }
+        
+        .export-confirm:hover {
+            background-color: #E56A00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 122, 0, 0.3);
+        }
+        
+        .export-cancel {
+            background-color: #f0f0f0;
+            color: #666;
+        }
+        
+        .export-cancel:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
         /* 防止长按出现复制菜单 */
         .category-card, .home-video-item, .video-item, .home-play-btn, .play-btn, .page-btn {
             -webkit-user-select: none;
@@ -828,6 +1300,57 @@
                         <!-- 首页视频列表会在这里动态生成 -->
                     </div>
                 </div>
+                
+                <!-- 数据统计面板 - 修改：移动到网页最下面 -->
+                <div id="statsPanel" class="stats-panel">
+                    <div class="stats-title">
+                        <span class="icon">📊</span>数据统计
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalSearches">0</div>
+                            <div class="stat-label">总搜索次数</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="uniqueKeywords">0</div>
+                            <div class="stat-label">搜索关键词</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalPlays">0</div>
+                            <div class="stat-label">视频播放</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="uniqueVideos">0</div>
+                            <div class="stat-label">播放视频</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-lists">
+                        <div class="stats-list">
+                            <div class="stats-list-title">
+                                <span class="icon">🔍</span>热门搜索词
+                            </div>
+                            <div class="stats-list-content" id="topSearchesList">
+                                <div class="empty-stats">暂无搜索记录</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stats-list">
+                            <div class="stats-list-title">
+                                <span class="icon">▶️</span>热门视频
+                            </div>
+                            <div class="stats-list-content" id="topVideosList">
+                                <div class="empty-stats">暂无播放记录</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-controls">
+                        <button class="stats-btn" id="exportDataBtn">导出数据</button>
+                        <button class="stats-btn" id="refreshStatsBtn">刷新统计</button>
+                    </div>
+                </div>
             </div>
             
             <!-- 视频页面：教程视频列表 -->
@@ -881,6 +1404,69 @@
         <div class="footer">
             <div><span class="wechat-icon">💚</span>扫码观看 | 硒鼓安装教程视频</div>
             <div style="margin-top: 6px; font-size: 11px; opacity: 0.8;">© 2026 蚁社电商 版权所有</div>
+        </div>
+    </div>
+    
+    <!-- 管理按钮 - 修改：变成灰色 -->
+    <button id="adminBtn" class="admin-btn" title="数据统计">📊</button>
+    
+    <!-- 密码输入弹窗 -->
+    <div id="passwordModal" class="password-modal">
+        <div class="password-box">
+            <div class="password-title" id="passwordTitle">请输入管理员密码</div>
+            <input type="password" id="passwordInput" class="password-input" placeholder="请输入密码">
+            <div class="password-controls">
+                <button id="passwordCancelBtn" class="password-btn password-cancel">取消</button>
+                <button id="passwordConfirmBtn" class="password-btn password-confirm">确认</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 导出选项弹窗 -->
+    <div id="exportModal" class="export-modal">
+        <div class="export-box">
+            <div class="export-title">导出数据选项</div>
+            <div class="export-options">
+                <div class="export-option">
+                    <label>
+                        <input type="radio" name="exportType" value="all" checked>
+                        导出所有数据
+                    </label>
+                </div>
+                <div class="export-option">
+                    <label>
+                        <input type="radio" name="exportType" value="month">
+                        按月份导出
+                    </label>
+                    <div class="export-month-select" id="monthSelect" style="display: none;">
+                        <select id="monthSelectInput">
+                            <!-- 月份选项将通过JavaScript动态生成 -->
+                        </select>
+                    </div>
+                </div>
+                <div class="export-option">
+                    <label>
+                        <input type="checkbox" id="includeSearchData" checked>
+                        包含搜索数据
+                    </label>
+                </div>
+                <div class="export-option">
+                    <label>
+                        <input type="checkbox" id="includeVideoData" checked>
+                        包含视频播放数据
+                    </label>
+                </div>
+                <div class="export-option">
+                    <label>
+                        <input type="checkbox" id="exportExcel" checked>
+                        导出为Excel格式
+                    </label>
+                </div>
+            </div>
+            <div class="export-controls">
+                <button id="exportCancelBtn" class="export-btn export-cancel">取消</button>
+                <button id="exportConfirmBtn" class="export-btn export-confirm">确认导出</button>
+            </div>
         </div>
     </div>
 
@@ -955,6 +1541,19 @@
             }
         ];
 
+        // 数据存储功能
+        const STORAGE_KEYS = {
+            SEARCHES: 'toner_install_searches',
+            VIDEO_PLAYS: 'toner_install_video_plays',
+            STATS: 'toner_install_stats'
+        };
+        
+        // 管理员密码
+        const ADMIN_PASSWORD = 'ysds666..';
+        
+        // 数据清理阈值
+        const MAX_RECORDS = 2000;
+
         // 存储当前播放的视频
         let currentPlayingId = null;
         // 存储首页当前播放的视频
@@ -963,6 +1562,569 @@
         let currentCategory = null;
         // 当前分类下的原始视频列表（用于二次筛选）
         let currentCategoryVideos = [];
+        // 记录是否已经通过密码验证
+        let isAuthenticated = false;
+        // 导出按钮脉冲动画定时器
+        let exportPulseInterval = null;
+        
+        // 初始化数据存储
+        function initDataStorage() {
+            // 确保每个存储键都存在
+            if (!localStorage.getItem(STORAGE_KEYS.SEARCHES)) {
+                localStorage.setItem(STORAGE_KEYS.SEARCHES, JSON.stringify([]));
+            }
+            
+            if (!localStorage.getItem(STORAGE_KEYS.VIDEO_PLAYS)) {
+                localStorage.setItem(STORAGE_KEYS.VIDEO_PLAYS, JSON.stringify({}));
+            }
+            
+            if (!localStorage.getItem(STORAGE_KEYS.STATS)) {
+                localStorage.setItem(STORAGE_KEYS.STATS, JSON.stringify({
+                    totalSearches: 0,
+                    totalPlays: 0,
+                    lastUpdated: new Date().toISOString()
+                }));
+            }
+        }
+        
+        // 自动清理旧数据（当记录超过2000条时）
+        function autoCleanData() {
+            // 清理搜索记录
+            const searches = JSON.parse(localStorage.getItem(STORAGE_KEYS.SEARCHES) || '[]');
+            if (searches.length > MAX_RECORDS) {
+                // 按时间排序，删除最早的记录
+                searches.sort((a, b) => new Date(a.firstSearched) - new Date(b.firstSearched));
+                const deletedCount = searches.length - MAX_RECORDS;
+                const cleanedSearches = searches.slice(deletedCount);
+                localStorage.setItem(STORAGE_KEYS.SEARCHES, JSON.stringify(cleanedSearches));
+                console.log(`自动清理了 ${deletedCount} 条搜索记录，保留 ${MAX_RECORDS} 条`);
+            }
+            
+            // 清理视频播放记录
+            const plays = JSON.parse(localStorage.getItem(STORAGE_KEYS.VIDEO_PLAYS) || '{}');
+            const playEntries = Object.entries(plays);
+            if (playEntries.length > MAX_RECORDS) {
+                // 按最后播放时间排序，删除最早的记录
+                playEntries.sort((a, b) => new Date(a[1].firstPlayed) - new Date(b[1].firstPlayed));
+                const deletedCount = playEntries.length - MAX_RECORDS;
+                const cleanedPlays = Object.fromEntries(playEntries.slice(deletedCount));
+                localStorage.setItem(STORAGE_KEYS.VIDEO_PLAYS, JSON.stringify(cleanedPlays));
+                console.log(`自动清理了 ${deletedCount} 条视频播放记录，保留 ${MAX_RECORDS} 条`);
+            }
+        }
+        
+        // 保存搜索记录
+        function saveSearch(keyword) {
+            if (!keyword || keyword.trim() === '') return;
+            
+            const searches = JSON.parse(localStorage.getItem(STORAGE_KEYS.SEARCHES) || '[]');
+            const stats = JSON.parse(localStorage.getItem(STORAGE_KEYS.STATS) || '{}');
+            
+            // 增加总搜索次数
+            stats.totalSearches = (stats.totalSearches || 0) + 1;
+            stats.lastUpdated = new Date().toISOString();
+            
+            // 查找是否已有相同关键词
+            const existingSearch = searches.find(s => s.keyword.toLowerCase() === keyword.toLowerCase());
+            
+            if (existingSearch) {
+                // 更新现有记录的次数和时间
+                existingSearch.count++;
+                existingSearch.lastSearched = new Date().toISOString();
+            } else {
+                // 添加新搜索记录
+                searches.push({
+                    keyword: keyword,
+                    count: 1,
+                    firstSearched: new Date().toISOString(),
+                    lastSearched: new Date().toISOString()
+                });
+            }
+            
+            // 保存到本地存储
+            localStorage.setItem(STORAGE_KEYS.SEARCHES, JSON.stringify(searches));
+            localStorage.setItem(STORAGE_KEYS.STATS, JSON.stringify(stats));
+            
+            // 自动清理数据
+            autoCleanData();
+            
+            return true;
+        }
+        
+        // 保存视频播放记录
+        function saveVideoPlay(videoTitle, videoId) {
+            if (!videoId) return;
+            
+            const plays = JSON.parse(localStorage.getItem(STORAGE_KEYS.VIDEO_PLAYS) || '{}');
+            const stats = JSON.parse(localStorage.getItem(STORAGE_KEYS.STATS) || '{}');
+            
+            // 增加总播放次数
+            stats.totalPlays = (stats.totalPlays || 0) + 1;
+            stats.lastUpdated = new Date().toISOString();
+            
+            if (!plays[videoId]) {
+                // 第一次播放这个视频
+                plays[videoId] = {
+                    title: videoTitle || `视频 ${videoId}`,
+                    playCount: 1,
+                    firstPlayed: new Date().toISOString(),
+                    lastPlayed: new Date().toISOString()
+                };
+            } else {
+                // 更新播放记录
+                plays[videoId].playCount++;
+                plays[videoId].lastPlayed = new Date().toISOString();
+                if (videoTitle && !plays[videoId].title) {
+                    plays[videoId].title = videoTitle;
+                }
+            }
+            
+            // 保存到本地存储
+            localStorage.setItem(STORAGE_KEYS.VIDEO_PLAYS, JSON.stringify(plays));
+            localStorage.setItem(STORAGE_KEYS.STATS, JSON.stringify(stats));
+            
+            // 自动清理数据
+            autoCleanData();
+            
+            return true;
+        }
+        
+        // 获取搜索统计数据
+        function getSearchStats() {
+            const searches = JSON.parse(localStorage.getItem(STORAGE_KEYS.SEARCHES) || '[]');
+            const stats = JSON.parse(localStorage.getItem(STORAGE_KEYS.STATS) || '{}');
+            
+            // 计算热门搜索词
+            const sortedSearches = [...searches].sort((a, b) => b.count - a.count).slice(0, 10);
+            
+            return {
+                totalSearches: stats.totalSearches || 0,
+                uniqueKeywords: searches.length,
+                topSearches: sortedSearches
+            };
+        }
+        
+        // 获取视频播放统计数据
+        function getVideoPlayStats() {
+            const plays = JSON.parse(localStorage.getItem(STORAGE_KEYS.VIDEO_PLAYS) || '{}');
+            const stats = JSON.parse(localStorage.getItem(STORAGE_KEYS.STATS) || '{}');
+            
+            // 计算热门视频
+            const playsArray = Object.values(plays);
+            const sortedPlays = playsArray.sort((a, b) => b.playCount - a.playCount).slice(0, 10);
+            
+            return {
+                totalPlays: stats.totalPlays || 0,
+                uniqueVideos: Object.keys(plays).length,
+                topVideos: sortedPlays
+            };
+        }
+        
+        // 显示统计数据
+        function displayStats() {
+            const searchStats = getSearchStats();
+            const videoStats = getVideoPlayStats();
+            
+            // 更新统计数据
+            document.getElementById('totalSearches').textContent = searchStats.totalSearches;
+            document.getElementById('uniqueKeywords').textContent = searchStats.uniqueKeywords;
+            document.getElementById('totalPlays').textContent = videoStats.totalPlays;
+            document.getElementById('uniqueVideos').textContent = videoStats.uniqueVideos;
+            
+            // 更新热门搜索列表
+            const topSearchesList = document.getElementById('topSearchesList');
+            if (searchStats.topSearches.length > 0) {
+                let html = '';
+                searchStats.topSearches.forEach(item => {
+                    html += `
+                    <div class="stats-list-item">
+                        <span class="stats-list-key">${item.keyword}</span>
+                        <span class="stats-list-value">${item.count}次</span>
+                    </div>`;
+                });
+                topSearchesList.innerHTML = html;
+            } else {
+                topSearchesList.innerHTML = '<div class="empty-stats">暂无搜索记录</div>';
+            }
+            
+            // 更新热门视频列表
+            const topVideosList = document.getElementById('topVideosList');
+            if (videoStats.topVideos.length > 0) {
+                let html = '';
+                videoStats.topVideos.forEach(item => {
+                    // 截取视频标题，防止过长
+                    const shortTitle = item.title.length > 20 ? item.title.substring(0, 20) + '...' : item.title;
+                    html += `
+                    <div class="stats-list-item">
+                        <span class="stats-list-key">${shortTitle}</span>
+                        <span class="stats-list-value">${item.playCount}次</span>
+                    </div>`;
+                });
+                topVideosList.innerHTML = html;
+            } else {
+                topVideosList.innerHTML = '<div class="empty-stats">暂无播放记录</div>';
+            }
+        }
+        
+        // 获取所有月份的数据
+        function getDataByMonths() {
+            const searches = JSON.parse(localStorage.getItem(STORAGE_KEYS.SEARCHES) || '[]');
+            const plays = JSON.parse(localStorage.getItem(STORAGE_KEYS.VIDEO_PLAYS) || '{}');
+            
+            // 按月份分组搜索数据
+            const searchMonths = {};
+            searches.forEach(search => {
+                const date = new Date(search.firstSearched);
+                const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+                const monthName = `${date.getFullYear()}年${date.getMonth() + 1}月`;
+                
+                if (!searchMonths[monthKey]) {
+                    searchMonths[monthKey] = {
+                        name: monthName,
+                        searches: [],
+                        totalSearches: 0,
+                        uniqueKeywords: 0
+                    };
+                }
+                
+                searchMonths[monthKey].searches.push(search);
+                searchMonths[monthKey].totalSearches += search.count;
+                // 计算本月唯一关键词
+                const monthKeywords = new Set(searchMonths[monthKey].searches.map(s => s.keyword.toLowerCase()));
+                searchMonths[monthKey].uniqueKeywords = monthKeywords.size;
+            });
+            
+            // 按月份分组视频播放数据
+            const playMonths = {};
+            Object.values(plays).forEach(play => {
+                const date = new Date(play.firstPlayed);
+                const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+                const monthName = `${date.getFullYear()}年${date.getMonth() + 1}月`;
+                
+                if (!playMonths[monthKey]) {
+                    playMonths[monthKey] = {
+                        name: monthName,
+                        plays: [],
+                        totalPlays: 0,
+                        uniqueVideos: 0
+                    };
+                }
+                
+                playMonths[monthKey].plays.push(play);
+                playMonths[monthKey].totalPlays += play.playCount;
+                // 计算本月唯一视频
+                const monthVideos = new Set(playMonths[monthKey].plays.map(p => p.title));
+                playMonths[monthKey].uniqueVideos = monthVideos.size;
+            });
+            
+            // 合并所有月份
+            const allMonths = new Set([...Object.keys(searchMonths), ...Object.keys(playMonths)]);
+            const months = Array.from(allMonths).sort().reverse();
+            
+            return {
+                searchMonths,
+                playMonths,
+                months: months.map(monthKey => {
+                    const searchData = searchMonths[monthKey] || { name: monthKey.replace('-', '年') + '月', searches: [], totalSearches: 0, uniqueKeywords: 0 };
+                    const playData = playMonths[monthKey] || { name: monthKey.replace('-', '年') + '月', plays: [], totalPlays: 0, uniqueVideos: 0 };
+                    
+                    return {
+                        key: monthKey,
+                        name: searchData.name || playData.name,
+                        searchData,
+                        playData
+                    };
+                })
+            };
+        }
+        
+        // 导出数据为Excel文件
+        function exportDataToExcel(monthKey = null, includeSearches = true, includeVideos = true) {
+            const searches = JSON.parse(localStorage.getItem(STORAGE_KEYS.SEARCHES) || '[]');
+            const plays = JSON.parse(localStorage.getItem(STORAGE_KEYS.VIDEO_PLAYS) || '{}');
+            const stats = JSON.parse(localStorage.getItem(STORAGE_KEYS.STATS) || '{}');
+            
+            // 如果指定了月份，筛选数据
+            let filteredSearches = searches;
+            let filteredPlays = Object.values(plays);
+            
+            if (monthKey) {
+                filteredSearches = searches.filter(search => {
+                    const searchDate = new Date(search.firstSearched);
+                    const searchMonthKey = `${searchDate.getFullYear()}-${String(searchDate.getMonth() + 1).padStart(2, '0')}`;
+                    return searchMonthKey === monthKey;
+                });
+                
+                filteredPlays = Object.values(plays).filter(play => {
+                    const playDate = new Date(play.firstPlayed);
+                    const playMonthKey = `${playDate.getFullYear()}-${String(playDate.getMonth() + 1).padStart(2, '0')}`;
+                    return playMonthKey === monthKey;
+                });
+            }
+            
+            // 创建Excel数据
+            const excelData = [];
+            
+            // 添加元数据
+            excelData.push(['硒鼓安装教程数据报表']);
+            excelData.push(['导出时间', new Date().toLocaleString('zh-CN')]);
+            excelData.push(['数据时间段', monthKey ? monthKey.replace('-', '年') + '月' : '全部数据']);
+            excelData.push([]);
+            
+            // 添加统计数据
+            if (includeSearches) {
+                excelData.push(['搜索数据统计']);
+                excelData.push(['总搜索次数', filteredSearches.reduce((sum, item) => sum + item.count, 0)]);
+                excelData.push(['唯一搜索关键词', new Set(filteredSearches.map(item => item.keyword.toLowerCase())).size]);
+                excelData.push([]);
+                
+                excelData.push(['搜索记录详情']);
+                excelData.push(['关键词', '搜索次数', '首次搜索时间', '最后搜索时间']);
+                
+                // 按搜索次数排序
+                const sortedSearches = [...filteredSearches].sort((a, b) => b.count - a.count);
+                sortedSearches.forEach(item => {
+                    excelData.push([
+                        item.keyword,
+                        item.count,
+                        new Date(item.firstSearched).toLocaleString('zh-CN'),
+                        new Date(item.lastSearched).toLocaleString('zh-CN')
+                    ]);
+                });
+                excelData.push([]);
+            }
+            
+            if (includeVideos) {
+                excelData.push(['视频播放数据统计']);
+                excelData.push(['总播放次数', filteredPlays.reduce((sum, item) => sum + item.playCount, 0)]);
+                excelData.push(['唯一播放视频', new Set(filteredPlays.map(item => item.title)).size]);
+                excelData.push([]);
+                
+                excelData.push(['视频播放记录详情']);
+                excelData.push(['视频标题', '播放次数', '首次播放时间', '最后播放时间']);
+                
+                // 按播放次数排序
+                const sortedPlays = [...filteredPlays].sort((a, b) => b.playCount - a.playCount);
+                sortedPlays.forEach(item => {
+                    excelData.push([
+                        item.title,
+                        item.playCount,
+                        new Date(item.firstPlayed).toLocaleString('zh-CN'),
+                        new Date(item.lastPlayed).toLocaleString('zh-CN')
+                    ]);
+                });
+            }
+            
+            // 生成Excel文件
+            let csvContent = '';
+            excelData.forEach(row => {
+                csvContent += row.map(cell => {
+                    // 处理单元格内容，确保格式正确
+                    if (cell === null || cell === undefined) return '';
+                    if (typeof cell === 'number') return cell;
+                    // 处理特殊字符
+                    const cellStr = String(cell);
+                    // 如果包含逗号、引号或换行符，用引号包围
+                    if (cellStr.includes(',') || cellStr.includes('"') || cellStr.includes('\n')) {
+                        return '"' + cellStr.replace(/"/g, '""') + '"';
+                    }
+                    return cellStr;
+                }).join(',') + '\n';
+            });
+            
+            // 添加BOM头，确保Excel正确识别中文
+            const BOM = '\uFEFF';
+            const blob = new Blob([BOM + csvContent], { type: 'text/csv;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            
+            // 生成文件名
+            const dateStr = new Date().toISOString().split('T')[0];
+            const fileName = monthKey 
+                ? `硒鼓安装数据_${monthKey}_${dateStr}.csv`
+                : `硒鼓安装数据_全部_${dateStr}.csv`;
+            
+            // 下载文件
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName;
+            link.click();
+            
+            // 清理URL
+            setTimeout(() => URL.revokeObjectURL(url), 100);
+            
+            return fileName;
+        }
+        
+        // 导出数据为JSON文件
+        function exportDataToJSON(monthKey = null, includeSearches = true, includeVideos = true) {
+            const searches = JSON.parse(localStorage.getItem(STORAGE_KEYS.SEARCHES) || '[]');
+            const plays = JSON.parse(localStorage.getItem(STORAGE_KEYS.VIDEO_PLAYS) || '{}');
+            const stats = JSON.parse(localStorage.getItem(STORAGE_KEYS.STATS) || '{}');
+            
+            // 如果指定了月份，筛选数据
+            let filteredSearches = searches;
+            let filteredPlays = plays;
+            
+            if (monthKey) {
+                filteredSearches = searches.filter(search => {
+                    const searchDate = new Date(search.firstSearched);
+                    const searchMonthKey = `${searchDate.getFullYear()}-${String(searchDate.getMonth() + 1).padStart(2, '0')}`;
+                    return searchMonthKey === monthKey;
+                });
+                
+                const filteredPlaysObj = {};
+                Object.entries(plays).forEach(([videoId, play]) => {
+                    const playDate = new Date(play.firstPlayed);
+                    const playMonthKey = `${playDate.getFullYear()}-${String(playDate.getMonth() + 1).padStart(2, '0')}`;
+                    if (playMonthKey === monthKey) {
+                        filteredPlaysObj[videoId] = play;
+                    }
+                });
+                filteredPlays = filteredPlaysObj;
+            }
+            
+            const exportData = {
+                metadata: {
+                    exportDate: new Date().toISOString(),
+                    source: "硒鼓安装教程视频库",
+                    period: monthKey ? monthKey.replace('-', '年') + '月' : "全部数据"
+                },
+                statistics: {
+                    totalSearches: stats.totalSearches || 0,
+                    totalPlays: stats.totalPlays || 0,
+                    lastUpdated: stats.lastUpdated
+                },
+                searches: includeSearches ? filteredSearches : [],
+                videoPlays: includeVideos ? filteredPlays : {}
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const dateStr = new Date().toISOString().split('T')[0];
+            const exportFileDefaultName = monthKey 
+                ? `硒鼓安装数据_${monthKey}_${dateStr}.json`
+                : `硒鼓安装数据_全部_${dateStr}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            return exportFileDefaultName;
+        }
+        
+        // 显示密码输入弹窗
+        function showPasswordModal() {
+            document.getElementById('passwordTitle').textContent = '请输入管理员密码';
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordModal').classList.add('active');
+            document.getElementById('passwordInput').focus();
+        }
+        
+        // 隐藏密码输入弹窗
+        function hidePasswordModal() {
+            document.getElementById('passwordModal').classList.remove('active');
+        }
+        
+        // 显示导出选项弹窗
+        function showExportModal() {
+            // 获取月份数据
+            const monthsData = getDataByMonths();
+            const monthSelect = document.getElementById('monthSelectInput');
+            
+            // 清空现有选项
+            monthSelect.innerHTML = '';
+            
+            // 添加月份选项
+            monthsData.months.forEach(month => {
+                const option = document.createElement('option');
+                option.value = month.key;
+                option.textContent = month.name;
+                monthSelect.appendChild(option);
+            });
+            
+            // 如果没有月份数据，禁用月份选项
+            if (monthsData.months.length === 0) {
+                document.querySelector('input[value="month"]').disabled = true;
+                document.getElementById('monthSelect').style.display = 'none';
+            } else {
+                document.querySelector('input[value="month"]').disabled = false;
+            }
+            
+            document.getElementById('exportModal').classList.add('active');
+        }
+        
+        // 隐藏导出选项弹窗
+        function hideExportModal() {
+            document.getElementById('exportModal').classList.remove('active');
+        }
+        
+        // 验证密码
+        function verifyPassword(password) {
+            return password === ADMIN_PASSWORD;
+        }
+        
+        // 执行密码验证
+        function executePasswordVerification() {
+            const password = document.getElementById('passwordInput').value;
+            
+            if (verifyPassword(password)) {
+                isAuthenticated = true;
+                hidePasswordModal();
+                toggleStatsPanel();
+            } else {
+                alert('密码错误，请重新输入！');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+        }
+        
+        // 执行导出操作
+        function executeExport() {
+            const exportType = document.querySelector('input[name="exportType"]:checked').value;
+            const includeSearches = document.getElementById('includeSearchData').checked;
+            const includeVideos = document.getElementById('includeVideoData').checked;
+            const exportExcel = document.getElementById('exportExcel').checked;
+            
+            let monthKey = null;
+            if (exportType === 'month') {
+                monthKey = document.getElementById('monthSelectInput').value;
+                if (!monthKey) {
+                    alert('请选择月份！');
+                    return;
+                }
+            }
+            
+            // 添加导出按钮加载动画
+            const exportConfirmBtn = document.getElementById('exportConfirmBtn');
+            const originalText = exportConfirmBtn.textContent;
+            exportConfirmBtn.textContent = '导出中...';
+            exportConfirmBtn.classList.add('loading');
+            
+            // 模拟导出过程的延迟
+            setTimeout(() => {
+                let fileName;
+                if (exportExcel) {
+                    fileName = exportDataToExcel(monthKey, includeSearches, includeVideos);
+                } else {
+                    fileName = exportDataToJSON(monthKey, includeSearches, includeVideos);
+                }
+                
+                // 恢复按钮状态
+                exportConfirmBtn.textContent = originalText;
+                exportConfirmBtn.classList.remove('loading');
+                
+                // 添加成功动画
+                exportConfirmBtn.classList.add('success-animation');
+                setTimeout(() => {
+                    exportConfirmBtn.classList.remove('success-animation');
+                }, 1000);
+                
+                hideExportModal();
+                alert(`数据已导出为${exportExcel ? 'Excel' : 'JSON'}文件：${fileName}`);
+            }, 800);
+        }
         
         // 切换页面
         function switchPage(page) {
@@ -1011,6 +2173,9 @@
                     const category = categories.find(c => c.id === categoryId);
                     
                     if (category) {
+                        // 保存分类搜索记录
+                        saveSearch(category.name);
+                        
                         // 切换到视频页面
                         switchPage('video');
                         // 设置当前分类
@@ -1097,7 +2262,7 @@
                 <div class="home-video-item" id="${itemId}">
                     <div class="home-video-header">
                         <div class="home-video-title-text">${productName}</div>
-                        <button class="home-play-btn" data-id="${itemId}" data-video="${videoId}">
+                        <button class="home-play-btn" data-id="${itemId}" data-video="${videoId}" data-title="${productName}">
                             <span class="btn-icon">▶</span>播放视频
                         </button>
                     </div>
@@ -1123,7 +2288,8 @@
                 btn.addEventListener('click', function() {
                     const itemId = this.getAttribute('data-id');
                     const videoId = this.getAttribute('data-video');
-                    toggleHomeVideo(itemId, videoId, this);
+                    const videoTitle = this.getAttribute('data-title');
+                    toggleHomeVideo(itemId, videoId, videoTitle, this);
                 });
             });
         }
@@ -1151,7 +2317,7 @@
                 <div class="video-item" id="${itemId}">
                     <div class="video-header">
                         <div class="video-title">${productName}</div>
-                        <button class="play-btn" data-id="${itemId}" data-video="${videoId}">
+                        <button class="play-btn" data-id="${itemId}" data-video="${videoId}" data-title="${productName}">
                             <span class="btn-icon">▶</span>播放视频
                         </button>
                     </div>
@@ -1187,13 +2353,14 @@
                 btn.addEventListener('click', function() {
                     const itemId = this.getAttribute('data-id');
                     const videoId = this.getAttribute('data-video');
-                    toggleVideo(itemId, videoId, this);
+                    const videoTitle = this.getAttribute('data-title');
+                    toggleVideo(itemId, videoId, videoTitle, this);
                 });
             });
         }
 
         // 切换首页视频播放
-        function toggleHomeVideo(itemId, videoId, button) {
+        function toggleHomeVideo(itemId, videoId, videoTitle, button) {
             const item = document.getElementById(itemId);
             const container = item.querySelector('.home-video-container');
             const iframe = item.querySelector('.home-video-player');
@@ -1228,6 +2395,9 @@
                 }
             }
             
+            // 保存播放记录
+            saveVideoPlay(videoTitle, videoId);
+            
             // 播放当前视频
             console.log('正在加载首页视频:', videoId);
             
@@ -1250,7 +2420,7 @@
         }
 
         // 切换视频播放
-        function toggleVideo(itemId, videoId, button) {
+        function toggleVideo(itemId, videoId, videoTitle, button) {
             const item = document.getElementById(itemId);
             const container = item.querySelector('.video-container');
             const iframe = item.querySelector('.video-player');
@@ -1285,6 +2455,9 @@
                 }
             }
             
+            // 保存播放记录
+            saveVideoPlay(videoTitle, videoId);
+            
             // 播放当前视频
             console.log('正在加载视频:', videoId);
             
@@ -1311,6 +2484,9 @@
             const searchText = document.getElementById('homeSearchInput').value.toLowerCase().trim();
             
             if (searchText) {
+                // 保存搜索记录
+                saveSearch(searchText);
+                
                 // 如果有搜索词，切换到视频页面并执行搜索
                 switchPage('video');
                 document.getElementById('searchInput').value = searchText;
@@ -1340,6 +2516,9 @@
                         const productName = item[0].toLowerCase();
                         return productName.includes(searchText);
                     });
+                    
+                    // 保存搜索记录
+                    saveSearch(searchText);
                 }
             } else {
                 // 没有当前分类，在所有视频中搜索
@@ -1350,6 +2529,9 @@
                         const productName = item[0].toLowerCase();
                         return productName.includes(searchText);
                     });
+                    
+                    // 保存搜索记录
+                    saveSearch(searchText);
                 }
             }
             
@@ -1374,8 +2556,104 @@
             displayVideos(filtered, currentCategory !== null);
         }
 
+        // 切换统计数据面板显示
+        function toggleStatsPanel() {
+            const statsPanel = document.getElementById('statsPanel');
+            const adminBtn = document.getElementById('adminBtn');
+            
+            if (statsPanel.style.display === 'block') {
+                statsPanel.style.display = 'none';
+                adminBtn.classList.remove('active');
+                // 停止导出按钮脉冲动画
+                if (exportPulseInterval) {
+                    clearInterval(exportPulseInterval);
+                    exportPulseInterval = null;
+                }
+                document.getElementById('exportDataBtn').classList.remove('export-pulse');
+            } else {
+                // 刷新统计数据
+                displayStats();
+                statsPanel.style.display = 'block';
+                adminBtn.classList.add('active');
+                // 滚动到统计面板位置
+                setTimeout(() => {
+                    statsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+                
+                // 启动导出按钮脉冲动画
+                startExportPulseAnimation();
+            }
+        }
+
+        // 启动导出按钮脉冲动画
+        function startExportPulseAnimation() {
+            const exportBtn = document.getElementById('exportDataBtn');
+            if (exportPulseInterval) {
+                clearInterval(exportPulseInterval);
+            }
+            
+            // 初始延迟后开始脉冲动画
+            setTimeout(() => {
+                exportBtn.classList.add('export-pulse');
+                // 每5秒重新触发一次脉冲动画
+                exportPulseInterval = setInterval(() => {
+                    exportBtn.classList.remove('export-pulse');
+                    setTimeout(() => {
+                        exportBtn.classList.add('export-pulse');
+                    }, 50);
+                }, 5000);
+            }, 1000);
+        }
+
+        // 点击数据统计按钮时的处理
+        function handleAdminButtonClick() {
+            // 如果已经通过验证，直接显示统计面板
+            if (isAuthenticated) {
+                toggleStatsPanel();
+            } else {
+                // 否则显示密码输入框
+                showPasswordModal();
+            }
+        }
+
+        // 刷新统计数据并添加动画
+        function refreshStatsWithAnimation() {
+            const refreshBtn = document.getElementById('refreshStatsBtn');
+            const originalText = refreshBtn.textContent;
+            
+            // 添加刷新动画
+            refreshBtn.classList.add('refresh-animation');
+            refreshBtn.textContent = '刷新中...';
+            
+            // 执行刷新
+            displayStats();
+            
+            // 恢复按钮状态
+            setTimeout(() => {
+                refreshBtn.classList.remove('refresh-animation');
+                refreshBtn.textContent = originalText;
+                
+                // 添加成功动画
+                refreshBtn.classList.add('success-animation');
+                setTimeout(() => {
+                    refreshBtn.classList.remove('success-animation');
+                }, 1000);
+                
+                // 显示刷新成功消息
+                const searchStats = getSearchStats();
+                const videoStats = getVideoPlayStats();
+                console.log(`统计数据已刷新：${searchStats.totalSearches}次搜索，${videoStats.totalPlays}次播放`);
+            }, 600);
+        }
+
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
+            // 初始化数据存储
+            initDataStorage();
+            
+            // 首次加载时自动清理数据
+            autoCleanData();
+            
             // 显示分类
             displayCategories();
             
@@ -1408,9 +2686,33 @@
                     }
                     homeCurrentPlayingId = null;
                 }
+                // 隐藏统计面板
+                document.getElementById('statsPanel').style.display = 'none';
+                document.getElementById('adminBtn').classList.remove('active');
+                // 重置验证状态
+                isAuthenticated = false;
+                // 停止导出按钮脉冲动画
+                if (exportPulseInterval) {
+                    clearInterval(exportPulseInterval);
+                    exportPulseInterval = null;
+                }
+                document.getElementById('exportDataBtn').classList.remove('export-pulse');
             });
             
-            document.getElementById('videoBtn').addEventListener('click', () => switchPage('video'));
+            document.getElementById('videoBtn').addEventListener('click', () => {
+                switchPage('video');
+                // 隐藏统计面板
+                document.getElementById('statsPanel').style.display = 'none';
+                document.getElementById('adminBtn').classList.remove('active');
+                // 重置验证状态
+                isAuthenticated = false;
+                // 停止导出按钮脉冲动画
+                if (exportPulseInterval) {
+                    clearInterval(exportPulseInterval);
+                    exportPulseInterval = null;
+                }
+                document.getElementById('exportDataBtn').classList.remove('export-pulse');
+            });
             
             // 返回首页按钮
             document.getElementById('backToHomeBtn').addEventListener('click', function() {
@@ -1437,6 +2739,14 @@
                     }
                     currentPlayingId = null;
                 }
+                // 重置验证状态
+                isAuthenticated = false;
+                // 停止导出按钮脉冲动画
+                if (exportPulseInterval) {
+                    clearInterval(exportPulseInterval);
+                    exportPulseInterval = null;
+                }
+                document.getElementById('exportDataBtn').classList.remove('export-pulse');
             });
             
             // 查看全部视频按钮
@@ -1511,6 +2821,54 @@
                 }
             });
             
+            // 统计数据按钮 - 修改为点击时先验证密码
+            const adminBtn = document.getElementById('adminBtn');
+            adminBtn.addEventListener('click', handleAdminButtonClick);
+            
+            // 刷新统计按钮 - 添加动画效果
+            document.getElementById('refreshStatsBtn').addEventListener('click', refreshStatsWithAnimation);
+            
+            // 导出数据按钮 - 显示导出选项弹窗
+            document.getElementById('exportDataBtn').addEventListener('click', showExportModal);
+            
+            // 密码弹窗事件
+            document.getElementById('passwordConfirmBtn').addEventListener('click', executePasswordVerification);
+            
+            document.getElementById('passwordCancelBtn').addEventListener('click', hidePasswordModal);
+            
+            // 密码输入框按回车键确认
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    executePasswordVerification();
+                }
+            });
+            
+            // 导出选项弹窗事件
+            document.getElementById('exportConfirmBtn').addEventListener('click', executeExport);
+            
+            document.getElementById('exportCancelBtn').addEventListener('click', hideExportModal);
+            
+            // 导出类型切换
+            document.querySelectorAll('input[name="exportType"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const monthSelect = document.getElementById('monthSelect');
+                    monthSelect.style.display = this.value === 'month' ? 'block' : 'none';
+                });
+            });
+            
+            // 点击弹窗背景关闭
+            document.getElementById('passwordModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    hidePasswordModal();
+                }
+            });
+            
+            document.getElementById('exportModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    hideExportModal();
+                }
+            });
+            
             // 优化移动端触摸体验
             document.querySelectorAll('button').forEach(button => {
                 button.addEventListener('touchstart', function() {
@@ -1521,7 +2879,39 @@
                     this.style.transform = 'scale(1)';
                 });
             });
+            
+            // 为数据统计按钮添加悬停效果
+            const statsButtons = document.querySelectorAll('.stats-btn');
+            statsButtons.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('loading')) {
+                        this.style.transform = 'translateY(-2px)';
+                        this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+                    }
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('loading')) {
+                        this.style.transform = 'translateY(0)';
+                        this.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.05)';
+                    }
+                });
+            });
+            
+            // 页面加载时显示初始统计数据
+            displayStats();
+            
+            // 页面加载完成后，如果数据量较大，自动为导出按钮添加脉冲动画提示
+            setTimeout(() => {
+                const searchStats = getSearchStats();
+                const videoStats = getVideoPlayStats();
+                if (searchStats.totalSearches > 10 || videoStats.totalPlays > 10) {
+                    // 数据量较大，提示用户导出
+                    console.log('检测到较多数据，建议导出备份');
+                }
+            }, 2000);
         });
     </script>
 </body>
 </html>
+[file content end]
