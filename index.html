@@ -1101,10 +1101,7 @@
             <div class="faq-item"><div class="faq-question"><span class="icon">⚠️</span>安装后打印机显示"缺粉"</div><div class="faq-answer">请尝试重新安装硒鼓，确保完全推入到位。如仍报错，可能需要重置芯片计数器。</div></div>
             <div class="faq-item"><div class="faq-question"><span class="icon">⚠️</span>打印有底灰或条纹</div><div class="faq-answer">可能是碳粉未均匀分布。建议取出硒鼓，水平摇晃5-6次后重新安装。</div></div>
             <div class="faq-item"><div class="faq-question"><span class="icon">⚠️</span>芯片不兼容错误</div><div class="faq-answer">请确认芯片方向与打印机触点完全匹配，如有污渍可用橡皮擦轻轻擦拭。</div></div>
-            <div class="home-video-section">
-                <div class="home-video-title"><h2><span class="icon">🎬</span>热门硒鼓安装视频推荐</h2><button class="view-all-btn" id="viewAllBtn">查看全部视频</button></div>
-                <div id="homeVideoList" class="home-video-list"></div>
-            </div>
+            <!-- 热门视频推荐区域已移除 -->
             <div id="statsPanel" class="stats-panel">
                 <div class="stats-title"><span class="icon">📊</span>数据统计</div>
                 <div class="stats-grid">
@@ -1229,23 +1226,7 @@
         if(f===t&&!isCat) info.style.display='none';
         else { info.style.display='flex'; txt.textContent=isCat?`在当前分类下找到 ${f} 个相关结果`:`找到 ${f} 个相关结果（共 ${t} 个教程）`; }
     }
-    function displayHomeVideos(){
-        let html=''; videoData.slice(0,4).forEach((item,i)=>{
-            let [name,id]=item, itemId=`home-video-${i}`;
-            html+=`<div class="home-video-item" id="${itemId}"><div class="home-video-header"><div class="home-video-title-text">${name}</div><button class="home-play-btn" data-id="${itemId}" data-video="${id}" data-title="${name}"><span class="btn-icon">▶</span>播放视频</button></div><div class="home-video-container"><div class="loading">视频加载中...</div><iframe class="home-video-player" src="about:blank" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; encrypted-media" sandbox="allow-same-origin allow-scripts allow-popups allow-forms" data-bvid="${id}"></iframe></div></div>`;
-        });
-        document.getElementById('homeVideoList').innerHTML = html;
-        document.querySelectorAll('.home-play-btn').forEach(b=>b.addEventListener('click',function(){
-            let id=this.dataset.id, vid=this.dataset.video, title=this.dataset.title;
-            if(homeCurrentPlayingId===id){ let p=document.getElementById(id); p.querySelector('.home-video-player').src='about:blank'; p.querySelector('.home-video-container').classList.remove('active'); this.innerHTML='<span class="btn-icon">▶</span>播放视频'; this.classList.remove('playing'); p.querySelector('.loading').style.display='flex'; homeCurrentPlayingId=null; }
-            else {
-                if(homeCurrentPlayingId){ let prev=document.getElementById(homeCurrentPlayingId); if(prev){ prev.querySelector('.home-video-player').src='about:blank'; prev.querySelector('.home-video-container').classList.remove('active'); prev.querySelector('.home-play-btn').innerHTML='<span class="btn-icon">▶</span>播放视频'; prev.querySelector('.home-play-btn').classList.remove('playing'); prev.querySelector('.loading').style.display='flex'; }}
-                saveVideoPlay(title,vid);
-                let cur=document.getElementById(id); let ifr=cur.querySelector('.home-video-player'); ifr.src=`https://player.bilibili.com/player.html?bvid=${vid}&page=1&high_quality=1&autoplay=1`; cur.querySelector('.loading').style.display='none'; cur.querySelector('.home-video-container').classList.add('active'); this.innerHTML='<span class="btn-icon">⏸</span>关闭视频'; this.classList.add('playing'); homeCurrentPlayingId=id;
-                setTimeout(()=>cur.scrollIntoView({behavior:'smooth',block:'nearest'}),300);
-            }
-        }));
-    }
+    // 热门视频渲染函数已移除，不再使用
     function displayVideos(videos,isCat){
         let list=document.getElementById('videoList');
         if(!videos.length){ list.innerHTML='<div class="no-result"><div class="no-result-icon">🔍</div><p>未找到相关视频</p><div class="hint">请尝试使用其他关键词，如"HP"、"Canon"、"Brother"等</div></div>'; return; }
@@ -1316,11 +1297,11 @@
             btn.textContent=ot; btn.classList.remove('loading'); btn.classList.add('success-animation'); setTimeout(()=>btn.classList.remove('success-animation'),1000); hideExportModal(); alert(`数据已导出`); },800);
     }
     document.addEventListener('DOMContentLoaded',()=>{
-        initDataStorage(); autoCleanData(); displayCategories(); displayHomeVideos(); displayVideos(videoData);
+        initDataStorage(); autoCleanData(); displayCategories(); displayVideos(videoData); // 移除了 displayHomeVideos() 调用
         document.getElementById('homeBtn').addEventListener('click',()=>{ switchPage('home'); document.getElementById('homeSearchInput').value=''; if(homeCurrentPlayingId){ let p=document.getElementById(homeCurrentPlayingId); if(p){ p.querySelector('.home-video-player').src='about:blank'; p.querySelector('.home-video-container').classList.remove('active'); p.querySelector('.home-play-btn').innerHTML='<span class="btn-icon">▶</span>播放视频'; p.querySelector('.home-play-btn').classList.remove('playing'); p.querySelector('.loading').style.display='flex'; } homeCurrentPlayingId=null; } document.getElementById('statsPanel').style.display='none'; document.getElementById('adminBtn').classList.remove('active'); isAuthenticated=false; if(exportPulseInterval){ clearInterval(exportPulseInterval); exportPulseInterval=null; } document.getElementById('exportDataBtn').classList.remove('export-pulse'); });
         document.getElementById('videoBtn').addEventListener('click',()=>{ switchPage('video'); document.getElementById('statsPanel').style.display='none'; document.getElementById('adminBtn').classList.remove('active'); isAuthenticated=false; if(exportPulseInterval){ clearInterval(exportPulseInterval); exportPulseInterval=null; } document.getElementById('exportDataBtn').classList.remove('export-pulse'); });
         document.getElementById('backToHomeBtn').addEventListener('click',()=>{ clearCategoryFilter(); switchPage('home'); document.getElementById('homeSearchInput').value=''; if(currentPlayingId){ let p=document.getElementById(currentPlayingId); if(p){ p.querySelector('.video-player').src='about:blank'; p.querySelector('.video-container').classList.remove('active'); p.querySelector('.play-btn').innerHTML='<span class="btn-icon">▶</span>播放视频'; p.querySelector('.play-btn').classList.remove('playing'); p.querySelector('.loading').style.display='flex'; } currentPlayingId=null; } isAuthenticated=false; if(exportPulseInterval){ clearInterval(exportPulseInterval); exportPulseInterval=null; } document.getElementById('exportDataBtn').classList.remove('export-pulse'); });
-        document.getElementById('viewAllBtn').addEventListener('click',()=>{ switchPage('video'); document.getElementById('searchInput').value=''; clearCategoryFilter(); });
+        // 移除了 viewAllBtn 的事件监听
         document.getElementById('homeSearchBtn').addEventListener('click',searchHomeVideos);
         document.getElementById('searchBtn').addEventListener('click',searchVideos);
         document.getElementById('closeCategoryHint').addEventListener('click',e=>{ e.stopPropagation(); clearCategoryFilter(); });
