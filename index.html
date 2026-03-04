@@ -1189,6 +1189,104 @@
         button {
             touch-action: manipulation;
         }
+        
+        /* ---------- 微信客服二维码样式 ---------- */
+        .wechat-section {
+            padding: 16px 16px 8px;
+            background-color: white;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .wechat-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .wechat-title .icon {
+            margin-right: 8px;
+            color: #FF7A00;
+            font-size: 20px;
+        }
+        
+        .wechat-tip {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 16px;
+            padding-left: 4px;
+            line-height: 1.5;
+        }
+        
+        .wechat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .wechat-card {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .wechat-card:active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-color: #FF7A00;
+        }
+        
+        .wechat-qr {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-color: #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        .wechat-qr img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .wechat-shop {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .wechat-id {
+            font-size: 11px;
+            color: #FF7A00;
+            word-break: break-all;
+            background-color: rgba(255,122,0,0.05);
+            padding: 4px 6px;
+            border-radius: 20px;
+            display: inline-block;
+            max-width: 100%;
+        }
+        
+        @media (min-width: 400px) {
+            .wechat-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .wechat-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
     </style>
 </head>
 <body>
@@ -1400,8 +1498,67 @@
             </div>
         </div>
         
+        <!-- ========= 新增微信客服二维码区域（6个店铺，带说明） ========= -->
+        <div class="wechat-section">
+            <div class="wechat-title">
+                <span class="icon">📱</span>店铺客服微信
+            </div>
+            <div class="wechat-tip">
+                可微信直接扫码添加客服，或长按保存二维码后在微信扫一扫选相册图片添加，也可直接复制微信号在微信添加好友即可添加。
+            <div class="wechat-grid">
+                <!-- 墨道旗舰店 -->
+                <div class="wechat-card">
+                    <div class="wechat-qr">
+                        <img src="https://kstang01.github.io/imges/WeChat%20Customer%20Service/01墨道旗舰店.jpg" alt="墨道旗舰店二维码" onerror="this.onerror=null; this.src='https://via.placeholder.com/120x120/FF7A00/ffffff?text=墨道';">
+                    </div>
+                    <div class="wechat-shop">墨道旗舰店</div>
+                    <div class="wechat-id">微信号：modaoxin</div>
+                </div>
+                <!-- 炫墨旗舰店 -->
+                <div class="wechat-card">
+                    <div class="wechat-qr">
+                        <img src="https://kstang01.github.io/imges/WeChat%20Customer%20Service/02炫墨办公旗舰店.jpg" alt="炫墨旗舰店二维码" onerror="this.onerror=null; this.src='https://via.placeholder.com/120x120/FF7A00/ffffff?text=炫墨旗舰';">
+                    </div>
+                    <div class="wechat-shop">炫墨旗舰店</div>
+                    <div class="wechat-id">微信号：xmqjd2019</div>
+                </div>
+                <!-- 炫墨苏宁店（用户提供的图片地址为03韩达旗舰店.jpg，按描述对应炫墨苏宁） -->
+                <div class="wechat-card">
+                    <div class="wechat-qr">
+                        <img src="https://kstang01.github.io/imges/WeChat%20Customer%20Service/03韩达旗舰店.jpg" alt="炫墨苏宁店二维码" onerror="this.onerror=null; this.src='https://via.placeholder.com/120x120/FF7A00/ffffff?text=炫墨苏宁';">
+                    </div>
+                    <div class="wechat-shop">炫墨苏宁</div>
+                    <div class="wechat-id">微信号：xunmo1212</div>
+                </div>
+                <!-- 韩达旗舰店（用户提供的图片地址为04炫墨苏宁.jpg，按描述对应韩达旗舰店） -->
+                <div class="wechat-card">
+                    <div class="wechat-qr">
+                        <img src="https://kstang01.github.io/imges/WeChat%20Customer%20Service/04炫墨苏宁.jpg" alt="韩达旗舰店二维码" onerror="this.onerror=null; this.src='https://via.placeholder.com/120x120/FF7A00/ffffff?text=韩达旗舰';">
+                    </div>
+                    <div class="wechat-shop">韩达旗舰店</div>
+                    <div class="wechat-id">微信号：handakf</div>
+                </div>
+                <!-- 韩达苏宁店 -->
+                <div class="wechat-card">
+                    <div class="wechat-qr">
+                        <img src="https://kstang01.github.io/imges/WeChat%20Customer%20Service/05韩达苏宁.jpg" alt="韩达苏宁店二维码" onerror="this.onerror=null; this.src='https://via.placeholder.com/120x120/FF7A00/ffffff?text=韩达苏宁';">
+                    </div>
+                    <div class="wechat-shop">韩达苏宁</div>
+                    <div class="wechat-id">微信号：handa2024</div>
+                </div>
+                <!-- 第六个：蚁社电商客服（待定，使用占位图，微信号沿用页面原有） -->
+                <div class="wechat-card">
+                    <div class="wechat-qr">
+                        <img src="https://via.placeholder.com/120x120/FF7A00/ffffff?text=蚁社" alt="敬请期待">
+                    </div>
+                    <div class="wechat-shop">敬请期待</div>
+                    <div class="wechat-id">微信号：yishegw</div>
+                </div>
+            </div>
+        </div>
+        
         <div class="footer">
-            <div><span class="wechat-icon">💚</span>扫码观看 | 硒鼓安装教程视频</div>
+            <div><span class="wechat-icon"></span>硒鼓安装教程视频</div>
             <div style="margin-top: 6px; font-size: 11px; opacity: 0.8;">© 2026 蚁社电商 版权所有</div>
         </div>
     </div>
@@ -1499,43 +1656,43 @@
             { 
                 id: 'integrated', 
                 name: '一体式硒鼓', 
-                desc: '整体安装',
-                icon: '📦',
+                desc: '安装教程',
+                icon: '⌛️',
                 keywords: ['一体式', '一体式硒鼓', '整体安装', '整体硒鼓']
             },
             { 
                 id: 'separated', 
                 name: '分离式硒鼓', 
-                desc: '鼓粉分离',
-                icon: '🔧',
+                desc: '安装教程',
+                icon: '⏳',
                 keywords: ['分离式', '分离式硒鼓', '鼓粉分离', '分离']
             },
             { 
                 id: 'toner', 
                 name: '粉盒鼓架', 
-                desc: '分体安装',
-                icon: '⚙️',
+                desc: '安装教程',
+                icon: '💡',
                 keywords: ['粉盒', '鼓架', '分体安装', '粉盒鼓架']
             },
             { 
                 id: 'color', 
                 name: '彩色硒鼓', 
-                desc: '彩色安装',
+                desc: '安装教程',
                 icon: '🎨',
                 keywords: ['彩色', '彩鼓', '颜色硒鼓', '彩色硒鼓']
             },
             { 
                 id: 'chip', 
                 name: '芯片更换', 
-                desc: '重置教程',
-                icon: '💿',
+                desc: '视频教程',
+                icon: '💾',
                 keywords: ['芯片', '芯片更换', 'IC芯片', '芯片重置']
             },
             { 
                 id: 'refill', 
-                name: '加粉教程', 
-                desc: '补充碳粉',
-                icon: '🔄',
+                name: '硒鼓加粉', 
+                desc: '视频教程',
+                icon: '🔁',
                 keywords: ['加粉', '填充', '补充碳粉', '加粉教程']
             }
         ];
