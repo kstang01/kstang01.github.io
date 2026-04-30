@@ -12,1062 +12,397 @@
             -webkit-tap-highlight-color: transparent;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
-            background-color: #f7f7f7;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: #FFFFFF;  /* 整体白色背景 */
+            color: #1E2A3A;
             line-height: 1.5;
-            padding: 0;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
         .container {
-            width: 100%;
+            max-width: 900px;
             margin: 0 auto;
-            background-color: white;
+            background: #FFFFFF;
             min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.02);
         }
+        /* 顶部区域：纯白色，无圆角无断层 */
         .header {
-            background: linear-gradient(135deg, #FF7A00 0%, #E56A00 100%);
-            color: white;
-            padding: 16px 16px 20px;
+            background: #FFFFFF;
+            position: relative;
+            padding: 24px 20px 20px;
             text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #F0F2F5;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
         .header h1 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 6px;
+            font-size: 22px;
+            font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 10px;
+            letter-spacing: -0.3px;
+            color: #2A7DE1;  /* 大标题蓝色 */
+            text-shadow: none;
         }
-        .header h1 .icon {
-            margin-right: 8px;
-            font-size: 20px;
-            filter: brightness(0) invert(1);
-        }
-        .header .subtitle {
-            font-size: 12px;
-            opacity: 0.9;
-            font-weight: 400;
-            margin-bottom: 12px;
+        .subtitle {
+            font-size: 13px;
+            margin: 8px 0 20px;
+            font-weight: 500;
+            color: #2A7DE1;  /* 小标题蓝色 */
+            opacity: 0.85;
         }
         .page-switch {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 14px;
         }
         .page-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 6px 20px;
-            border-radius: 20px;
-            font-size: 13px;
+            background: #F0F2F5;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.25s;
             flex: 1;
-            max-width: 140px;
+            max-width: 150px;
+            color: #1E2A3A;
         }
         .page-btn.active {
-            background: white;
-            color: #FF7A00;
-            font-weight: 500;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: #2A7DE1;
+            color: white;
+            box-shadow: 0 4px 10px rgba(42,125,225,0.2);
+        }
+        .page-btn:active {
+            transform: scale(0.96);
         }
         .main-content {
-            padding: 16px 16px 20px;
+            padding: 20px 16px 24px;
+            background: #FFFFFF;
         }
         .page {
             display: none;
+            background: #FFFFFF;
+            border-radius: 0;
         }
         .page.active {
             display: block;
         }
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            background-color: #FF7A00;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
-            width: 100%;
-            justify-content: center;
-        }
-        .back-btn .icon {
-            margin-right: 6px;
-            font-size: 14px;
-        }
-        .home-search-section, .search-section {
+        .search-box, .home-search-box {
+            display: flex;
+            gap: 10px;
             margin-bottom: 16px;
         }
-        .home-search-box, .search-box {
-            position: relative;
-            width: 100%;
-            display: flex;
-            gap: 8px;
-        }
-        .home-search-box input, .search-box input {
+        input {
             flex: 1;
-            padding: 14px 16px;
+            padding: 14px 18px;
             font-size: 16px;
-            border: 1px solid #e6e6e6;
-            border-radius: 10px;
-            background-color: #fafafa;
-            transition: all 0.3s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-            -webkit-appearance: none;
+            border: 1px solid #E2E8F0;
+            border-radius: 30px;
+            background: #F8FAFC;
+            transition: all 0.2s;
         }
-        .home-search-box input:focus, .search-box input:focus {
+        input:focus {
             outline: none;
-            border-color: #FF7A00;
-            background-color: white;
-            box-shadow: 0 3px 12px rgba(255, 122, 0, 0.1);
+            border-color: #2A7DE1;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(42,125,225,0.1);
         }
-        .home-search-btn, .search-btn {
-            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
-            color: #333;
-            border: 1px solid #e9ecef;
-            padding: 0 20px;
-            border-radius: 10px;
+        .search-btn, .home-search-btn {
+            background: #F0F2F5;
+            border: 1px solid #E2E8F0;
+            padding: 0 24px;
+            border-radius: 40px;
             cursor: pointer;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.3s;
             display: flex;
             align-items: center;
-            justify-content: center;
-            min-width: 60px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-        }
-        .home-search-btn .btn-icon, .search-btn .btn-icon {
             font-size: 18px;
-            color: #666;
+            color: #2A7DE1;
+            transition: all 0.2s;
         }
-        .home-search-instructions, .instructions {
-            background-color: #fff8f0;
-            border-radius: 8px;
-            padding: 12px 14px;
-            margin-top: 10px;
-            margin-bottom: 5px;
-            border-left: 3px solid #FF7A00;
-            font-size: 12px;
-            line-height: 1.4;
+        .search-btn:active, .home-search-btn:active {
+            background: #E6E9EF;
         }
-        .home-search-instructions .title, .instructions h3 {
-            color: #FF7A00;
-            font-weight: 500;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
+        .instructions {
+            background: #F8FAFC;
+            border-left: 5px solid #2A7DE1;
+            padding: 14px 16px;
+            border-radius: 20px;
             font-size: 13px;
+            margin: 16px 0;
         }
-        .home-search-instructions .title .icon, .instructions h3 .icon {
-            margin-right: 6px;
+        .instructions h3 {
+            color: #2A7DE1;
             font-size: 14px;
-        }
-        .home-search-instructions ol, .instructions ol {
-            padding-left: 18px;
-            margin: 0;
-        }
-        .home-search-instructions li, .instructions li {
             margin-bottom: 6px;
-            color: #666;
-            font-size: 12px;
         }
-        .home-search-instructions li strong, .instructions li strong {
-            color: #333;
-            font-weight: 500;
-        }
-        .guide-title {
-            font-size: 17px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #f0f0f0;
-            display: flex;
-            align-items: center;
-        }
-        .guide-title .icon {
-            margin-right: 8px;
-            font-size: 18px;
-            color: #FF7A00;
-        }
-        .guide-subtitle {
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 16px;
-            padding-left: 5px;
+        .instructions ol {
+            padding-left: 20px;
+            color: #334155;
         }
         .category-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-bottom: 25px;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin: 24px 0;
         }
         .category-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
-            border: 1px solid #e9ecef;
-            border-radius: 12px;
-            padding: 18px 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background: #F8FAFC;
+            border: 1px solid #E9EDF2;
+            border-radius: 24px;
+            padding: 20px 12px;
             text-align: center;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.25s;
         }
         .category-card:active {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-color: #FF7A00;
+            transform: translateY(-4px);
+            border-color: #2A7DE1;
+            box-shadow: 0 12px 24px rgba(42,125,225,0.1);
         }
         .category-icon {
-            font-size: 32px;
-            margin-bottom: 12px;
-            color: #FF7A00;
+            font-size: 36px;
+            color: #2A7DE1;
+            margin-bottom: 10px;
         }
         .category-name {
-            font-weight: 600;
+            font-weight: 700;
             font-size: 16px;
-            color: #333;
-            margin-bottom: 6px;
+            color: #1E293B;
         }
         .category-desc {
-            font-size: 13px;
-            color: #666;
+            font-size: 12px;
+            color: #5B6E8C;
         }
         .steps-title, .faq-title {
-            font-size: 17px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 15px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #f0f0f0;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 28px 0 14px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #E9EDF2;
             display: flex;
             align-items: center;
-        }
-        .steps-title .icon, .faq-title .icon {
-            margin-right: 8px;
-            font-size: 18px;
-            color: #FF7A00;
-        }
-        .steps-list {
-            list-style: none;
-            margin-bottom: 25px;
+            gap: 8px;
+            color: #2A7DE1;
         }
         .step-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 12px;
+            gap: 14px;
+            background: #F8FAFC;
             padding: 14px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            border-left: 4px solid #FF7A00;
+            border-radius: 20px;
+            border-left: 5px solid #2A7DE1;
+            margin-bottom: 12px;
         }
         .step-number {
-            background-color: #FF7A00;
+            background: #2A7DE1;
             color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: bold;
-            margin-right: 12px;
             flex-shrink: 0;
         }
-        .step-text {
-            font-size: 14px;
-            color: #333;
-            line-height: 1.5;
-        }
-        .faq-title {
-            margin: 25px 0 15px;
-        }
         .faq-item {
-            margin-bottom: 12px;
+            background: #F8FAFC;
             padding: 14px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            border-left: 4px solid #ff6b6b;
+            border-radius: 20px;
+            border-left: 5px solid #FF8A6F;
+            margin-bottom: 12px;
         }
         .faq-question {
-            font-weight: 600;
-            color: #333;
-            font-size: 14px;
-            margin-bottom: 8px;
+            font-weight: 700;
             display: flex;
             align-items: center;
-        }
-        .faq-question .icon {
-            margin-right: 6px;
-            font-size: 16px;
-            color: #ff6b6b;
+            gap: 8px;
+            margin-bottom: 6px;
+            color: #2D3A5E;
         }
         .faq-answer {
             font-size: 13px;
-            color: #666;
-            line-height: 1.5;
-        }
-        .home-video-section {
-            margin-top: 25px;
-        }
-        .home-video-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .home-video-title h2 {
-            font-size: 17px;
-            font-weight: 600;
-            color: #333;
-            display: flex;
-            align-items: center;
-        }
-        .home-video-title h2 .icon {
-            margin-right: 8px;
-            color: #FF7A00;
-        }
-        .view-all-btn {
-            background-color: #FF7A00;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-            box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
-        }
-        .home-video-list {
-            display: grid;
-            gap: 14px;
-        }
-        .home-video-item, .video-item {
-            background-color: white;
-            border-radius: 12px;
-            padding: 16px;
-            border: 1px solid #f0f0f0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-        }
-        .home-video-header, .video-header {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-        .home-video-title-text, .video-title {
-            font-weight: 600;
-            color: #333;
-            font-size: 15px;
-            flex: 1;
-            line-height: 1.4;
-            margin-bottom: 12px;
-        }
-        .home-play-btn, .play-btn {
-            background-color: #FF7A00;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s;
-            width: 100%;
-            box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .home-play-btn .btn-icon, .play-btn .btn-icon {
-            margin-right: 6px;
-            font-size: 14px;
-        }
-        .home-play-btn.playing, .play-btn.playing {
-            background-color: #f85e5e;
-        }
-        .home-video-container, .video-container {
-            width: 100%;
-            height: 0;
-            overflow: hidden;
-            transition: height 0.3s ease;
-            border-radius: 8px;
-            margin-top: 12px;
-            background-color: #000;
-        }
-        .home-video-container.active, .video-container.active {
-            height: 200px;
-        }
-        .home-video-player, .video-player {
-            width: 100%;
-            height: 200px;
-            border-radius: 8px;
-            border: none;
-            display: block;
+            color: #4A5B7C;
         }
         .video-list-title {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .video-list-title h2 {
-            font-size: 17px;
-            font-weight: 600;
-            color: #333;
+            align-items: baseline;
+            margin: 20px 0 16px;
         }
         .video-count {
-            background-color: #FF7A00;
+            background: #2A7DE1;
             color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 4px 14px;
+            border-radius: 50px;
             font-size: 12px;
             font-weight: 500;
         }
-        .video-list {
-            display: grid;
-            gap: 14px;
-        }
-        .category-hint {
-            background-color: #fff8f0;
-            border-radius: 10px;
-            padding: 12px 15px;
+        .video-item {
+            background: #F8FAFC;
+            border: 1px solid #E9EDF2;
+            border-radius: 20px;
+            padding: 16px;
             margin-bottom: 16px;
-            border-left: 4px solid #FF7A00;
-            font-size: 13px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            cursor: pointer;
-        }
-        .category-hint .hint-text {
-            display: flex;
             align-items: center;
-        }
-        .category-hint .icon {
-            color: #FF7A00;
-            margin-right: 8px;
-            font-size: 16px;
-        }
-        .close-btn {
-            background: none;
-            border: none;
-            color: #999;
-            font-size: 18px;
-            cursor: pointer;
-            padding: 0;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
+            flex-wrap: wrap;
+            gap: 12px;
             transition: all 0.2s;
+        }
+        .video-title {
+            font-weight: 600;
+            flex: 1;
+            color: #1E2A3A;
+            font-size: 15px;
+        }
+        .play-btn {
+            background: #2A7DE1;
+            color: white;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            box-shadow: 0 2px 6px rgba(42,125,225,0.2);
+        }
+        .play-btn:active {
+            transform: scale(0.95);
+            background: #1E6BC9;
         }
         .no-result {
             text-align: center;
-            padding: 50px 15px;
-            color: #999;
+            padding: 48px;
+            color: #7C8BA0;
+            background: #F8FAFC;
+            border-radius: 32px;
         }
-        .no-result-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-            opacity: 0.5;
-        }
-        .no-result p {
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-        .no-result .hint {
-            font-size: 13px;
-            margin-top: 8px;
-            color: #666;
-        }
-        .search-result-info {
-            color: #FF7A00;
-            font-size: 13px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-        .search-result-info .icon {
-            margin-right: 6px;
-        }
-        .footer {
-            text-align: center;
-            padding: 20px 15px;
-            color: #999;
-            font-size: 12px;
-            border-top: 1px solid #f0f0f0;
-            background-color: #fafafa;
-            margin-top: 20px;
-        }
-        .footer .wechat-icon {
-            color: #FF7A00;
-            font-size: 16px;
-            margin-right: 4px;
-            vertical-align: middle;
-        }
-        .loading {
-            display: flex;
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            color: #FF7A00;
-            font-size: 14px;
         }
-        .loading:before {
-            content: '';
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255, 122, 0, 0.2);
-            border-top-color: #FF7A00;
-            border-radius: 50%;
-            margin-right: 10px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        @media (min-width: 400px) {
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .home-video-header, .video-header {
-                flex-direction: row;
-                align-items: center;
-            }
-            .home-video-title-text, .video-title {
-                margin-bottom: 0;
-            }
-            .home-play-btn, .play-btn {
-                width: auto;
-                min-width: 100px;
-            }
-        }
-        @media (min-width: 768px) {
-            .container {
-                max-width: 900px;
-                margin: 0 auto;
-                box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-                border-radius: 0;
-                overflow: hidden;
-            }
-            .header {
-                padding: 20px 20px 25px;
-            }
-            .header h1 {
-                font-size: 22px;
-            }
-            .header .subtitle {
-                font-size: 13px;
-            }
-            .main-content {
-                padding: 20px 20px 30px;
-            }
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            .home-play-btn, .play-btn {
-                padding: 8px 16px;
-            }
-        }
-        .stats-panel {
-            background-color: #fff8f0;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 25px 0 10px;
-            border: 1px solid #ffe4cc;
-            display: none;
-        }
-        .stats-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #FF7A00;
-            margin-bottom: 10px;
+        .video-modal.active {
             display: flex;
-            align-items: center;
         }
-        .stats-title .icon {
-            margin-right: 8px;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .stat-item {
-            background-color: white;
-            border-radius: 8px;
-            padding: 10px;
-            border: 1px solid #f0f0f0;
-            text-align: center;
-        }
-        .stat-value {
-            font-size: 18px;
-            font-weight: 700;
-            color: #FF7A00;
-            margin-bottom: 3px;
-        }
-        .stat-label {
-            font-size: 11px;
-            color: #666;
-        }
-        .stats-lists {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-        @media (min-width: 400px) {
-            .stats-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            .stats-lists {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        .stats-list {
-            background-color: white;
-            border-radius: 8px;
-            padding: 12px;
-            border: 1px solid #f0f0f0;
-        }
-        .stats-list-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #f0f0f0;
-            display: flex;
-            align-items: center;
-        }
-        .stats-list-title .icon {
-            margin-right: 6px;
-        }
-        .stats-list-content {
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        .stats-list-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            font-size: 12px;
-            border-bottom: 1px dashed #f0f0f0;
-        }
-        .stats-list-item:last-child {
-            border-bottom: none;
-        }
-        .stats-list-key {
-            color: #333;
-        }
-        .stats-list-value {
-            color: #FF7A00;
-            font-weight: 500;
-        }
-        .empty-stats {
-            color: #999;
-            font-size: 12px;
-            text-align: center;
-            padding: 10px 0;
-        }
-        .stats-controls {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            gap: 8px;
-        }
-        .stats-btn {
-            background: linear-gradient(135deg, #FF7A00 0%, #E56A00 100%);
-            color: white;
-            border: 1px solid #E56A00;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            flex: 1;
-            box-shadow: 0 2px 6px rgba(255, 122, 0, 0.2);
-            font-weight: 500;
-            position: relative;
+        .modal-content {
+            background: #000;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 28px;
             overflow: hidden;
-        }
-        .stats-btn:hover {
-            background: linear-gradient(135deg, #E56A00 0%, #CC5A00 100%);
-            box-shadow: 0 4px 12px rgba(255, 122, 0, 0.3);
-            transform: translateY(-2px);
-        }
-        .stats-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 122, 0, 0.4); }
-            70% { box-shadow: 0 0 0 6px rgba(255, 122, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 122, 0, 0); }
-        }
-        .refresh-animation {
-            animation: spin 0.6s ease-in-out;
-        }
-        .export-pulse {
-            animation: pulse 1.5s infinite;
-        }
-        .stats-btn.loading {
             position: relative;
-            color: transparent;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.4);
         }
-        .stats-btn.loading::after {
-            content: '';
+        .modal-close {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 16px;
-            height: 16px;
-            margin: -8px 0 0 -8px;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            border-top-color: white;
+            top: 14px;
+            right: 14px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes success {
-            0% { background: linear-gradient(135deg, #FF7A00 0%, #E56A00 100%); }
-            50% { background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; }
-            100% { background: linear-gradient(135deg, #FF7A00 0%, #E56A00 100%); }
-        }
-        .success-animation {
-            animation: success 1s ease;
-        }
-        .admin-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, #FF7A00 0%, #E56A00 100%);
-            color: white;
-            border: 1px solid #E56A00;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(255, 122, 0, 0.3);
-            z-index: 999;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s;
-        }
-        .admin-btn.active {
-            background: linear-gradient(135deg, #E56A00 0%, #CC5A00 100%);
-            border-color: #CC5A00;
-            transform: rotate(45deg);
-        }
-        .admin-btn:hover {
-            background: linear-gradient(135deg, #E56A00 0%, #CC5A00 100%);
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(255, 122, 0, 0.4);
-        }
-        .password-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        .password-modal.active {
-            display: flex;
-        }
-        .password-box {
-            background-color: white;
-            border-radius: 12px;
-            padding: 20px;
-            width: 90%;
-            max-width: 320px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            animation: modalAppear 0.3s ease-out;
-        }
-        @keyframes modalAppear {
-            from { opacity: 0; transform: translateY(-20px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .password-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        .password-input {
-            width: 100%;
-            padding: 12px 16px;
-            font-size: 16px;
-            border: 1px solid #e6e6e6;
-            border-radius: 8px;
-            background-color: #fafafa;
-            margin-bottom: 15px;
-            transition: all 0.3s;
-        }
-        .password-input:focus {
-            outline: none;
-            border-color: #FF7A00;
-            background-color: white;
-            box-shadow: 0 3px 12px rgba(255, 122, 0, 0.1);
-        }
-        .password-controls {
-            display: flex;
-            gap: 10px;
-        }
-        .password-btn {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-        .password-confirm {
-            background-color: #FF7A00;
-            color: white;
-            box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
-        }
-        .password-cancel {
-            background-color: #f0f0f0;
-            color: #666;
-        }
-        .export-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        .export-modal.active {
-            display: flex;
-        }
-        .export-box {
-            background-color: white;
-            border-radius: 12px;
-            padding: 20px;
-            width: 90%;
-            max-width: 350px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            animation: modalAppear 0.3s ease-out;
-        }
-        .export-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        .export-options {
-            margin-bottom: 20px;
-        }
-        .export-option {
-            margin-bottom: 12px;
-        }
-        .export-option label {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            color: #333;
-            cursor: pointer;
-        }
-        .export-option input[type="checkbox"] {
-            margin-right: 8px;
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
-        .export-option input[type="radio"] {
-            margin-right: 8px;
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
-        .export-month-select {
-            margin-top: 10px;
-            margin-left: 24px;
-        }
-        .export-month-select select {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #e6e6e6;
-            border-radius: 6px;
-            font-size: 14px;
-            background-color: #fafafa;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        .export-month-select select:focus {
-            outline: none;
-            border-color: #FF7A00;
-            box-shadow: 0 3px 12px rgba(255, 122, 0, 0.1);
-        }
-        .export-controls {
-            display: flex;
-            gap: 10px;
-        }
-        .export-btn {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .export-confirm {
-            background-color: #FF7A00;
-            color: white;
-            box-shadow: 0 2px 5px rgba(255, 122, 0, 0.2);
-        }
-        .export-confirm:hover {
-            background-color: #E56A00;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 122, 0, 0.3);
-        }
-        .export-cancel {
-            background-color: #f0f0f0;
-            color: #666;
-        }
-        .export-cancel:hover {
-            background-color: #e0e0e0;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .category-card, .home-video-item, .video-item, .home-play-btn, .play-btn, .page-btn {
-            -webkit-user-select: none;
-            user-select: none;
-        }
-        button {
-            touch-action: manipulation;
-        }
-        /* 微信客服区域新样式 */
-        .wechat-section {
-            padding: 16px 16px 8px;
-            background-color: white;
-            border-top: 1px solid #f0f0f0;
-        }
-        .wechat-title {
-            font-size: 17px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-        }
-        .wechat-title .icon {
-            margin-right: 8px;
-            color: #FF7A00;
+            z-index: 10;
             font-size: 20px;
+            backdrop-filter: blur(4px);
         }
-        .wechat-tip {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 16px;
-            padding-left: 4px;
-            line-height: 1.5;
+        .modal-video {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: none;
+        }
+        .back-btn {
+            background: #2A7DE1;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 60px;
+            width: 100%;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 2px 6px rgba(42,125,225,0.2);
+        }
+        .back-btn:active {
+            transform: scale(0.97);
+        }
+        .wechat-section {
+            padding: 20px 16px;
+            background: #FFFFFF;
+            border-top: 1px solid #E9EDF2;
         }
         .shop-select {
             width: 100%;
-            padding: 14px 16px;
-            font-size: 16px;
-            border: 1px solid #e6e6e6;
-            border-radius: 10px;
-            background-color: #fafafa;
-            margin-bottom: 16px;
-            appearance: none;
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            background-size: 16px;
-            color: #333;
-        }
-        .shop-select:focus {
-            outline: none;
-            border-color: #FF7A00;
-            box-shadow: 0 3px 12px rgba(255, 122, 0, 0.1);
+            padding: 14px;
+            border: 1px solid #E2E8F0;
+            border-radius: 30px;
+            margin: 12px 0;
+            background: #F8FAFC;
+            color: #1E2A3A;
+            font-size: 14px;
         }
         .selected-shop-card {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 12px;
-            padding: 16px;
             text-align: center;
-            transition: all 0.2s;
-            margin-top: 8px;
+            background: #F8FAFC;
+            border-radius: 28px;
+            padding: 16px;
         }
-        .selected-shop-card .wechat-qr {
-            width: 120px;
-            height: 120px;
-            background-color: #eee;
-            border-radius: 8px;
-            overflow: hidden;
-            margin: 0 auto 10px;
-            border: 1px solid #ddd;
-        }
-        .selected-shop-card .wechat-qr img {
-            width: 100%;
-            height: 100%;
+        .wechat-qr img {
+            width: 110px;
+            height: 110px;
             object-fit: cover;
-            display: block;
+            border-radius: 16px;
+            border: 1px solid #E2E8F0;
         }
-        .selected-shop-card .wechat-shop {
-            font-weight: 600;
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 4px;
+        .footer {
+            text-align: center;
+            padding: 18px;
+            font-size: 11px;
+            color: #7C8BA0;
+            border-top: 1px solid #E9EDF2;
+            background: #FFFFFF;
         }
-        .selected-shop-card .wechat-id {
-            font-size: 12px;
-            color: #FF7A00;
-            word-break: break-all;
-            background-color: rgba(255,122,0,0.05);
-            padding: 6px 12px;
-            border-radius: 20px;
-            display: inline-block;
+        @media (max-width: 450px) {
+            .category-grid { gap: 12px; }
+            .video-item { flex-direction: column; align-items: stretch; }
+            .play-btn { justify-content: center; }
+            .header h1 { font-size: 18px; }
+            .page-btn { padding: 6px 16px; font-size: 13px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <h1><span class="icon">🖨️</span>硒鼓安装教程视频库</h1>
+        <h1><span>🖨️</span>硒鼓安装教程视频库</h1>
         <div class="subtitle">专业硒鼓安装教学，快速掌握更换技巧</div>
         <div class="page-switch">
             <button class="page-btn active" id="homeBtn">安装指南</button>
@@ -1076,270 +411,222 @@
     </div>
     <div class="main-content">
         <div id="homePage" class="page active">
-            <div class="home-search-section">
-                <div class="home-search-box">
-                    <input type="text" id="homeSearchInput" placeholder="请输入硒鼓或产品型号，如：388、1136...">
-                    <button class="home-search-btn" id="homeSearchBtn"><span class="btn-icon">🔍</span></button>
-                </div>
-                <div class="home-search-instructions">
-                    <div class="title"><span class="icon">📚</span>使用说明：</div>
-                    <ol><li><strong>输入硒鼓或产品型号</strong> - 支持模糊搜索</li><li><strong>选择对应的产品安装教程</strong></li><li><strong>点击播放视频按钮</strong> - 观看详细安装教程</li></ol>
-                </div>
+            <div class="home-search-box">
+                <input type="text" id="homeSearchInput" placeholder="请输入硒鼓或产品型号，如：388、1136...">
+                <button class="home-search-btn" id="homeSearchBtn">🔍</button>
             </div>
-            <div class="guide-title"><span class="icon">📋</span>硒鼓安装指南</div>
-            <div class="guide-subtitle">选择对应的硒鼓安装类型查看详细视频教程</div>
+            <div class="instructions">
+                <h3>📚 使用说明</h3>
+                <ol><li>输入硒鼓或产品型号模糊搜索</li><li>点击下方分类直接观看视频</li><li>点击播放按钮观看详细教程</li></ol>
+            </div>
+            <div class="guide-title" style="font-weight:700; margin:10px 0 5px;">📋 硒鼓安装指南</div>
             <div class="category-grid" id="categoryGrid"></div>
-            <div class="steps-title"><span class="icon">📝</span>硒鼓通用安装步骤</div>
+            <div class="steps-title">📝 硒鼓通用安装步骤</div>
             <ul class="steps-list">
-                <li class="step-item"><div class="step-number">1</div><div class="step-text">水平摇晃硒鼓5-6次，唤醒碳粉，使碳粉均匀分布</div></li>
-                <li class="step-item"><div class="step-number">2</div><div class="step-text">取下硒鼓保护盖和两侧的卡扣，确保安装过程中无异物阻挡</div></li>
-                <li class="step-item"><div class="step-number">3</div><div class="step-text">平直拉出封条，切勿剪断或使用蛮力，避免损坏内部结构</div></li>
-                <li class="step-item"><div class="step-number">4</div><div class="step-text">检查芯片方向，确保芯片朝正确方向安装，避免打印机报错</div></li>
-                <li class="step-item"><div class="step-number">5</div><div class="step-text">将硒鼓装入打印机，听到"咔哒"声表示安装到位，即可使用</div></li>
+                <li class="step-item"><div class="step-number">1</div><div>水平摇晃硒鼓5-6次，使碳粉均匀分布</div></li>
+                <li class="step-item"><div class="step-number">2</div><div>取下保护盖和卡扣，确保无异物阻挡</div></li>
+                <li class="step-item"><div class="step-number">3</div><div>平直拉出封条，切勿剪断</div></li>
+                <li class="step-item"><div class="step-number">4</div><div>检查芯片方向，确保正确安装</div></li>
+                <li class="step-item"><div class="step-number">5</div><div>将硒鼓装入打印机，听到"咔哒"声即到位</div></li>
             </ul>
-            <div class="faq-title"><span class="icon">❓</span>安装常见问题</div>
-            <div class="faq-item"><div class="faq-question"><span class="icon">⚠️</span>安装后打印机显示"缺粉"</div><div class="faq-answer">请尝试重新安装硒鼓，确保完全推入到位。如仍报错，可能需要重置芯片计数器。</div></div>
-            <div class="faq-item"><div class="faq-question"><span class="icon">⚠️</span>打印有底灰或条纹</div><div class="faq-answer">可能是碳粉未均匀分布。建议取出硒鼓，水平摇晃5-6次后重新安装。</div></div>
-            <div class="faq-item"><div class="faq-question"><span class="icon">⚠️</span>芯片不兼容错误</div><div class="faq-answer">请确认芯片方向与打印机触点完全匹配，如有污渍可用橡皮擦轻轻擦拭。</div></div>
-            <!-- 热门视频推荐区域已移除 -->
-            <div id="statsPanel" class="stats-panel">
-                <div class="stats-title"><span class="icon">📊</span>数据统计</div>
-                <div class="stats-grid">
-                    <div class="stat-item"><div class="stat-value" id="totalSearches">0</div><div class="stat-label">总搜索次数</div></div>
-                    <div class="stat-item"><div class="stat-value" id="uniqueKeywords">0</div><div class="stat-label">搜索关键词</div></div>
-                    <div class="stat-item"><div class="stat-value" id="totalPlays">0</div><div class="stat-label">视频播放</div></div>
-                    <div class="stat-item"><div class="stat-value" id="uniqueVideos">0</div><div class="stat-label">播放视频</div></div>
-                </div>
-                <div class="stats-lists">
-                    <div class="stats-list"><div class="stats-list-title"><span class="icon">🔍</span>热门搜索词</div><div class="stats-list-content" id="topSearchesList"><div class="empty-stats">暂无搜索记录</div></div></div>
-                    <div class="stats-list"><div class="stats-list-title"><span class="icon">▶️</span>热门视频</div><div class="stats-list-content" id="topVideosList"><div class="empty-stats">暂无播放记录</div></div></div>
-                </div>
-                <div class="stats-controls"><button class="stats-btn" id="exportDataBtn">导出数据</button><button class="stats-btn" id="refreshStatsBtn">刷新统计</button></div>
-            </div>
+            <div class="faq-title">❓ 安装常见问题</div>
+            <div class="faq-item"><div class="faq-question">⚠️ 安装后打印机显示"缺粉"</div><div>请重新安装硒鼓，确保推入到位。如仍报错，可能需要重置芯片。</div></div>
+            <div class="faq-item"><div class="faq-question">⚠️ 打印有底灰或条纹</div><div>取出硒鼓，水平摇晃5-6次后重新安装。</div></div>
+            <div class="faq-item"><div class="faq-question">⚠️ 芯片不兼容错误</div><div>确认芯片方向与打印机触点匹配，可用橡皮擦轻擦芯片触点。</div></div>
         </div>
+
         <div id="videoPage" class="page">
-            <button class="back-btn" id="backToHomeBtn"><span class="icon">←</span>返回指南首页</button>
-            <div class="search-section"><div class="search-box"><input type="text" id="searchInput" placeholder="请输入硒鼓或产品型号，如：388、1136..."><button class="search-btn" id="searchBtn"><span class="btn-icon">🔍</span></button></div></div>
-            <div id="categoryHint" class="category-hint" style="display: none;"><div class="hint-text"><span class="icon">🔍</span> <span id="categoryHintText"></span></div><button class="close-btn" id="closeCategoryHint">×</button></div>
-            <div class="instructions"><h3><span class="icon">📚</span>使用说明：</h3><ol><li><strong>输入硒鼓或产品型号</strong> - 支持模糊搜索</li><li><strong>选择对应的产品安装教程</strong></li><li><strong>点击播放视频按钮</strong> - 观看详细安装教程</li></ol></div>
-            <div class="video-list-title"><h2>安装教程列表</h2><div class="video-count" id="videoCount">0 个教程</div></div>
-            <div id="searchResultInfo" class="search-result-info" style="display: none;"><span class="icon">🔍</span> <span id="resultText"></span></div>
+            <button class="back-btn" id="backToHomeBtn"><span>←</span>返回指南首页</button>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="请输入硒鼓或产品型号...">
+                <button class="search-btn" id="searchBtn">🔍</button>
+            </div>
+            <div class="instructions">
+                <h3>📚 使用说明</h3>
+                <ol><li>输入型号搜索视频</li><li>点击播放按钮弹出窗口观看</li></ol>
+            </div>
+            <div class="video-list-title"><h2>安装教程列表</h2><div class="video-count" id="videoCount">0</div></div>
             <div id="videoList" class="video-list"></div>
         </div>
     </div>
-    <!-- 店铺客服微信区域（下拉选择后显示二维码） -->
+
     <div class="wechat-section">
-        <div class="wechat-title"><span class="icon">📱</span>添加店铺客服微信</div>
-        <div class="wechat-tip">可微信直接扫码添加客服，或长按保存二维码后在微信扫一扫选相册图片添加，也可直接复制微信号在微信添加好友即可添加。</div>
-        <select id="shopSelect" class="shop-select">
-            <option value="" selected disabled>请选择您购买产品的店铺</option>
-        </select>
-        <div id="selectedShopCard" class="selected-shop-card" style="display: none;"></div>
+        <div style="font-weight:600; margin-bottom:6px;">📱 添加店铺客服微信</div>
+        <div class="wechat-tip" style="font-size:12px; color:#5b6e8c;">扫码或复制微信号添加</div>
+        <select id="shopSelect" class="shop-select"><option disabled selected>请选择购买产品的店铺</option></select>
+        <div id="selectedShopCard" class="selected-shop-card" style="display:none;"></div>
     </div>
-    <div class="footer"><div><span class="wechat-icon"></span>硒鼓安装教程视频</div><div style="margin-top: 6px; font-size: 11px; opacity: 0.8;">© 2026 蚁社电商 版权所有</div></div>
+    <div class="footer">© 2026 蚁社电商 版权所有</div>
 </div>
-<button id="adminBtn" class="admin-btn" title="数据统计">📊</button>
-<div id="passwordModal" class="password-modal"><div class="password-box"><div class="password-title" id="passwordTitle">请输入管理员密码</div><input type="password" id="passwordInput" class="password-input" placeholder="请输入密码"><div class="password-controls"><button id="passwordCancelBtn" class="password-btn password-cancel">取消</button><button id="passwordConfirmBtn" class="password-btn password-confirm">确认</button></div></div></div>
-<div id="exportModal" class="export-modal"><div class="export-box"><div class="export-title">导出数据选项</div><div class="export-options"><div class="export-option"><label><input type="radio" name="exportType" value="all" checked>导出所有数据</label></div><div class="export-option"><label><input type="radio" name="exportType" value="month">按月份导出</label><div class="export-month-select" id="monthSelect" style="display: none;"><select id="monthSelectInput"></select></div></div><div class="export-option"><label><input type="checkbox" id="includeSearchData" checked>包含搜索数据</label></div><div class="export-option"><label><input type="checkbox" id="includeVideoData" checked>包含视频播放数据</label></div><div class="export-option"><label><input type="checkbox" id="exportExcel" checked>导出为Excel格式</label></div></div><div class="export-controls"><button id="exportCancelBtn" class="export-btn export-cancel">取消</button><button id="exportConfirmBtn" class="export-btn export-confirm">确认导出</button></div></div></div>
+
+<!-- 视频播放模态框 -->
+<div id="videoModal" class="video-modal"><div class="modal-content"><div class="modal-close" id="closeModalBtn">✕</div><iframe id="modalIframe" class="modal-video" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe></div></div>
+
 <script>
-    const videoData = [["137XX 1460 万页版安装视频","BV13kzZB7EHt"],["450XX大容量粉盒安装","BV1tMzZB6EEM"],["1020 2612硒鼓安装小硒鼓教程","BV1tMzZB6E7w"],["1035/TN1000/1035/201/115T粉盒鼓架安装教程","BV1nWzZB8EJg"],["1110 166 1003 110 1680万页版安装视频","BV1WjzZBNEZH"],["1520 277 万页版安装视频","BV1CjzZBNE2n"],["1520 277 万页 安装教程","BV1WjzZBNECG"],["2325XX粉盒大容量安装教程","BV1yjzZBNEAP"],["奔图 213 219 206 202 205 201奔图2系列小容量安装教程","BV1WjzZBNEoS"],["惠普 137 1370硒鼓安装教程","BV1WjzZBNEdj"],["惠普 277 429 329硒鼓安装教程","BV1yjzZBNEwy"],["惠普 388 硒鼓安装教程","BV1WjzZBNE2D"],["惠普 万页版 2612 388 硒鼓安装教程","BV1WjzZBNEVn"],["惠普217 218 230XX万页版安装","BV1s5zZBiE4R"],["惠普500 510 206 416一体式彩鼓安装教程","BV1N5zZBqEwq"],["惠普1110 166 1003 1680 小米K100 三星111 101安装教程","BV1y5zZBiEen"],["惠普CF 230 217 218 CF 219 232粉盒鼓架安装视频","BV1s5zZBiEjZ"],["惠普CF 230 217 218粉盒安装教程","BV1s5zZBiE6q"],["联想101w、7268、2268、100分离式硒鼓粉盒安装","BV1s5zZBiE6Y"],["兄弟2240 450套装 粉盒硒鼓安装教程","BV1y5zZBiE9Q"]];
-    const categories = [{ id:'integrated', name:'一体式硒鼓', desc:'安装教程', icon:'⌛️', keywords:['一体式','一体式硒鼓','整体安装','整体硒鼓']},{ id:'separated', name:'分离式硒鼓', desc:'安装教程', icon:'⏳', keywords:['分离式','分离式硒鼓','鼓粉分离','分离']},{ id:'toner', name:'粉盒鼓架', desc:'安装教程', icon:'💡', keywords:['粉盒','鼓架','分体安装','粉盒鼓架']},{ id:'color', name:'彩色硒鼓', desc:'安装教程', icon:'🎨', keywords:['彩色','彩鼓','颜色硒鼓','彩色硒鼓']},{ id:'chip', name:'芯片更换', desc:'视频教程', icon:'💾', keywords:['芯片','芯片更换','IC芯片','芯片重置']},{ id:'refill', name:'硒鼓加粉', desc:'视频教程', icon:'🔁', keywords:['加粉','填充','补充碳粉','加粉教程']}];
-    const STORAGE_KEYS = { SEARCHES:'toner_install_searches', VIDEO_PLAYS:'toner_install_video_plays', STATS:'toner_install_stats' };
-    const ADMIN_PASSWORD = 'ysds666..';
-    const MAX_RECORDS = 2000;
-    let currentPlayingId = null, homeCurrentPlayingId = null, currentCategory = null, currentCategoryVideos = [], isAuthenticated = false, exportPulseInterval = null;
-    function initDataStorage() {
-        if(!localStorage.getItem(STORAGE_KEYS.SEARCHES)) localStorage.setItem(STORAGE_KEYS.SEARCHES, JSON.stringify([]));
-        if(!localStorage.getItem(STORAGE_KEYS.VIDEO_PLAYS)) localStorage.setItem(STORAGE_KEYS.VIDEO_PLAYS, JSON.stringify({}));
-        if(!localStorage.getItem(STORAGE_KEYS.STATS)) localStorage.setItem(STORAGE_KEYS.STATS, JSON.stringify({ totalSearches:0, totalPlays:0, lastUpdated:new Date().toISOString() }));
+// ======================= 数据定义 =======================
+const videoData = [
+    ["137XX 1460 万页版安装视频","BV13kzZB7EHt"],["450XX大容量粉盒安装","BV1tMzZB6EEM"],["1020 2612硒鼓安装小硒鼓教程","BV1tMzZB6E7w"],["1035/TN1000/1035/201/115T粉盒鼓架安装教程","BV1nWzZB8EJg"],["1110 166 1003 110 1680万页版安装视频","BV1WjzZBNEZH"],["1520 277 万页版安装视频","BV1CjzZBNE2n"],["1520 277 万页 安装教程","BV1WjzZBNECG"],["2325XX粉盒大容量安装教程","BV1yjzZBNEAP"],["奔图 213 219 206 202 205 201奔图2系列小容量安装教程","BV1WjzZBNEoS"],["惠普 137 1370硒鼓安装教程","BV1WjzZBNEdj"],["惠普 277 429 329硒鼓安装教程","BV1yjzZBNEwy"],["惠普 388 硒鼓安装教程","BV1WjzZBNE2D"],["惠普 万页版 2612 388 硒鼓安装教程","BV1WjzZBNEVn"],["惠普217 218 230XX万页版安装","BV1s5zZBiE4R"],["惠普500 510 206 416一体式彩鼓安装教程","BV1N5zZBqEwq"],["惠普1110 166 1003 1680 小米K100 三星111 101安装教程","BV1y5zZBiEen"],["惠普CF 230 217 218 CF 219 232粉盒鼓架安装视频","BV1s5zZBiEjZ"],["惠普CF 230 217 218粉盒安装教程","BV1s5zZBiE6q"],["联想101w、7268、2268、100分离式硒鼓粉盒安装","BV1s5zZBiE6Y"],["兄弟2240 450套装 粉盒硒鼓安装教程","BV1y5zZBiE9Q"]
+];
+const categories = [
+    { id:'integrated', name:'一体式硒鼓', icon:'⌛️', bvid:'BV1dHo6BUEBk' },
+    { id:'separated', name:'分离式硒鼓', icon:'⏳', bvid:'BV1mqo6BBE9t' },
+    { id:'toner', name:'粉盒鼓架', icon:'💡', bvid:'BV1QvokBmEHY' },
+    { id:'color', name:'彩色硒鼓', icon:'🎨', bvid:null },
+    { id:'chip', name:'芯片更换', icon:'💾', bvid:'BV1L2orBHEK7' },
+    { id:'refill', name:'硒鼓加粉', icon:'🔁', bvid:null }
+];
+const STORAGE = { SEARCHES:'toner_install_searches', PLAYS:'toner_install_video_plays', STATS:'toner_install_stats' };
+let currentCategory = null, currentCategoryVideos = [];
+
+// 存储与统计 (保留记录功能，无界面)
+function saveSearch(kw) {
+    if (!kw) return;
+    let searches = JSON.parse(localStorage.getItem(STORAGE.SEARCHES) || '[]');
+    let stats = JSON.parse(localStorage.getItem(STORAGE.STATS) || '{}');
+    stats.totalSearches = (stats.totalSearches || 0) + 1;
+    let exist = searches.find(s => s.keyword.toLowerCase() === kw.toLowerCase());
+    if (exist) exist.count++;
+    else searches.push({ keyword: kw, count: 1, firstSearched: new Date().toISOString() });
+    localStorage.setItem(STORAGE.SEARCHES, JSON.stringify(searches));
+    localStorage.setItem(STORAGE.STATS, JSON.stringify(stats));
+}
+function savePlay(title, bvid) {
+    if (!bvid) return;
+    let plays = JSON.parse(localStorage.getItem(STORAGE.PLAYS) || '{}');
+    let stats = JSON.parse(localStorage.getItem(STORAGE.STATS) || '{}');
+    stats.totalPlays = (stats.totalPlays || 0) + 1;
+    if (!plays[bvid]) plays[bvid] = { title: title, playCount: 1, firstPlayed: new Date().toISOString() };
+    else plays[bvid].playCount++;
+    localStorage.setItem(STORAGE.PLAYS, JSON.stringify(plays));
+    localStorage.setItem(STORAGE.STATS, JSON.stringify(stats));
+}
+
+// 视频弹窗
+function showVideoModal(bvid, title) {
+    if (!bvid) { alert('该视频正在制作中，敬请期待！'); return; }
+    savePlay(title, bvid);
+    let modal = document.getElementById('videoModal');
+    let iframe = document.getElementById('modalIframe');
+    iframe.src = `https://player.bilibili.com/player.html?bvid=${bvid}&page=1&autoplay=1&high_quality=1`;
+    modal.classList.add('active');
+}
+document.getElementById('closeModalBtn')?.addEventListener('click', () => {
+    let modal = document.getElementById('videoModal');
+    let iframe = document.getElementById('modalIframe');
+    iframe.src = '';
+    modal.classList.remove('active');
+});
+document.getElementById('videoModal')?.addEventListener('click', (e) => {
+    if (e.target === document.getElementById('videoModal')) {
+        document.getElementById('modalIframe').src = '';
+        document.getElementById('videoModal').classList.remove('active');
     }
-    function autoCleanData() {
-        let searches = JSON.parse(localStorage.getItem(STORAGE_KEYS.SEARCHES)||'[]');
-        if(searches.length>MAX_RECORDS){ searches.sort((a,b)=>new Date(a.firstSearched)-new Date(b.firstSearched)); searches = searches.slice(searches.length-MAX_RECORDS); localStorage.setItem(STORAGE_KEYS.SEARCHES,JSON.stringify(searches)); }
-        let plays = JSON.parse(localStorage.getItem(STORAGE_KEYS.VIDEO_PLAYS)||'{}');
-        let playEntries = Object.entries(plays);
-        if(playEntries.length>MAX_RECORDS){ playEntries.sort((a,b)=>new Date(a[1].firstPlayed)-new Date(b[1].firstPlayed)); plays = Object.fromEntries(playEntries.slice(playEntries.length-MAX_RECORDS)); localStorage.setItem(STORAGE_KEYS.VIDEO_PLAYS,JSON.stringify(plays)); }
-    }
-    function saveSearch(keyword) {
-        if(!keyword||!keyword.trim()) return;
-        let searches = JSON.parse(localStorage.getItem(STORAGE_KEYS.SEARCHES)||'[]');
-        let stats = JSON.parse(localStorage.getItem(STORAGE_KEYS.STATS)||'{}');
-        stats.totalSearches = (stats.totalSearches||0)+1; stats.lastUpdated = new Date().toISOString();
-        let existing = searches.find(s=>s.keyword.toLowerCase()===keyword.toLowerCase());
-        if(existing){ existing.count++; existing.lastSearched = new Date().toISOString(); }
-        else searches.push({ keyword, count:1, firstSearched:new Date().toISOString(), lastSearched:new Date().toISOString() });
-        localStorage.setItem(STORAGE_KEYS.SEARCHES,JSON.stringify(searches));
-        localStorage.setItem(STORAGE_KEYS.STATS,JSON.stringify(stats));
-        autoCleanData();
-    }
-    function saveVideoPlay(title, id) {
-        if(!id) return;
-        let plays = JSON.parse(localStorage.getItem(STORAGE_KEYS.VIDEO_PLAYS)||'{}');
-        let stats = JSON.parse(localStorage.getItem(STORAGE_KEYS.STATS)||'{}');
-        stats.totalPlays = (stats.totalPlays||0)+1; stats.lastUpdated = new Date().toISOString();
-        if(!plays[id]) plays[id] = { title:title||`视频 ${id}`, playCount:1, firstPlayed:new Date().toISOString(), lastPlayed:new Date().toISOString() };
-        else { plays[id].playCount++; plays[id].lastPlayed = new Date().toISOString(); if(title&&!plays[id].title) plays[id].title=title; }
-        localStorage.setItem(STORAGE_KEYS.VIDEO_PLAYS,JSON.stringify(plays));
-        localStorage.setItem(STORAGE_KEYS.STATS,JSON.stringify(stats));
-        autoCleanData();
-    }
-    function getSearchStats() {
-        let s = JSON.parse(localStorage.getItem(STORAGE_KEYS.SEARCHES)||'[]');
-        let st = JSON.parse(localStorage.getItem(STORAGE_KEYS.STATS)||'{}');
-        return { totalSearches:st.totalSearches||0, uniqueKeywords:s.length, topSearches:[...s].sort((a,b)=>b.count-a.count).slice(0,10) };
-    }
-    function getVideoPlayStats() {
-        let p = JSON.parse(localStorage.getItem(STORAGE_KEYS.VIDEO_PLAYS)||'{}');
-        let st = JSON.parse(localStorage.getItem(STORAGE_KEYS.STATS)||'{}');
-        let arr = Object.values(p);
-        return { totalPlays:st.totalPlays||0, uniqueVideos:Object.keys(p).length, topVideos:arr.sort((a,b)=>b.playCount-a.playCount).slice(0,10) };
-    }
-    function displayStats() {
-        let ss = getSearchStats(), vs = getVideoPlayStats();
-        document.getElementById('totalSearches').textContent = ss.totalSearches;
-        document.getElementById('uniqueKeywords').textContent = ss.uniqueKeywords;
-        document.getElementById('totalPlays').textContent = vs.totalPlays;
-        document.getElementById('uniqueVideos').textContent = vs.uniqueVideos;
-        let topS = document.getElementById('topSearchesList');
-        if(ss.topSearches.length) topS.innerHTML = ss.topSearches.map(i=>`<div class="stats-list-item"><span class="stats-list-key">${i.keyword}</span><span class="stats-list-value">${i.count}次</span></div>`).join('');
-        else topS.innerHTML = '<div class="empty-stats">暂无搜索记录</div>';
-        let topV = document.getElementById('topVideosList');
-        if(vs.topVideos.length) topV.innerHTML = vs.topVideos.map(i=>`<div class="stats-list-item"><span class="stats-list-key">${i.title.length>20?i.title.substring(0,20)+'...':i.title}</span><span class="stats-list-value">${i.playCount}次</span></div>`).join('');
-        else topV.innerHTML = '<div class="empty-stats">暂无播放记录</div>';
-    }
-    function displayCategories() {
-        document.getElementById('categoryGrid').innerHTML = categories.map(c=>`<div class="category-card" data-id="${c.id}"><div class="category-icon">${c.icon}</div><div class="category-name">${c.name}</div><div class="category-desc">${c.desc}</div></div>`).join('');
-        document.querySelectorAll('.category-card').forEach(c=>c.addEventListener('click',function(){
-            let cat = categories.find(c=>c.id===this.dataset.id);
-            if(cat){ saveSearch(cat.name); switchPage('video'); currentCategory=cat; document.getElementById('searchInput').value=''; showCategoryHint(cat); searchByCategory(cat); }
-        }));
-    }
-    function showCategoryHint(cat){ document.getElementById('categoryHintText').textContent=`当前分类：${cat.name}安装教程`; document.getElementById('categoryHint').style.display='flex'; }
-    function clearCategoryFilter(){ currentCategory=null; currentCategoryVideos=[]; document.getElementById('categoryHint').style.display='none'; document.getElementById('searchInput').value=''; displayVideos(videoData); }
-    function searchByCategory(cat){
-        currentCategoryVideos = videoData.filter(v=>cat.keywords.some(k=>v[0].toLowerCase().includes(k.toLowerCase())));
-        displayVideos(currentCategoryVideos);
-    }
-    function updateVideoCount(c){ document.getElementById('videoCount').textContent = `${c} 个教程`; }
-    function showSearchResultInfo(f,t,isCat){
-        let info=document.getElementById('searchResultInfo'), txt=document.getElementById('resultText');
-        if(f===t&&!isCat) info.style.display='none';
-        else { info.style.display='flex'; txt.textContent=isCat?`在当前分类下找到 ${f} 个相关结果`:`找到 ${f} 个相关结果（共 ${t} 个教程）`; }
-    }
-    // 热门视频渲染函数已移除，不再使用
-    function displayVideos(videos,isCat){
-        let list=document.getElementById('videoList');
-        if(!videos.length){ list.innerHTML='<div class="no-result"><div class="no-result-icon">🔍</div><p>未找到相关视频</p><div class="hint">请尝试使用其他关键词，如"HP"、"Canon"、"Brother"等</div></div>'; return; }
-        let html='';
-        videos.forEach((item,i)=>{
-            let [name,id]=item, itemId=`video-${i}`;
-            html+=`<div class="video-item" id="${itemId}"><div class="video-header"><div class="video-title">${name}</div><button class="play-btn" data-id="${itemId}" data-video="${id}" data-title="${name}"><span class="btn-icon">▶</span>播放视频</button></div><div class="video-container"><div class="loading">视频加载中...</div><iframe class="video-player" src="about:blank" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; encrypted-media" sandbox="allow-same-origin allow-scripts allow-popups allow-forms" data-bvid="${id}"></iframe></div></div>`;
-        });
-        list.innerHTML = html;
-        updateVideoCount(videos.length);
-        showSearchResultInfo(videos.length, currentCategory?currentCategoryVideos.length:videoData.length, !!currentCategory);
-        document.querySelectorAll('.play-btn').forEach(b=>b.addEventListener('click',function(){
-            let id=this.dataset.id, vid=this.dataset.video, title=this.dataset.title;
-            if(currentPlayingId===id){ let p=document.getElementById(id); p.querySelector('.video-player').src='about:blank'; p.querySelector('.video-container').classList.remove('active'); this.innerHTML='<span class="btn-icon">▶</span>播放视频'; this.classList.remove('playing'); p.querySelector('.loading').style.display='flex'; currentPlayingId=null; }
-            else {
-                if(currentPlayingId){ let prev=document.getElementById(currentPlayingId); if(prev){ prev.querySelector('.video-player').src='about:blank'; prev.querySelector('.video-container').classList.remove('active'); prev.querySelector('.play-btn').innerHTML='<span class="btn-icon">▶</span>播放视频'; prev.querySelector('.play-btn').classList.remove('playing'); prev.querySelector('.loading').style.display='flex'; }}
-                saveVideoPlay(title,vid);
-                let cur=document.getElementById(id); let ifr=cur.querySelector('.video-player'); ifr.src=`https://player.bilibili.com/player.html?bvid=${vid}&page=1&high_quality=1&autoplay=1`; cur.querySelector('.loading').style.display='none'; cur.querySelector('.video-container').classList.add('active'); this.innerHTML='<span class="btn-icon">⏸</span>关闭视频'; this.classList.add('playing'); currentPlayingId=id;
-                setTimeout(()=>cur.scrollIntoView({behavior:'smooth',block:'nearest'}),300);
-            }
-        }));
-    }
-    function searchHomeVideos(){ let s=document.getElementById('homeSearchInput').value.toLowerCase().trim(); if(s){ saveSearch(s); switchPage('video'); document.getElementById('searchInput').value=s; searchVideos(); } }
-    function searchVideos(){
-        let searchText=document.getElementById('searchInput').value.toLowerCase().trim();
-        let source = currentCategory ? (currentCategoryVideos.length?currentCategoryVideos:videoData) : videoData;
-        let filtered = (!searchText) ? source : source.filter(v=>v[0].toLowerCase().includes(searchText));
-        if(searchText) saveSearch(searchText);
-        if(currentPlayingId){ let p=document.getElementById(currentPlayingId); if(p){ p.querySelector('.video-player').src='about:blank'; p.querySelector('.video-container').classList.remove('active'); p.querySelector('.play-btn').innerHTML='<span class="btn-icon">▶</span>播放视频'; p.querySelector('.play-btn').classList.remove('playing'); p.querySelector('.loading').style.display='flex'; } currentPlayingId=null; }
-        displayVideos(filtered,!!currentCategory);
-    }
-    function switchPage(p){ let hp=document.getElementById('homePage'), vp=document.getElementById('videoPage'), hb=document.getElementById('homeBtn'), vb=document.getElementById('videoBtn'); if(p==='home'){ hp.classList.add('active'); vp.classList.remove('active'); hb.classList.add('active'); vb.classList.remove('active'); window.scrollTo(0,0); }else{ hp.classList.remove('active'); vp.classList.add('active'); hb.classList.remove('active'); vb.classList.add('active'); window.scrollTo(0,0); } }
-    function showPasswordModal(){ document.getElementById('passwordTitle').textContent='请输入管理员密码'; document.getElementById('passwordInput').value=''; document.getElementById('passwordModal').classList.add('active'); document.getElementById('passwordInput').focus(); }
-    function hidePasswordModal(){ document.getElementById('passwordModal').classList.remove('active'); }
-    function toggleStatsPanel(){
-        let sp=document.getElementById('statsPanel'), ab=document.getElementById('adminBtn');
-        if(sp.style.display==='block'){ sp.style.display='none'; ab.classList.remove('active'); if(exportPulseInterval){ clearInterval(exportPulseInterval); exportPulseInterval=null; } document.getElementById('exportDataBtn').classList.remove('export-pulse'); }
-        else { displayStats(); sp.style.display='block'; ab.classList.add('active'); setTimeout(()=>sp.scrollIntoView({behavior:'smooth',block:'start'}),100); startExportPulseAnimation(); }
-    }
-    function startExportPulseAnimation(){ let btn=document.getElementById('exportDataBtn'); if(exportPulseInterval) clearInterval(exportPulseInterval); setTimeout(()=>{ btn.classList.add('export-pulse'); exportPulseInterval=setInterval(()=>{ btn.classList.remove('export-pulse'); setTimeout(()=>btn.classList.add('export-pulse'),50); },5000); },1000); }
-    function refreshStatsWithAnimation(){
-        let btn=document.getElementById('refreshStatsBtn'), ot=btn.textContent;
-        btn.classList.add('refresh-animation'); btn.textContent='刷新中...'; displayStats();
-        setTimeout(()=>{ btn.classList.remove('refresh-animation'); btn.textContent=ot; btn.classList.add('success-animation'); setTimeout(()=>btn.classList.remove('success-animation'),1000); },600);
-    }
-    function showExportModal(){
-        let monthsData = (()=>{
-            let searches=JSON.parse(localStorage.getItem(STORAGE_KEYS.SEARCHES)||'[]'), plays=JSON.parse(localStorage.getItem(STORAGE_KEYS.VIDEO_PLAYS)||'{}');
-            let sMonths={}, pMonths={};
-            searches.forEach(s=>{ let d=new Date(s.firstSearched), mk=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'); if(!sMonths[mk]) sMonths[mk]={name:mk.replace('-','年')+'月',searches:[],totalSearches:0,uniqueKeywords:0}; sMonths[mk].searches.push(s); sMonths[mk].totalSearches+=s.count; sMonths[mk].uniqueKeywords=new Set(sMonths[mk].searches.map(ss=>ss.keyword.toLowerCase())).size; });
-            Object.values(plays).forEach(p=>{ let d=new Date(p.firstPlayed), mk=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'); if(!pMonths[mk]) pMonths[mk]={name:mk.replace('-','年')+'月',plays:[],totalPlays:0,uniqueVideos:0}; pMonths[mk].plays.push(p); pMonths[mk].totalPlays+=p.playCount; pMonths[mk].uniqueVideos=new Set(pMonths[mk].plays.map(pp=>pp.title)).size; });
-            let all=new Set([...Object.keys(sMonths),...Object.keys(pMonths)]);
-            return Array.from(all).sort().reverse().map(k=>({key:k, name:(sMonths[k]||pMonths[k]).name, searchData:sMonths[k]||{name:k.replace('-','年')+'月',searches:[],totalSearches:0,uniqueKeywords:0}, playData:pMonths[k]||{name:k.replace('-','年')+'月',plays:[],totalPlays:0,uniqueVideos:0}}));
-        })();
-        let monthSel=document.getElementById('monthSelectInput');
-        monthSel.innerHTML = monthsData.map(m=>`<option value="${m.key}">${m.name}</option>`).join('');
-        if(!monthsData.length){ document.querySelector('input[value="month"]').disabled=true; document.getElementById('monthSelect').style.display='none'; }
-        else { document.querySelector('input[value="month"]').disabled=false; }
-        document.getElementById('exportModal').classList.add('active');
-    }
-    function hideExportModal(){ document.getElementById('exportModal').classList.remove('active'); }
-    function executePasswordVerification(){ if(document.getElementById('passwordInput').value===ADMIN_PASSWORD){ isAuthenticated=true; hidePasswordModal(); toggleStatsPanel(); }else{ alert('密码错误'); document.getElementById('passwordInput').value=''; document.getElementById('passwordInput').focus(); } }
-    function executeExport(){ let type=document.querySelector('input[name="exportType"]:checked').value, incS=document.getElementById('includeSearchData').checked, incV=document.getElementById('includeVideoData').checked, excel=document.getElementById('exportExcel').checked, monthKey=type==='month'?document.getElementById('monthSelectInput').value:null; if(type==='month'&&!monthKey){ alert('请选择月份'); return; }
-        let btn=document.getElementById('exportConfirmBtn'), ot=btn.textContent; btn.textContent='导出中...'; btn.classList.add('loading');
-        setTimeout(()=>{
-            let name; function toExcel(mk,is,iv){ let s=JSON.parse(localStorage.getItem(STORAGE_KEYS.SEARCHES)||'[]'), p=JSON.parse(localStorage.getItem(STORAGE_KEYS.VIDEO_PLAYS)||'{}'), st=JSON.parse(localStorage.getItem(STORAGE_KEYS.STATS)||'{}'); if(mk){ s=s.filter(sr=>new Date(sr.firstSearched).getFullYear()+'-'+String(new Date(sr.firstSearched).getMonth()+1).padStart(2,'0')===mk); p=Object.fromEntries(Object.entries(p).filter(([_,pl])=>new Date(pl.firstPlayed).getFullYear()+'-'+String(new Date(pl.firstPlayed).getMonth()+1).padStart(2,'0')===mk)); } let data=[]; data.push(['硒鼓安装教程数据报表'],['导出时间',new Date().toLocaleString('zh-CN')],['数据时间段',mk?mk.replace('-','年')+'月':'全部数据'],[]); if(is){ data.push(['搜索数据统计'],['总搜索次数',s.reduce((a,i)=>a+i.count,0)],['唯一搜索关键词',new Set(s.map(i=>i.keyword.toLowerCase())).size],[]); data.push(['搜索记录详情'],['关键词','搜索次数','首次搜索时间','最后搜索时间']); s.sort((a,b)=>b.count-a.count).forEach(i=>data.push([i.keyword,i.count,new Date(i.firstSearched).toLocaleString('zh-CN'),new Date(i.lastSearched).toLocaleString('zh-CN')])); data.push([]); } if(iv){ let pv=Object.values(p); data.push(['视频播放数据统计'],['总播放次数',pv.reduce((a,i)=>a+i.playCount,0)],['唯一播放视频',new Set(pv.map(i=>i.title)).size],[]); data.push(['视频播放记录详情'],['视频标题','播放次数','首次播放时间','最后播放时间']); pv.sort((a,b)=>b.playCount-a.playCount).forEach(i=>data.push([i.title,i.playCount,new Date(i.firstPlayed).toLocaleString('zh-CN'),new Date(i.lastPlayed).toLocaleString('zh-CN')])); } let csv=data.map(r=>r.map(c=>{ if(c===null||c===undefined)return''; if(typeof c==='number')return c; let cs=String(c); if(cs.includes(',')||cs.includes('"')||cs.includes('\n')) return '"'+cs.replace(/"/g,'""')+'"'; return cs; }).join(',')).join('\n'); let blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}), url=URL.createObjectURL(blob), link=document.createElement('a'); link.href=url; link.download=`硒鼓安装数据_${mk||'全部'}_${new Date().toISOString().split('T')[0]}.csv`; link.click(); setTimeout(()=>URL.revokeObjectURL(url),100); return link.download; }
-            if(excel) name = toExcel(monthKey, incS, incV); else { /* json省略保持精简，实际保留原函数但此处略写，本demo仅做示意，完整功能不变 */ alert('JSON导出功能已保留'); }
-            btn.textContent=ot; btn.classList.remove('loading'); btn.classList.add('success-animation'); setTimeout(()=>btn.classList.remove('success-animation'),1000); hideExportModal(); alert(`数据已导出`); },800);
-    }
-    document.addEventListener('DOMContentLoaded',()=>{
-        initDataStorage(); autoCleanData(); displayCategories(); displayVideos(videoData); // 移除了 displayHomeVideos() 调用
-        document.getElementById('homeBtn').addEventListener('click',()=>{ switchPage('home'); document.getElementById('homeSearchInput').value=''; if(homeCurrentPlayingId){ let p=document.getElementById(homeCurrentPlayingId); if(p){ p.querySelector('.home-video-player').src='about:blank'; p.querySelector('.home-video-container').classList.remove('active'); p.querySelector('.home-play-btn').innerHTML='<span class="btn-icon">▶</span>播放视频'; p.querySelector('.home-play-btn').classList.remove('playing'); p.querySelector('.loading').style.display='flex'; } homeCurrentPlayingId=null; } document.getElementById('statsPanel').style.display='none'; document.getElementById('adminBtn').classList.remove('active'); isAuthenticated=false; if(exportPulseInterval){ clearInterval(exportPulseInterval); exportPulseInterval=null; } document.getElementById('exportDataBtn').classList.remove('export-pulse'); });
-        document.getElementById('videoBtn').addEventListener('click',()=>{ switchPage('video'); document.getElementById('statsPanel').style.display='none'; document.getElementById('adminBtn').classList.remove('active'); isAuthenticated=false; if(exportPulseInterval){ clearInterval(exportPulseInterval); exportPulseInterval=null; } document.getElementById('exportDataBtn').classList.remove('export-pulse'); });
-        document.getElementById('backToHomeBtn').addEventListener('click',()=>{ clearCategoryFilter(); switchPage('home'); document.getElementById('homeSearchInput').value=''; if(currentPlayingId){ let p=document.getElementById(currentPlayingId); if(p){ p.querySelector('.video-player').src='about:blank'; p.querySelector('.video-container').classList.remove('active'); p.querySelector('.play-btn').innerHTML='<span class="btn-icon">▶</span>播放视频'; p.querySelector('.play-btn').classList.remove('playing'); p.querySelector('.loading').style.display='flex'; } currentPlayingId=null; } isAuthenticated=false; if(exportPulseInterval){ clearInterval(exportPulseInterval); exportPulseInterval=null; } document.getElementById('exportDataBtn').classList.remove('export-pulse'); });
-        // 移除了 viewAllBtn 的事件监听
-        document.getElementById('homeSearchBtn').addEventListener('click',searchHomeVideos);
-        document.getElementById('searchBtn').addEventListener('click',searchVideos);
-        document.getElementById('closeCategoryHint').addEventListener('click',e=>{ e.stopPropagation(); clearCategoryFilter(); });
-        document.getElementById('categoryHint').addEventListener('click',function(e){ if(e.target===this||e.target.classList.contains('hint-text')) clearCategoryFilter(); });
-        let hs=document.getElementById('homeSearchInput'), st; hs.addEventListener('input',()=>{ clearTimeout(st); st=setTimeout(searchHomeVideos,500); }); hs.addEventListener('keypress',e=>{ if(e.key==='Enter') searchHomeVideos(); });
-        let sv=document.getElementById('searchInput'), stv; sv.addEventListener('input',()=>{ clearTimeout(stv); stv=setTimeout(searchVideos,300); }); sv.addEventListener('keypress',e=>{ if(e.key==='Enter') searchVideos(); }); sv.addEventListener('keydown',e=>{ if(e.key==='Escape'){ sv.value=''; searchVideos(); } });
-        document.getElementById('adminBtn').addEventListener('click',()=>{ if(isAuthenticated) toggleStatsPanel(); else showPasswordModal(); });
-        document.getElementById('refreshStatsBtn').addEventListener('click',refreshStatsWithAnimation);
-        document.getElementById('exportDataBtn').addEventListener('click',showExportModal);
-        document.getElementById('passwordConfirmBtn').addEventListener('click',executePasswordVerification);
-        document.getElementById('passwordCancelBtn').addEventListener('click',hidePasswordModal);
-        document.getElementById('passwordInput').addEventListener('keypress',e=>{ if(e.key==='Enter') executePasswordVerification(); });
-        document.getElementById('exportConfirmBtn').addEventListener('click',executeExport);
-        document.getElementById('exportCancelBtn').addEventListener('click',hideExportModal);
-        document.querySelectorAll('input[name="exportType"]').forEach(r=>r.addEventListener('change',function(){ document.getElementById('monthSelect').style.display=this.value==='month'?'block':'none'; }));
-        document.getElementById('passwordModal').addEventListener('click',function(e){ if(e.target===this) hidePasswordModal(); });
-        document.getElementById('exportModal').addEventListener('click',function(e){ if(e.target===this) hideExportModal(); });
-        displayStats();
-        // 店铺数据及下拉初始化
-        const shops = [
-            { name:'墨道旗舰店', wechatId:'modaoxin', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/01墨道旗舰店.jpg' },
-            { name:'炫墨旗舰店', wechatId:'xmqjd2019', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/02炫墨办公旗舰店.jpg' },
-            { name:'炫墨苏宁', wechatId:'xunmo1212', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/03韩达旗舰店.jpg' },
-            { name:'韩达旗舰店', wechatId:'handakf', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/04炫墨苏宁.jpg' },
-            { name:'韩达苏宁', wechatId:'handa2024', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/05韩达苏宁.jpg' },
-            { name:'敬请期待', wechatId:'ysds666', image:'https://via.placeholder.com/120x120/FF7A00/ffffff?text=敬请期待' }
-        ];
-        let select = document.getElementById('shopSelect');
-        shops.forEach((s,idx)=> { let opt = document.createElement('option'); opt.value = idx; opt.textContent = s.name; select.appendChild(opt); });
-        select.addEventListener('change', function(){
-            let idx = this.value;
-            if(idx === '') { document.getElementById('selectedShopCard').style.display = 'none'; return; }
-            let shop = shops[idx];
-            let card = document.getElementById('selectedShopCard');
-            card.innerHTML = `<div class="wechat-qr"><img src="${shop.image}" alt="${shop.name}" onerror="this.onerror=null; this.src='https://via.placeholder.com/120x120/FF7A00/ffffff?text=${encodeURIComponent(shop.name)}';"></div><div class="wechat-shop">${shop.name}</div><div class="wechat-id">微信号：${shop.wechatId}</div>`;
-            card.style.display = 'block';
+});
+
+// 分类卡片
+function renderCategories() {
+    let html = categories.map(c => `<div class="category-card" data-bvid="${c.bvid || ''}" data-name="${c.name}"><div class="category-icon">${c.icon}</div><div class="category-name">${c.name}</div><div class="category-desc">点击观看视频</div></div>`).join('');
+    document.getElementById('categoryGrid').innerHTML = html;
+    document.querySelectorAll('.category-card').forEach(card => {
+        card.addEventListener('click', () => {
+            let bvid = card.dataset.bvid;
+            let name = card.dataset.name;
+            if (bvid && bvid !== 'null') showVideoModal(bvid, name);
+            else alert('该教程视频正在制作中，敬请期待！');
         });
     });
+}
+
+// 视频列表渲染
+function displayVideoList(list) {
+    let container = document.getElementById('videoList');
+    if (!list.length) {
+        container.innerHTML = '<div class="no-result">📭 未找到相关视频</div>';
+        document.getElementById('videoCount').innerText = '0';
+        return;
+    }
+    let html = '';
+    list.forEach(item => {
+        let [title, bvid] = item;
+        html += `<div class="video-item"><div class="video-title">${title}</div><button class="play-btn" data-bvid="${bvid}" data-title="${title}">▶ 播放视频</button></div>`;
+    });
+    container.innerHTML = html;
+    document.getElementById('videoCount').innerText = list.length;
+    document.querySelectorAll('.play-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            let bvid = btn.dataset.bvid;
+            let title = btn.dataset.title;
+            showVideoModal(bvid, title);
+        });
+    });
+}
+function searchVideos() {
+    let kw = document.getElementById('searchInput').value.trim();
+    let source = currentCategory ? currentCategoryVideos : videoData;
+    let filtered = kw ? source.filter(v => v[0].toLowerCase().includes(kw.toLowerCase())) : source;
+    if (kw) saveSearch(kw);
+    displayVideoList(filtered);
+}
+function searchHome() {
+    let kw = document.getElementById('homeSearchInput').value.trim();
+    if (kw) {
+        saveSearch(kw);
+        switchPage('video');
+        document.getElementById('searchInput').value = kw;
+        searchVideos();
+    }
+}
+function switchPage(page) {
+    document.getElementById('homePage').classList.toggle('active', page === 'home');
+    document.getElementById('videoPage').classList.toggle('active', page === 'video');
+    document.getElementById('homeBtn').classList.toggle('active', page === 'home');
+    document.getElementById('videoBtn').classList.toggle('active', page === 'video');
+    if (page === 'video' && currentCategory) searchVideos();
+}
+
+// 店铺客服
+const shops = [
+    { name:'墨道旗舰店', wechatId:'modaoxin', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/01墨道旗舰店.jpg' },
+    { name:'炫墨旗舰店', wechatId:'xmqjd2019', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/02炫墨办公旗舰店.jpg' },
+    { name:'炫墨苏宁', wechatId:'xunmo1212', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/03韩达旗舰店.jpg' },
+    { name:'韩达旗舰店', wechatId:'handakf', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/04炫墨苏宁.jpg' },
+    { name:'韩达苏宁', wechatId:'handa2024', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/05韩达苏宁.jpg' },
+];
+function initShops() {
+    let sel = document.getElementById('shopSelect');
+    shops.forEach((s, idx) => {
+        let opt = document.createElement('option');
+        opt.value = idx;
+        opt.textContent = s.name;
+        sel.appendChild(opt);
+    });
+    sel.addEventListener('change', function() {
+        let idx = this.value;
+        if (idx === '') return;
+        let s = shops[idx];
+        let card = document.getElementById('selectedShopCard');
+        card.innerHTML = `<div class="wechat-qr"><img src="${s.image}" onerror="this.src='https://placehold.co/110x110/2A7DE1/white?text=${encodeURIComponent(s.name)}'"></div><div style="margin-top:8px; font-weight:600;">${s.name}</div><div style="font-size:13px; color:#2A7DE1;">微信号：${s.wechatId}</div>`;
+        card.style.display = 'block';
+    });
+}
+
+// 页面事件绑定
+document.getElementById('homeBtn').addEventListener('click', () => switchPage('home'));
+document.getElementById('videoBtn').addEventListener('click', () => { currentCategory = null; currentCategoryVideos = []; switchPage('video'); searchVideos(); });
+document.getElementById('backToHomeBtn').addEventListener('click', () => switchPage('home'));
+document.getElementById('homeSearchBtn').addEventListener('click', searchHome);
+document.getElementById('searchBtn').addEventListener('click', searchVideos);
+document.getElementById('homeSearchInput').addEventListener('keypress', e => { if (e.key === 'Enter') searchHome(); });
+document.getElementById('searchInput').addEventListener('keypress', e => { if (e.key === 'Enter') searchVideos(); });
+
+// 初始化
+function init() {
+    if (!localStorage.getItem(STORAGE.STATS)) localStorage.setItem(STORAGE.STATS, JSON.stringify({}));
+    renderCategories();
+    displayVideoList(videoData);
+    initShops();
+}
+init();
 </script>
 </body>
 </html>
