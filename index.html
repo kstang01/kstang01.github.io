@@ -477,27 +477,12 @@
             background: #F8FAFC;
         }
 
-        /* ========== 以下保持原样 - 店铺客服分区未修改 ========== */
+        /* 店铺客服分区 - 保留原有布局样式，仅内容修改 */
         .wechat-section {
             padding: 20px 16px;
             background: #FFFFFF;
             border-top: 1px solid #E9EDF2;
-        }
-        .shop-select {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #E2E8F0;
-            border-radius: 30px;
-            margin: 12px 0;
-            background: #F8FAFC;
-            color: #1E2A3A;
-            font-size: 14px;
-        }
-        .selected-shop-card {
             text-align: center;
-            background: #F8FAFC;
-            border-radius: 28px;
-            padding: 16px;
         }
         .wechat-qr img {
             width: 110px;
@@ -505,6 +490,12 @@
             object-fit: cover;
             border-radius: 16px;
             border: 1px solid #E2E8F0;
+            margin-top: 12px;
+        }
+        .wechat-tip {
+            font-size: 13px;
+            color: #5b6e8c;
+            margin: 8px 0 4px;
         }
         .footer {
             text-align: center;
@@ -514,7 +505,6 @@
             border-top: 1px solid #E2E8F0;
             background: #F5F7FB;
         }
-        /* ==================================================== */
 
         @media (max-width: 560px) {
             .category-grid {
@@ -615,12 +605,15 @@
         </div>
     </div>
 
-    <!-- 店铺客服分区：保持原样未修改 -->
+    <!-- 店铺客服分区：保留原布局，移除下拉框，改为固定二维码 -->
     <div class="wechat-section">
-        <div style="font-weight:600; margin-bottom:6px;">📱 添加店铺客服微信</div>
-        <div class="wechat-tip" style="font-size:12px; color:#5b6e8c;">扫码或复制微信号添加</div>
-        <select id="shopSelect" class="shop-select"><option disabled selected>请选择购买产品的店铺</option></select>
-        <div id="selectedShopCard" class="selected-shop-card" style="display:none;"></div>
+        <div style="font-weight:600; margin-bottom:6px;">📱 店铺在线客服</div>
+        <div class="wechat-tip">请用微信扫码添加客服</div>
+        <div class="wechat-qr">
+            <img src="https://kstang01.github.io/imges/WeChat%20Customer%20Service/%E5%8C%85%E8%A3%B9%E5%8D%A1%E4%BA%8C%E7%BB%B4%E7%A0%81%20%E6%8B%B7%E8%B4%9D.png" 
+                 alt="客服微信二维码"
+                 onerror="this.onerror=null; this.src='https://placehold.co/110x110/2563EB/white?text=请+检查+二维码+链接'">
+        </div>
     </div>
     <div class="footer">© 2026 蚁社电商 · 专业硒鼓安装技术支持</div>
 </div>
@@ -634,7 +627,7 @@
 </div>
 
 <script>
-    // ======================= 数据定义（保持不变）=======================
+    // ======================= 数据定义 ========================
     const videoData = [
         ["137XX 1460 万页版安装视频","BV13kzZB7EHt"],
         ["450XX大容量粉盒安装","BV1tMzZB6EEM"],
@@ -674,7 +667,7 @@
     };
     let currentCategory = null, currentCategoryVideos = [];
 
-    // 存储与统计（保持不变）
+    // 存储与统计
     function saveSearch(kw) {
         if (!kw) return;
         let searches = JSON.parse(localStorage.getItem(STORAGE.SEARCHES) || '[]');
@@ -788,44 +781,13 @@
         }
     }
 
-    // 页面切换（带动画过渡效果）
+    // 页面切换
     function switchPage(page) {
         document.getElementById('homePage').classList.toggle('active', page === 'home');
         document.getElementById('videoPage').classList.toggle('active', page === 'video');
         document.getElementById('homeBtn').classList.toggle('active', page === 'home');
         document.getElementById('videoBtn').classList.toggle('active', page === 'video');
         if (page === 'video' && currentCategory) searchVideos();
-    }
-
-    // 客服店铺数据（保持不变）
-    const shops = [
-        { name:'墨道旗舰店', wechatId:'modaoxin', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/01墨道旗舰店.jpg' },
-        { name:'炫墨旗舰店', wechatId:'xmqjd2019', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/02炫墨办公旗舰店.jpg' },
-        { name:'炫墨苏宁', wechatId:'xunmo1212', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/03韩达旗舰店.jpg' },
-        { name:'韩达旗舰店', wechatId:'handakf', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/04炫墨苏宁.jpg' },
-        { name:'韩达苏宁', wechatId:'handa2024', image:'https://kstang01.github.io/imges/WeChat%20Customer%20Service/05韩达苏宁.jpg' },
-    ];
-
-    function initShops() {
-        const sel = document.getElementById('shopSelect');
-        shops.forEach((s, idx) => {
-            const option = document.createElement('option');
-            option.value = idx;
-            option.textContent = s.name;
-            sel.appendChild(option);
-        });
-        sel.addEventListener('change', function() {
-            const idx = parseInt(this.value);
-            if (isNaN(idx)) return;
-            const s = shops[idx];
-            const card = document.getElementById('selectedShopCard');
-            card.innerHTML = `
-                <div class="wechat-qr"><img src="${s.image}" onerror="this.src='https://placehold.co/110x110/2A7DE1/white?text=${encodeURIComponent(s.name)}'"></div>
-                <div style="margin-top:8px; font-weight:600;">${s.name}</div>
-                <div style="font-size:13px; color:#2A7DE1;">微信号：${s.wechatId}</div>
-            `;
-            card.style.display = 'block';
-        });
     }
 
     // 事件绑定
@@ -847,7 +809,6 @@
         if (!localStorage.getItem(STORAGE.STATS)) localStorage.setItem(STORAGE.STATS, JSON.stringify({}));
         renderCategories();
         displayVideoList(videoData);
-        initShops();
     }
     init();
 </script>
