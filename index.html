@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>硒鼓安装教程 | 专业视频库</title>
     <style>
+        :root {
+            --navy-950: #07152f;
+            --navy-900: #0b1f42;
+            --navy-800: #12315f;
+            --blue-700: #1764d8;
+            --blue-600: #2878ed;
+            --blue-500: #4b91f5;
+            --blue-100: #eaf2ff;
+            --ink-900: #14233d;
+            --ink-700: #34445f;
+            --ink-500: #71809a;
+            --line: #e7edf6;
+            --surface: #ffffff;
+            --page: #f3f6fb;
+            --shadow-sm: 0 5px 18px rgba(17, 39, 75, .045);
+            --shadow-md: 0 14px 34px rgba(17, 39, 75, .085);
+            --shadow-blue: 0 12px 26px rgba(40, 120, 237, .22);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,521 +31,748 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
+            min-height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
-            background: #F5F7FB;
-            color: #1E293B;
-            line-height: 1.5;
+            color: var(--ink-900);
+            line-height: 1.6;
+            background:
+                radial-gradient(ellipse at 12% 0%, rgba(76, 139, 239, .10), transparent 34rem),
+                radial-gradient(ellipse at 94% 22%, rgba(91, 123, 196, .07), transparent 30rem),
+                var(--page);
+        }
+
+        button, input { font: inherit; }
+
+        button:focus-visible, input:focus-visible {
+            outline: 3px solid rgba(53, 130, 246, .28);
+            outline-offset: 3px;
         }
 
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: #F5F7FB;
+            width: min(100%, 1120px);
             min-height: 100vh;
+            margin: 0 auto;
+            background: transparent;
+            overflow: clip;
         }
 
-        /* 顶部区域优化 - 增加毛玻璃效果 */
+        /* 顶部品牌区域 */
         .header {
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 20px 20px 16px;
+            isolation: isolate;
+            overflow: hidden;
+            padding: 27px 24px 20px;
             text-align: center;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+            color: #fff;
+            background:
+                radial-gradient(circle at 16% 0%, rgba(78, 145, 255, .24), transparent 24rem),
+                radial-gradient(circle at 88% 100%, rgba(43, 112, 219, .22), transparent 22rem),
+                linear-gradient(125deg, var(--navy-950) 0%, var(--navy-900) 54%, #102c55 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, .10);
+            box-shadow: 0 12px 30px rgba(8, 26, 56, .15);
         }
 
+        .header::before,
+        .header::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+
+        .header::before {
+            width: 260px;
+            height: 260px;
+            top: -190px;
+            right: 8%;
+            border: 1px solid rgba(255, 255, 255, .10);
+            box-shadow: 0 0 0 26px rgba(255, 255, 255, .025), 0 0 0 54px rgba(255, 255, 255, .018);
+        }
+
+        .header::after {
+            width: 180px;
+            height: 180px;
+            left: -105px;
+            bottom: -135px;
+            background: rgba(63, 132, 242, .13);
+            filter: blur(3px);
+        }
+
+        .header > * { position: relative; z-index: 1; }
+
         .header h1 {
-            font-size: 24px;
-            font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            gap: 11px;
+            color: #fff;
+            font-size: clamp(21px, 3vw, 28px);
+            line-height: 1.3;
+            font-weight: 750;
+            letter-spacing: .035em;
+            text-shadow: 0 2px 16px rgba(0, 0, 0, .18);
         }
 
         .subtitle {
+            margin: 9px 0 21px;
+            color: rgba(225, 236, 255, .76);
             font-size: 13px;
-            margin: 8px 0 20px;
-            font-weight: 500;
-            color: #6B7280;
+            font-weight: 450;
+            letter-spacing: .12em;
         }
 
-        /* 标签切换优化 */
         .page-switch {
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 12px;
-            background: #F1F5F9;
-            padding: 4px;
-            border-radius: 60px;
+            gap: 5px;
             width: fit-content;
             margin: 0 auto;
+            padding: 5px;
+            border: 1px solid rgba(255, 255, 255, .13);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .09);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+            backdrop-filter: blur(14px);
         }
 
         .page-btn {
+            min-width: 132px;
+            padding: 9px 22px;
+            border: 0;
+            border-radius: 999px;
+            color: rgba(235, 242, 255, .78);
             background: transparent;
-            border: none;
-            padding: 8px 28px;
-            border-radius: 40px;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 650;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            color: #64748B;
+            transition: color .22s ease, background .22s ease, box-shadow .22s ease, transform .22s ease;
         }
+
+        .page-btn:hover { color: #fff; }
 
         .page-btn.active {
-            background: #FFFFFF;
-            color: #2563EB;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            color: var(--navy-900);
+            background: #fff;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, .16);
         }
 
-        .page-btn:active {
-            transform: scale(0.96);
-        }
+        .page-btn:active { transform: scale(.97); }
 
-        .main-content {
-            padding: 20px 16px 24px;
-        }
+        .main-content { padding: 28px 24px 34px; }
 
-        .page {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .page.active {
-            display: block;
-        }
+        .page { display: none; animation: fadeIn .32s ease both; }
+        .page.active { display: block; }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(9px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 搜索框优化 - 更大更圆润 */
+        /* 搜索区域 */
         .search-box, .home-search-box {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 20px;
         }
 
         input {
             flex: 1;
-            padding: 15px 20px;
-            font-size: 16px;
-            border: 1.5px solid #E2E8F0;
-            border-radius: 48px;
-            background: #FFFFFF;
-            transition: all 0.2s;
+            min-width: 0;
+            padding: 15px 21px;
+            border: 1px solid #dfe7f2;
+            border-radius: 15px;
+            color: var(--ink-900);
+            background: rgba(255, 255, 255, .94);
+            box-shadow: var(--shadow-sm);
+            font-size: 15px;
             font-weight: 500;
+            transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
         }
+
+        input::placeholder { color: #9aa7ba; font-weight: 400; }
 
         input:focus {
             outline: none;
-            border-color: #3B82F6;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+            border-color: #79aaf4;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, .10), var(--shadow-sm);
         }
 
         .search-btn, .home-search-btn {
-            background: #F1F5F9;
-            border: none;
-            padding: 0 28px;
-            border-radius: 48px;
-            cursor: pointer;
+            flex: 0 0 56px;
             display: flex;
             align-items: center;
-            font-size: 20px;
-            color: #2563EB;
-            transition: all 0.2s;
-            font-weight: 600;
+            justify-content: center;
+            border: 0;
+            border-radius: 15px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--blue-600), #1b5fc7);
+            box-shadow: 0 7px 16px rgba(37, 99, 235, .20);
+            font-size: 19px;
+            font-weight: 650;
+            cursor: pointer;
+            transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
         }
 
-        .search-btn:active, .home-search-btn:active {
-            background: #E2E8F0;
-            transform: scale(0.96);
+        .search-btn:hover, .home-search-btn:hover {
+            filter: brightness(1.06);
+            box-shadow: var(--shadow-blue);
         }
 
-        /* 温馨提示卡片优化 */
+        .search-btn:active, .home-search-btn:active { transform: scale(.96); }
+
+        /* 使用说明 */
         .instructions {
-            background: linear-gradient(135deg, #EFF6FF 0%, #FFFFFF 100%);
-            border-left: 4px solid #3B82F6;
-            padding: 16px 20px;
-            border-radius: 24px;
-            margin: 16px 0 24px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            position: relative;
+            margin: 17px 0 26px;
+            padding: 18px 21px 17px 23px;
+            overflow: hidden;
+            border: 1px solid #dce9fc;
+            border-radius: 17px;
+            background: linear-gradient(115deg, #edf4ff 0%, #f8fbff 62%, #fff 100%);
+            box-shadow: 0 6px 18px rgba(39, 91, 160, .045);
+        }
+
+        .instructions::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #3987f2, #7eb4ff);
         }
 
         .instructions h3 {
-            color: #1E40AF;
-            font-size: 14px;
-            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 7px;
+            margin-bottom: 8px;
+            color: #174b91;
+            font-size: 14px;
+            font-weight: 750;
         }
 
         .instructions ol {
             padding-left: 20px;
-            color: #4B5563;
+            color: #586b86;
             font-size: 13px;
         }
 
-        /* 分类网格优化 - 更现代的卡片 */
+        .instructions li { padding: 2px 0; }
+
+        .guide-title {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin: 25px 0 7px !important;
+            color: var(--ink-900);
+            font-size: 18px;
+            letter-spacing: .01em;
+        }
+
+        .guide-title::before {
+            content: "";
+            width: 4px;
+            height: 18px;
+            border-radius: 5px;
+            background: linear-gradient(180deg, #4a95f8, #1c62c9);
+        }
+
+        /* 分类卡片 */
         .category-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin: 20px 0 32px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+            margin: 17px 0 34px;
         }
 
         .category-card {
-            background: #FFFFFF;
-            border: 1px solid #EFF3F8;
-            border-radius: 28px;
-            padding: 20px 12px;
+            position: relative;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 13px 17px;
+            overflow: hidden;
+            border: 1px solid rgba(222, 231, 243, .95);
+            border-radius: 19px;
             text-align: center;
+            background: linear-gradient(145deg, #fff 0%, #fbfdff 100%);
+            box-shadow: var(--shadow-sm);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            transition: transform .24s ease, border-color .24s ease, box-shadow .24s ease;
+        }
+
+        .category-card::after {
+            content: "";
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            right: -48px;
+            top: -48px;
+            border-radius: 50%;
+            background: rgba(62, 132, 239, .055);
+            transition: transform .3s ease;
         }
 
         .category-card:hover {
             transform: translateY(-4px);
-            border-color: #3B82F6;
-            box-shadow: 0 16px 28px -12px rgba(59, 130, 246, 0.25);
+            border-color: #b9d3fa;
+            box-shadow: 0 15px 30px rgba(29, 84, 157, .11);
         }
 
-        .category-card:active {
-            transform: scale(0.96);
-        }
+        .category-card:hover::after { transform: scale(1.7); }
+        .category-card:active { transform: scale(.975); }
 
         .category-icon {
-            font-size: 40px;
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, .75);
+            border-radius: 17px;
+            background: linear-gradient(145deg, #edf4ff, #dceaff);
+            box-shadow: inset 0 1px 0 #fff, 0 5px 12px rgba(45, 105, 190, .08);
+            font-size: 29px;
+        }
+
+        .category-icon svg {
+            width: 37px;
+            height: 37px;
+            display: block;
+            overflow: visible;
+        }
+
+        .category-icon svg * {
+            vector-effect: non-scaling-stroke;
         }
 
         .category-name {
-            font-weight: 700;
-            font-size: 15px;
-            color: #1E293B;
             margin-bottom: 4px;
+            color: #1a2c49;
+            font-size: 15px;
+            font-weight: 750;
         }
 
         .category-desc {
+            color: #8b9ab0;
             font-size: 11px;
-            color: #94A3B8;
+            letter-spacing: .02em;
         }
 
-        /* 安装步骤优化 */
+        /* 安装步骤与常见问题 */
         .steps-title, .faq-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin: 28px 0 16px;
-            padding-left: 4px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: #1E293B;
+            gap: 9px;
+            margin: 30px 0 15px;
+            padding-left: 1px;
+            color: var(--ink-900);
+            font-size: 18px;
+            font-weight: 750;
         }
 
-        .steps-list {
-            list-style: none;
-        }
+        .steps-list { list-style: none; }
 
         .step-item {
             display: flex;
             align-items: center;
-            gap: 16px;
-            background: #FFFFFF;
-            padding: 14px 18px;
-            border-radius: 20px;
-            margin-bottom: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-            border: 1px solid #F1F5F9;
-            transition: all 0.2s;
+            gap: 15px;
+            margin-bottom: 10px;
+            padding: 14px 17px;
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            color: #465772;
+            background: rgba(255, 255, 255, .94);
+            box-shadow: 0 3px 11px rgba(20, 43, 78, .035);
+            font-size: 14px;
+            font-weight: 500;
+            transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
         }
 
         .step-item:hover {
-            border-color: #E2E8F0;
-            transform: translateX(4px);
+            transform: translateX(3px);
+            border-color: #cbdcf4;
+            box-shadow: var(--shadow-sm);
         }
 
         .step-number {
-            background: linear-gradient(135deg, #2563EB, #3B82F6);
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 32px;
+            flex: 0 0 34px;
+            width: 34px;
+            height: 34px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            font-weight: 700;
-            flex-shrink: 0;
-            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+            border: 3px solid #eaf2ff;
+            border-radius: 50%;
+            color: #fff;
+            background: linear-gradient(145deg, #3987f0, #175bc1);
+            box-shadow: 0 4px 9px rgba(37, 99, 235, .18);
+            font-size: 13px;
+            font-weight: 750;
         }
 
-        /* FAQ 优化 */
         .faq-item {
-            background: #FFFFFF;
-            padding: 16px 18px;
-            border-radius: 20px;
-            margin-bottom: 12px;
-            border: 1px solid #F1F5F9;
-            transition: all 0.2s;
-            cursor: pointer;
+            margin-bottom: 10px;
+            padding: 17px 19px;
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            background: #fff;
+            box-shadow: 0 3px 11px rgba(20, 43, 78, .03);
+            transition: border-color .2s ease, box-shadow .2s ease;
         }
 
-        .faq-item:active {
-            background: #F8FAFE;
+        .faq-item:hover {
+            border-color: #d2e1f5;
+            box-shadow: var(--shadow-sm);
         }
 
         .faq-question {
-            font-weight: 700;
             display: flex;
-            align-items: center;
-            gap: 10px;
+            align-items: flex-start;
+            gap: 9px;
             margin-bottom: 8px;
-            color: #1E293B;
-            font-size: 15px;
+            color: #263954;
+            font-size: 14px;
+            font-weight: 750;
+            line-height: 1.5;
         }
 
         .faq-answer {
+            padding-left: 27px;
+            color: #71809a;
             font-size: 13px;
-            color: #64748B;
-            padding-left: 28px;
+            line-height: 1.75;
         }
 
-        /* 视频列表优化 */
+        /* 视频中心 */
         .video-list-title {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: baseline;
-            margin: 20px 0 16px;
+            gap: 12px;
+            margin: 25px 0 15px;
         }
 
         .video-list-title h2 {
+            color: var(--ink-900);
             font-size: 18px;
-            font-weight: 700;
-            color: #1E293B;
+            font-weight: 750;
         }
 
         .video-count {
-            background: #EFF6FF;
-            color: #2563EB;
-            padding: 4px 14px;
-            border-radius: 40px;
+            min-width: 34px;
+            padding: 5px 12px;
+            border: 1px solid #dce9fc;
+            border-radius: 999px;
+            color: #2167c5;
+            background: #edf4ff;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 750;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
         }
 
         .video-item {
-            background: #FFFFFF;
-            border-radius: 24px;
-            padding: 16px 20px;
-            margin-bottom: 12px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            transition: all 0.25s;
-            border: 1px solid #F1F5F9;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 10px;
+            padding: 15px 17px 15px 19px;
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, .96);
+            box-shadow: 0 3px 11px rgba(20, 43, 78, .035);
+            transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
         }
 
         .video-item:hover {
-            border-color: #E2E8F0;
-            box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            border-color: #cbdcf4;
+            box-shadow: 0 10px 22px rgba(20, 55, 105, .075);
         }
 
         .video-title {
-            font-weight: 600;
             flex: 1;
-            color: #1E293B;
-            font-size: 15px;
-        }
-
-        /* 播放按钮优化 */
-        .play-btn {
-            background: linear-gradient(135deg, #2563EB, #3B82F6);
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            min-width: 0;
+            color: #293b57;
             font-size: 14px;
             font-weight: 600;
-            transition: all 0.2s;
-            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+            line-height: 1.65;
         }
 
-        .play-btn:active {
-            transform: scale(0.95);
-            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
-        }
-
-        .no-result {
-            text-align: center;
-            padding: 48px;
-            color: #94A3B8;
-            background: #FFFFFF;
-            border-radius: 32px;
-            font-weight: 500;
-        }
-
-        /* 视频弹窗优化 */
-        .video-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(12px);
-            z-index: 2000;
+        .play-btn {
+            flex: 0 0 auto;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border: 0;
+            border-radius: 11px;
+            color: #fff;
+            background: linear-gradient(135deg, #347fe7, #175dc5);
+            box-shadow: 0 5px 12px rgba(37, 99, 235, .18);
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
         }
 
-        .video-modal.active {
-            display: flex;
+        .play-btn:hover {
+            filter: brightness(1.06);
+            box-shadow: 0 8px 17px rgba(37, 99, 235, .25);
         }
+
+        .play-btn:active { transform: scale(.96); }
+
+        .no-result {
+            padding: 54px 20px;
+            border: 1px dashed #d4dfed;
+            border-radius: 18px;
+            color: #8a9ab1;
+            background: rgba(255, 255, 255, .78);
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* 视频播放弹窗 */
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 22px;
+            background: rgba(4, 13, 29, .84);
+            backdrop-filter: blur(12px);
+        }
+
+        .video-modal.active { display: flex; }
 
         .modal-content {
-            background: #000;
-            width: 90%;
-            max-width: 880px;
-            border-radius: 32px;
-            overflow: hidden;
             position: relative;
-            box-shadow: 0 32px 56px rgba(0, 0, 0, 0.4);
-            animation: modalZoomIn 0.25s ease;
+            width: min(100%, 900px);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: 19px;
+            background: #000;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .42);
+            animation: modalZoomIn .25s ease both;
         }
 
         @keyframes modalZoomIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(8px) scale(.975); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .modal-close {
             position: absolute;
-            top: 16px;
-            right: 16px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
+            top: 12px;
+            right: 12px;
+            z-index: 10;
+            width: 38px;
+            height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid rgba(255, 255, 255, .22);
+            border-radius: 50%;
+            color: #fff;
+            background: rgba(7, 18, 36, .68);
+            backdrop-filter: blur(8px);
+            font-size: 18px;
             cursor: pointer;
-            z-index: 10;
-            font-size: 20px;
-            backdrop-filter: blur(4px);
-            transition: all 0.2s;
+            transition: background .2s ease, transform .2s ease;
         }
 
-        .modal-close:active {
-            background: rgba(0, 0, 0, 0.8);
-            transform: scale(0.92);
-        }
+        .modal-close:hover { background: rgba(7, 18, 36, .92); }
+        .modal-close:active { transform: scale(.92); }
 
         .modal-video {
+            display: block;
             width: 100%;
             aspect-ratio: 16 / 9;
-            border: none;
+            border: 0;
         }
 
-        /* 返回按钮优化 */
+        /* 返回按钮 */
         .back-btn {
-            background: #FFFFFF;
-            color: #2563EB;
-            border: 1px solid #E2E8F0;
-            padding: 12px;
-            border-radius: 60px;
             width: 100%;
-            margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 9px;
+            margin-bottom: 19px;
+            padding: 12px 16px;
+            border: 1px solid #dfe7f2;
+            border-radius: 13px;
+            color: #315d98;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+            font-size: 14px;
+            font-weight: 700;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 15px;
-            transition: all 0.2s;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+            transition: border-color .2s ease, background .2s ease, transform .2s ease;
         }
 
-        .back-btn:active {
-            transform: scale(0.97);
-            background: #F8FAFC;
-        }
+        .back-btn:hover { border-color: #bfd5f4; background: #fafdff; }
+        .back-btn:active { transform: scale(.985); }
 
-        /* 店铺客服分区 - 保留原有布局样式，仅内容修改 */
+        /* 客服与页脚 */
         .wechat-section {
-            padding: 20px 16px;
-            background: #FFFFFF;
-            border-top: 1px solid #E9EDF2;
+            padding: 27px 18px 30px;
+            border-top: 1px solid #e5ebf4;
+            background: linear-gradient(180deg, rgba(255,255,255,.92), #fff);
             text-align: center;
-        }
-        .wechat-qr img {
-            width: 110px;
-            height: 110px;
-            object-fit: cover;
-            border-radius: 16px;
-            border: 1px solid #E2E8F0;
-            margin-top: 12px;
-        }
-        .wechat-tip {
-            font-size: 13px;
-            color: #5b6e8c;
-            margin: 8px 0 4px;
-        }
-        .footer {
-            text-align: center;
-            padding: 18px;
-            font-size: 11px;
-            color: #94A3B8;
-            border-top: 1px solid #E2E8F0;
-            background: #F5F7FB;
         }
 
-        @media (max-width: 560px) {
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
+        .wechat-section > div:first-child {
+            color: #203653;
+            font-size: 15px;
+            font-weight: 750 !important;
+        }
+
+        .wechat-tip {
+            margin: 7px 0 5px;
+            color: #8492a8;
+            font-size: 12px;
+        }
+
+        .wechat-qr img {
+            width: 116px;
+            height: 116px;
+            margin-top: 11px;
+            padding: 5px;
+            border: 1px solid #e5ebf3;
+            border-radius: 14px;
+            background: #fff;
+            box-shadow: 0 7px 20px rgba(20, 43, 78, .08);
+            object-fit: cover;
+        }
+
+        .footer {
+            padding: 17px 18px 20px;
+            border-top: 1px solid #e8edf4;
+            color: #9aa6b7;
+            background: #f5f7fb;
+            font-size: 11px;
+            letter-spacing: .035em;
+            text-align: center;
+        }
+
+        @media (min-width: 900px) {
+            .header { padding-top: 30px; }
+            .main-content { padding: 32px 34px 40px; }
+            .category-grid { gap: 18px; }
+            .category-card { min-height: 164px; }
+        }
+
+        @media (max-width: 640px) {
+            .header {
+                padding: 20px 14px 16px;
             }
-            .video-item {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .play-btn {
-                justify-content: center;
-            }
-            .header h1 {
-                font-size: 20px;
-            }
+
+            .header h1 { font-size: 20px; gap: 8px; }
+            .subtitle { margin: 7px 0 16px; font-size: 11px; letter-spacing: .08em; }
+
             .page-btn {
-                padding: 6px 20px;
+                min-width: 118px;
+                padding: 8px 14px;
                 font-size: 13px;
             }
+
+            .main-content { padding: 20px 14px 27px; }
+
+            .category-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 11px;
+                margin-bottom: 28px;
+            }
+
+            .category-card {
+                min-height: 139px;
+                padding: 16px 9px 14px;
+                border-radius: 16px;
+            }
+
+            .category-icon {
+                width: 52px;
+                height: 52px;
+                margin-bottom: 9px;
+                border-radius: 15px;
+                font-size: 26px;
+            }
+
+            .category-name { font-size: 14px; }
+            .category-desc { font-size: 10px; }
+
+            .instructions {
+                padding: 15px 16px 14px 19px;
+                border-radius: 15px;
+            }
+
+            .instructions ol { font-size: 12px; }
+            .steps-title, .faq-title, .video-list-title h2 { font-size: 16px; }
+
             .step-item {
-                padding: 12px 16px;
+                gap: 12px;
+                padding: 12px 13px;
+                border-radius: 13px;
+                font-size: 13px;
+            }
+
+            .step-number {
+                flex-basis: 31px;
+                width: 31px;
+                height: 31px;
+            }
+
+            .faq-item { padding: 14px 15px; border-radius: 13px; }
+            .faq-question { font-size: 13px; }
+            .faq-answer { font-size: 12px; }
+
+            .video-item {
+                align-items: stretch;
+                flex-direction: column;
+                gap: 11px;
+                padding: 14px;
+                border-radius: 13px;
+            }
+
+            .video-title { font-size: 13px; }
+            .play-btn { width: 100%; padding: 11px 14px; }
+
+            .search-box, .home-search-box { gap: 8px; }
+            input { padding: 13px 15px; font-size: 14px; border-radius: 13px; }
+            .search-btn, .home-search-btn { flex-basis: 48px; border-radius: 13px; }
+
+            .video-modal { padding: 12px; }
+            .modal-content { border-radius: 13px; }
+            .modal-close { top: 8px; right: 8px; width: 34px; height: 34px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
             }
         }
     </style>
@@ -704,12 +950,78 @@
     ];
 
     const categories = [
-        { id:'integrated', name:'一体式硒鼓安装', icon:'⌛️', bvid:'BV1dHo6BUEBk' },
-        { id:'separated', name:'分离式硒鼓安装', icon:'⏳', bvid:'BV1mqo6BBE9t' },
-        { id:'toner', name:'粉盒鼓架安装', icon:'💡', bvid:'BV1QvokBmEHY' },
-        { id:'color', name:'彩色硒鼓安装', icon:'🎨', bvid:'BV1VQ7561EtC' },
-        { id:'chip', name:'芯片更换教程', icon:'💾', bvid:'BV1L2orBHEK7' },
-        { id:'refill', name:'硒鼓加粉教程', icon:'🔁', bvid:'BV1qF7G6kE43' }
+        {
+            id:'integrated', name:'一体式硒鼓安装',
+            icon:`<svg viewBox="0 0 64 64" aria-hidden="true" fill="none">
+                <path d="M12 21.5 18 15h28l6 6.5v25a4 4 0 0 1-4 4H16a4 4 0 0 1-4-4v-25Z" fill="#dceaff" stroke="#1764d8" stroke-width="2.6" stroke-linejoin="round"/>
+                <path d="M19 15v-4h26v4M19 50.5v3h26v-3" stroke="#1764d8" stroke-width="2.6" stroke-linecap="round"/>
+                <path d="M18 28h28v13H18z" fill="#fff" stroke="#4b91f5" stroke-width="2.3"/>
+                <path d="M22 32h20M22 36h13" stroke="#8aaee5" stroke-width="2.2" stroke-linecap="round"/>
+                <circle cx="46" cy="45" r="4" fill="#f0b429" stroke="#fff" stroke-width="1.5"/>
+                <path d="M8 27v13M56 27v13" stroke="#1764d8" stroke-width="2.6" stroke-linecap="round"/>
+            </svg>`,
+            bvid:'BV1dHo6BUEBk'
+        },
+        {
+            id:'separated', name:'分离式硒鼓安装',
+            icon:`<svg viewBox="0 0 64 64" aria-hidden="true" fill="none">
+                <path d="M9 28h46v19a5 5 0 0 1-5 5H14a5 5 0 0 1-5-5V28Z" fill="#dceaff" stroke="#1764d8" stroke-width="2.6" stroke-linejoin="round"/>
+                <path d="M15 28V17h34v11M21 17v-5h22v5" stroke="#1764d8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M17 36h30v9H17z" fill="#fff" stroke="#4b91f5" stroke-width="2.2"/>
+                <path d="M23 40h18" stroke="#8aaee5" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M25 53v4m14-4v4" stroke="#1764d8" stroke-width="2.6" stroke-linecap="round"/>
+                <path d="M27 22h10" stroke="#f0b429" stroke-width="3" stroke-linecap="round"/>
+            </svg>`,
+            bvid:'BV1mqo6BBE9t'
+        },
+        {
+            id:'toner', name:'粉盒鼓架安装',
+            icon:`<svg viewBox="0 0 64 64" aria-hidden="true" fill="none">
+                <path d="M6 23a5 5 0 0 1 5-5h18a5 5 0 0 1 5 5v19a5 5 0 0 1-5 5H11a5 5 0 0 1-5-5V23Z" fill="#eaf2ff" stroke="#1764d8" stroke-width="2.5"/>
+                <path d="M10 25h20M10 39h20M15 18v-4h10v4" stroke="#4b91f5" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M39 23a5 5 0 0 1 5-5h9a5 5 0 0 1 5 5v19a5 5 0 0 1-5 5h-9a5 5 0 0 1-5-5V23Z" fill="#fff" stroke="#1764d8" stroke-width="2.5"/>
+                <circle cx="48.5" cy="32" r="6.5" fill="#dceaff" stroke="#4b91f5" stroke-width="2.2"/>
+                <path d="M34 31h4m-2-3 3 3-3 3" stroke="#f0b429" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M44 48v3m9-3v3" stroke="#1764d8" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>`,
+            bvid:'BV1QvokBmEHY'
+        },
+        {
+            id:'color', name:'彩色硒鼓安装',
+            icon:`<svg viewBox="0 0 64 64" aria-hidden="true" fill="none">
+                <path d="M10 22 16 16h32l6 6v24a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V22Z" fill="#eaf2ff" stroke="#1764d8" stroke-width="2.5" stroke-linejoin="round"/>
+                <path d="M18 16v-4h28v4" stroke="#1764d8" stroke-width="2.5" stroke-linecap="round"/>
+                <rect x="17" y="27" width="30" height="14" rx="3" fill="#fff" stroke="#8aaee5" stroke-width="1.8"/>
+                <rect x="20" y="30" width="5" height="8" rx="1" fill="#19a6d2"/>
+                <rect x="27" y="30" width="5" height="8" rx="1" fill="#d94b57"/>
+                <rect x="34" y="30" width="5" height="8" rx="1" fill="#e7bd32"/>
+                <rect x="41" y="30" width="3" height="8" rx="1" fill="#303b54"/>
+                <path d="M17 46h30" stroke="#4b91f5" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>`,
+            bvid:'BV1VQ7561EtC'
+        },
+        {
+            id:'chip', name:'芯片更换教程',
+            icon:`<svg viewBox="0 0 64 64" aria-hidden="true" fill="none">
+                <rect x="17" y="17" width="30" height="30" rx="5" fill="#dceaff" stroke="#1764d8" stroke-width="2.6"/>
+                <rect x="24" y="24" width="16" height="16" rx="2.5" fill="#fff" stroke="#4b91f5" stroke-width="2.2"/>
+                <path d="M23 11v6m9-6v6m9-6v6M23 47v6m9-6v6m9-6v6M11 23h6m-6 9h6m-6 9h6m30-18h6m-6 9h6m-6 9h6" stroke="#1764d8" stroke-width="2.6" stroke-linecap="round"/>
+                <circle cx="32" cy="32" r="3" fill="#f0b429"/>
+            </svg>`,
+            bvid:'BV1L2orBHEK7'
+        },
+        {
+            id:'refill', name:'硒鼓加粉教程',
+            icon:`<svg viewBox="0 0 64 64" aria-hidden="true" fill="none">
+                <path d="M25 10h14v7l4 5v29a4 4 0 0 1-4 4H25a4 4 0 0 1-4-4V22l4-5v-7Z" fill="#eaf2ff" stroke="#1764d8" stroke-width="2.6" stroke-linejoin="round"/>
+                <path d="M25 10h14M25 17h14" stroke="#1764d8" stroke-width="2.6" stroke-linecap="round"/>
+                <path d="M23 36h18v12a3 3 0 0 1-3 3H26a3 3 0 0 1-3-3V36Z" fill="#dceaff"/>
+                <path d="M26 42c3-3 5 3 8 0s5 1 7 0" stroke="#4b91f5" stroke-width="2.2" stroke-linecap="round"/>
+                <circle cx="15" cy="28" r="2" fill="#f0b429"/><circle cx="49" cy="31" r="2.5" fill="#f0b429"/><circle cx="17" cy="43" r="1.6" fill="#4b91f5"/>
+                <path d="M13 18l3-3m32 38 3-3" stroke="#8aaee5" stroke-width="2" stroke-linecap="round"/>
+            </svg>`,
+            bvid:'BV1qF7G6kE43'
+        }
     ];
 
     const STORAGE = {
